@@ -138,13 +138,13 @@ const PGCard = ({ pg }) => {
                   </div>
                   <div className="d-flex flex-column mt-4">
                     <button
-                      className="btn btn-primary btn-sm blue_bg"
+                      className="btn btn-primary btn-sm blue_bg button"
                       type="button"
                     >
                       Details
                     </button>
                     <button
-                      className="btn btn-outline-primary btn-sm mt-2 blue_bg_1"
+                      className="btn btn-outline-primary btn-sm mt-2 blue_bg_1 button"
                       type="button"
                     >
                       Contact Owner

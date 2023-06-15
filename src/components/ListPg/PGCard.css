@@ -11,6 +11,7 @@
 
 .blue_bg {
   background-color: #2549d3 !important;
+  padding: 5px;
 }
 
 .blue_bg_1:hover {
@@ -147,8 +148,8 @@ h5 {
   color: #f129ab;
 }
 .banner-co-living {
-  background-color: #e4fa8d;
-  color: #b3b306;
+  background-color: #fadf8d;
+  color: #ebaa13;
 }
 
 /* .banner:before {
@@ -195,13 +196,15 @@ h5 {
 }
 
 .card {
-  /* background: linear-gradient(
-    135deg,
-    #cfdef6 0%,
-    #e9edf0 40%,
-    #c4d9f4 100% */
+  background: linear-gradient(135deg, #ecedee 0%, #fafbfc 40%, #f1f2f4 100%);
   /* ); background: linear-gradient(135deg, #c2ebf0 0%, #eceff1 50%, #c2ebf0 100%); */
   /* background: linear-gradient(135deg, #c2ebf0, #eceff1); */
   /* background: linear-gradient(to bottom right, #b0e0e6, #eceff1); */
   /* background: linear-gradient(to bottom right, #e3eff3, #eceff1); */
+}
+
+.button {
+  font-size: 16px;
+  font-weight: 500;
+  padding: 0;
 }

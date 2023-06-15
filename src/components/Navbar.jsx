@@ -37,7 +37,7 @@ const Navbar = () => {
             <li>
               <a
                 className="ff_space fw_400 blk_clr fs_sm blue_hover_clr"
-                href="#"
+                href="/Services"
               >
                 Services
               </a>

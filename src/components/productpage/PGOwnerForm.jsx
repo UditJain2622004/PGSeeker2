@@ -198,10 +198,10 @@ const PGOwnerForm = () => {
   };
 
   return (
-    <div className="container">
-      <form onSubmit={handleFormSubmit}>
-        <section className="name-description">
-          <h2>PG Details</h2>
+    <div className="container complete-page">
+      <form className="complete-form" onSubmit={handleFormSubmit}>
+        <section className="name-description parts part1">
+          <h2 className="input-heading">PG Details</h2>
           <div className="form-group">
             <label htmlFor="name">Name:</label>
             <input
@@ -226,10 +226,10 @@ const PGOwnerForm = () => {
         </section>
         <hr></hr>
 
-        <section className="pgtype">
+        <section className="pgtype parts part2">
           <div className="form-group">
             <label htmlFor="pgType">
-              <h2>PG Type:</h2>
+              <h2 className="input-heading">PG Type</h2>
             </label>
 
             <div className="radio-buttons">
@@ -271,7 +271,7 @@ const PGOwnerForm = () => {
         </section>
         <hr></hr>
 
-        <h2>Address Details</h2>
+        <h2 className="input-heading">Address Details</h2>
         <div className="address">
           <div className="form-group">
             <label htmlFor="locality">Locality:</label>
@@ -317,8 +317,8 @@ const PGOwnerForm = () => {
 
         <hr></hr>
 
-        <section className="sharing">
-          <h2>Sharing Options</h2>
+        <section className="sharing parts part4">
+          <h2 className="input-heading">Sharing Options</h2>
           {sharingOptions.map((option, index) => (
             <div key={index} className="sharingoption">
               <label>
@@ -428,8 +428,8 @@ const PGOwnerForm = () => {
           </div>
         </div> */}
 
-        <section className="rules">
-          <h2>PG Rules</h2>
+        <section className="rules parts part5">
+          <h2 className="input-heading">PG Rules</h2>
           <div className="rules-row1">
             <CheckBoxInput
               fields={rules}
@@ -475,8 +475,8 @@ const PGOwnerForm = () => {
 
         <hr></hr>
 
-        <section className="">
-          <h2>PG Amenities</h2>
+        <section className="amenities parts part6">
+          <h2 className="input-heading">PG Amenities</h2>
           <div className="">
             <CheckBoxInput
               className="row"
@@ -506,7 +506,7 @@ const PGOwnerForm = () => {
 
         <hr />
 
-        <h2>Contact Info</h2>
+        <h2 className="input-heading">Contact Info</h2>
         <div className="contact">
           <div className="form-group">
             <label htmlFor="phone">Phone:</label>
@@ -532,8 +532,8 @@ const PGOwnerForm = () => {
 
         <hr />
 
-        <section className="images">
-          <h2>Images</h2>
+        <section className="images parts part8">
+          <h2 className="input-heading">Images</h2>
           <div>
             <div className="file-input">
               {" "}

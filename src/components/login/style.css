@@ -20,12 +20,19 @@
   background-color: #fff;
   padding: 30px;
   width: 50%;
-  height: 88vh;
+  height: 80vh;
   /* border-radius: 5px; */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   text-align: center;
   float: right;
-  background: linear-gradient(135deg, #bbd1f6 0%, #f5f0f4 50%, #d2e1f5 50%);
+  background: linear-gradient(135deg, #ecedee 0%, #eff0f1 40%, #f1f2f4 100%);
+  background: linear-gradient(135deg, #c8d9f3 0%, #eaf1f5 50%, #c8d9f3 100%);
+  /* border-radius: 3rem; */
+  border-radius: 0 35% 0 35%;
+  z-index: 1;
+  position: absolute;
+  top: 115px;
+  right: 400px;
 }
 .img-section {
   display: inline;
@@ -34,12 +41,14 @@
 
 .image-sign {
   background-color: #fff;
-  width: 50%;
+  width: 100%;
   height: 88vh;
   display: inline;
-  /* border-radius: 5px; */
+  /* border-radius: 50rem; */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   text-align: center;
+  /* margin-top: 80px; */
+  /* vertical-align: middle; */
 }
 
 .form-section h2 {
@@ -60,7 +69,7 @@ input[type="text"],
 input[type="email"],
 input[type="password"] {
   padding: 10px;
-  width: 100%;
+  width: 220px;
   border-radius: 5px;
   border: none;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);

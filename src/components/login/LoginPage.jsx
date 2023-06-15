@@ -181,7 +181,7 @@ const LoginPage = () => {
             <button type="submit">Login</button>
           </form>
           <p className="mt-3">
-            Don't have an account ? <Link to="/signup">SignUp</Link> Now
+            Don't have an account ? <Link to="/signup">SignUp Now</Link>
           </p>
         </div>
       </div>
