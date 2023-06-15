@@ -1,0 +1,74 @@
+.filters {
+  display: flex;
+  /* background: linear-gradient(135deg, #c2ebf0 0%, #eceff1 50%, #c2ebf0 100%); */
+}
+.filters-body {
+  flex: 1;
+  width: 20vw;
+  padding-left: 20px;
+}
+.vertical-line {
+  width: 1px;
+  background-color: #888888;
+  opacity: 0.5;
+
+  /* Additional styles for the vertical line */
+}
+
+label {
+  font-size: 1.2rem;
+}
+
+input[type="radio"] {
+  width: 17px;
+  height: 16px;
+  border: 2px solid #ccc;
+  border-radius: 3px;
+  outline: none;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  border: 2px solid black;
+  border-radius: 50%;
+  outline: none;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+/* Styling for dropdown lists */
+.select-container {
+  position: relative;
+  display: inline-block;
+}
+
+select {
+  border-radius: 10%;
+  width: 250px;
+  height: 30px;
+}
+
+.select-dropdown {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: 2px solid black;
+  border-radius: 50%;
+  background-color: #fff;
+  font-size: 16px;
+  outline: none;
+  cursor: pointer;
+  margin: 20px;
+}
+
+.select-option {
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.select-option:hover {
+  background-color: #f2f2f2;
+}
