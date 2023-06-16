@@ -7,12 +7,12 @@ function capitalize(string) {
 const checkboxInput = ({ fields, type, handleChange, allowed }) => {
   return (
     <>
-      {fields.map((el) => {
+      {fields.map((el, index) => {
         return (
-          <>
+          <React.Fragment key={index}>
             <div className="form-group">
               <input
-                onclick="checkUncheck()"
+                // onClick="checkUncheck()"
                 type="checkbox"
                 id={el}
                 name={el}
@@ -24,7 +24,7 @@ const checkboxInput = ({ fields, type, handleChange, allowed }) => {
                 {allowed ? " Allowed" : ""}
               </label>
             </div>
-          </>
+          </React.Fragment>
         );
       })}
     </>

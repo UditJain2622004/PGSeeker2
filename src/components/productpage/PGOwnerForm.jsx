@@ -57,11 +57,11 @@ const PGOwnerForm = () => {
   });
 
   const [pgRules, setPGRules] = useState({
-    guests: "",
-    pets: "",
-    smoking: "",
-    loudMusic: "",
-    alcohol: "",
+    guests: false,
+    // pets: false,
+    smoking: false,
+    loudMusic: false,
+    alcohol: false,
     securityDeposit: "",
     noticePeriod: "",
     gateClosingTime: "",
@@ -73,21 +73,21 @@ const PGOwnerForm = () => {
   });
 
   const [pgAmenities, setPGAmenities] = useState({
-    wifi: "",
-    ac: "",
-    parking: "",
-    fourWheelerParking: "",
-    roomCleaning: "",
-    tv: "",
-    fridge: "",
-    waterCooler: "",
-    warden: "",
-    microwave: "",
-    lift: "",
-    nonVeg: "",
-    veg: "",
-    powerBackup: "",
-    laundry: "",
+    wifi: false,
+    ac: false,
+    parking: false,
+    fourWheelerParking: false,
+    roomCleaning: false,
+    tv: false,
+    fridge: false,
+    waterCooler: false,
+    warden: false,
+    microwave: false,
+    lift: false,
+    nonVeg: false,
+    veg: false,
+    powerBackup: false,
+    laundry: false,
   });
 
   const handleAddSharingOption = () => {
@@ -109,6 +109,32 @@ const PGOwnerForm = () => {
     setSharingOptions(updatedOptions);
   };
 
+  // const handleImageChange = (e) => {
+  //   const files = e.target.files;
+  //   const newImages = [];
+
+  //   for (let i = 0; i < files.length; i++) {
+  //     const file = files[i];
+  //     const reader = new FileReader();
+
+  //     reader.onload = () => {
+  //       // newImages.push(file);
+  //       newImages.push({ file, dataURL: reader.result });
+
+  //       if (newImages.length === files.length) {
+  //         setImages([...images, ...newImages]);
+  //       }
+  //     };
+
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
+
+  // const handleImageDeselect = (index) => {
+  //   const updatedImages = images.filter((_, i) => i !== index);
+  //   setImages(updatedImages);
+  // };
+
   const handleImageChange = (e) => {
     const files = e.target.files;
     const newImages = [];
@@ -118,7 +144,7 @@ const PGOwnerForm = () => {
       const reader = new FileReader();
 
       reader.onload = () => {
-        newImages.push(reader.result);
+        newImages.push({ file, dataURL: reader.result });
 
         if (newImages.length === files.length) {
           setImages([...images, ...newImages]);
@@ -147,7 +173,22 @@ const PGOwnerForm = () => {
   };
 
   const handlePGRulesChange = (event) => {
-    setPGRules({ ...pgRules, [event.target.name]: event.target.value });
+    // console.log(event.target.type);
+    if (event.target.type == "checkbox") {
+      setPGRules({
+        ...pgRules,
+        [event.target.name]: event.currentTarget.checked,
+      });
+    } else {
+      setPGRules({ ...pgRules, [event.target.name]: event.target.value });
+    }
+  };
+
+  const handlePgAmenitiesChange = (event) => {
+    setPGAmenities({
+      ...pgAmenities,
+      [event.target.name]: event.currentTarget.checked,
+    });
   };
 
   const handleContactInfo = (event) => {
@@ -157,11 +198,36 @@ const PGOwnerForm = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(pgDetails);
-    console.log(addressDetails);
-    console.log(pgRules);
-    // const response = await createPG(pgData);
-    // console.log(response); // log the response from the server
+    const { name, description, pgType } = pgDetails;
+    const { noticePeriod, securityDeposit, gateClosingTime } = pgRules;
+    const pg_Amenities = [pgAmenities];
+    const pg_rules = [pgRules];
+
+    const pgData = new FormData();
+    // Add other fields to the FormData
+    pgData.append("name", name);
+    pgData.append("description", description);
+    pgData.append("pgType", pgType);
+
+    // Append images to FormData
+    images.forEach((image) => {
+      pgData.append(`images`, image.file);
+    });
+    pgData.append("pgAmenities", JSON.stringify(pg_Amenities));
+    pgData.append("sharing", JSON.stringify(sharingOptions));
+    pgData.append("address", JSON.stringify(addressDetails));
+    pgData.append("pgContactInfo", JSON.stringify(ContactInfo));
+    pgData.append("pgRules", JSON.stringify(pg_rules));
+    pgData.append("noticePeriodDays", noticePeriod);
+    pgData.append("securityDeposit", securityDeposit);
+    pgData.append("gateClosingTime", gateClosingTime);
+
+    // pgData.forEach((value, key) => {
+    //   console.log("key %s: value %s", key, value);
+    // });
+
+    const response = await createPG(pgData);
+    console.log(response); // log the response from the server
   };
 
   return (
@@ -226,8 +292,8 @@ const PGOwnerForm = () => {
                     type="radio"
                     id="male"
                     name="pgType"
-                    value="Male"
-                    checked={pgDetails.pgType === "Male"}
+                    value="male"
+                    checked={pgDetails.pgType === "male"}
                     onChange={handlePGDetailsChange}
                   />
                   <label htmlFor="male">Male</label>
@@ -237,8 +303,8 @@ const PGOwnerForm = () => {
                     type="radio"
                     id="female"
                     name="pgType"
-                    value="Female"
-                    checked={pgDetails.pgType === "Female"}
+                    value="female"
+                    checked={pgDetails.pgType === "female"}
                     onChange={handlePGDetailsChange}
                   />
                   <label htmlFor="female">Female</label>
@@ -248,8 +314,8 @@ const PGOwnerForm = () => {
                     type="radio"
                     id="coLiving"
                     name="pgType"
-                    value="Co-Living"
-                    checked={pgDetails.pgType === "Co-Living"}
+                    value="co-living"
+                    checked={pgDetails.pgType === "co-living"}
                     onChange={handlePGDetailsChange}
                   />
                   <label htmlFor="coLiving">Co-Living</label>
@@ -439,7 +505,7 @@ const PGOwnerForm = () => {
                 <CheckBoxInput
                   fields={rules}
                   type={pgRules}
-                  handleChange={setPGRules}
+                  handleChange={handlePGRulesChange}
                   allowed={false}
                 />
               </div>
@@ -506,7 +572,7 @@ const PGOwnerForm = () => {
                 <CheckBoxInput
                   fields={amenities2.slice(0, 4)}
                   type={pgAmenities}
-                  handleChange={setPGAmenities}
+                  handleChange={handlePgAmenitiesChange}
                   allowed={false}
                 />
               </div>
@@ -525,7 +591,7 @@ const PGOwnerForm = () => {
                 <CheckBoxInput
                   fields={amenities2.slice(4, 8)}
                   type={pgAmenities}
-                  handleChange={setPGAmenities}
+                  handleChange={handlePgAmenitiesChange}
                   allowed={false}
                 />
               </div>
@@ -544,7 +610,7 @@ const PGOwnerForm = () => {
                 <CheckBoxInput
                   fields={amenities2.slice(8, 12)}
                   type={pgAmenities}
-                  handleChange={setPGAmenities}
+                  handleChange={handlePgAmenitiesChange}
                   allowed={false}
                 />
               </div>
@@ -615,12 +681,12 @@ const PGOwnerForm = () => {
                   />
                 </div>
 
-                <div className="image-container">
+                <div className="img-container">
                   {images.map((image, index) => (
                     <div key={index} className="image-wrapper">
                       <img
                         className="small-image"
-                        src={image}
+                        src={image.dataURL}
                         alt={` ${index}`}
                       />
                       <button

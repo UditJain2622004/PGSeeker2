@@ -1,10 +1,10 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle";
-import React from 'react'
+import React from "react";
 import Amenities from "./Amenities";
 import UseStateDesc from "./UseStateDesc";
 
-import Header from './Header';
+import Header from "./Header";
 
 const amenitiesData = [
   { id: 1, name: "Wifi", icon: "" },
@@ -37,4 +37,4 @@ const product = () => {
   );
 };
 
-export default product
+export default product;

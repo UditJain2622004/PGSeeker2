@@ -1,0 +1,115 @@
+.pg-details-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.slideshow {
+  position: relative;
+  width: 600px;
+  height: 400px;
+}
+
+.image-container {
+  position: relative;
+  height: 50vh;
+  width: 100%;
+}
+
+.pg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.button-container {
+  position: absolute;
+  top: 110%;
+  left: 35%;
+  transform: translateY(-50%);
+  border: 1px solid black;
+}
+
+.slideshow-button {
+  background-color: #fff;
+  color: #000;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.pg-description {
+  margin-left: 40px;
+  width: 50%;
+}
+
+.pg-name {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.pg-info p {
+  margin-bottom: 5px;
+}
+
+.booking-buttons {
+  margin-top: 20px;
+}
+
+.booking-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.amenities-section {
+  margin-top: 20px;
+}
+
+.amenities-section h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.amenities-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.amenities-section li {
+  margin-bottom: 5px;
+}
+
+.pg-description-text {
+  margin-top: 20px;
+}
+
+.pg-description-text h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.reviews-section {
+  margin-top: 20px;
+}
+
+.reviews-section h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.review {
+  margin-bottom: 10px;
+}
+
+.review p {
+  margin-bottom: 5px;
+}

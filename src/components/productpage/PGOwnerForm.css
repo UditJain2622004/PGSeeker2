@@ -77,7 +77,7 @@ hr {
   /* width: 500px; */
 }
 
-.image-container {
+.img-container {
   display: flex;
   flex-wrap: wrap;
 }
