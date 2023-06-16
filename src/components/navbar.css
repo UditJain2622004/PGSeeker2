@@ -3,4 +3,8 @@
   background: linear-gradient(135deg, #c8d9f3 0%, #eaf1f5 50%, #c8d9f3 100%);
   /* background: linear-gradient(135deg, #99bcf1 0%, #dbebf6 50%, #438ee9 100%); */
   /* background: linear-gradient(135deg, #b9cff1 0%, #d8e9f4 50%, #6ba8f1 100%); */
+  /* position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 99; */
 }

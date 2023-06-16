@@ -11,7 +11,7 @@
 }
 
 .blue_clr {
-  color: #2979ff;
+  /* color: #2979ff; */
   font-size: 32px;
   font-weight: bold;
   text-align: center;
@@ -36,6 +36,7 @@
   line-height: 1.6;
   font-size: 1rem;
   color: #888888;
+  text-align: justify;
 }
 
 .about-image {

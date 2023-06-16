@@ -9,14 +9,21 @@ label {
 
 input[type="text"],
 input[type="number"],
-input[type="email"],
-textarea {
+input[type="email"] {
   width: 220px;
   height: 35px;
-  border: none;
+  border: 0.5px solid rgb(234, 229, 229);
   border-radius: 5cap;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   cursor: auto;
+  /* display: inline; */
+}
+
+textarea {
+  width: 50%;
+  border: 0.5px solid rgb(234, 229, 229);
+  border-radius: 5cap;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .radio-buttons {
@@ -52,21 +59,22 @@ textarea {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 1000px;
+  /* width: 1000px; */
   /* flex-wrap: wrap; */
 }
 
 hr {
   margin: 10px 0;
+  margin-bottom: 20px;
   border: 1px solid rgb(106, 101, 101);
 }
 
 .contact {
-  margin-top: 50px;
+  /* margin-top: 50px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  width: 500px;
+  justify-content: space-between; */
+  /* width: 500px; */
 }
 
 .image-container {
@@ -99,6 +107,7 @@ hr {
   font-size: 15px;
   font-weight: bolder;
 }
+
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
@@ -112,11 +121,25 @@ input[type="number"] {
 .sharingoption {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
-  padding: 10px;
+  margin-bottom: 10px;
+  padding: 10px 10px 0px 10px;
   border: none;
   border-radius: 2%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.sharingoptionfield {
+  width: 40% !important;
+}
+
+.remove-button {
+  /* position: absolute; */
+  top: 0;
+  right: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
 }
 
 .file-input {
@@ -150,24 +173,50 @@ input[type="number"] {
 }
 
 .parts {
-  padding: 0 20px;
+  padding: 10px 20px;
+  margin: 0px 0px;
 }
 
-.part2,
-.part4,
-.part6,
-.part8 {
-  background-color: #f2efef;
+.part1,
+.part3,
+.part5,
+.part7,
+.part9,
+.part11,
+.part13,
+.part15,
+.part17 {
+  background-color: #f7f5f5;
+}
+
+.form-container {
+  /* border: 1px solid rgb(10, 7, 7); */
+  width: 70%;
+  border: none;
+  border-radius: 5px;
+  background-color: #ffffff;
+  padding: 10px 10px;
+  margin: 20px auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .complete-form {
-  border: 1px solid black;
-  background-color: #ffffff;
-  /* margin: 10px auto; */
+  border: 1px solid rgb(217, 215, 215);
 }
 
-/* .complete-page {
+.input-heading {
+  font-weight: 600;
+}
+
+.heading {
   margin: 0;
-  margin-right: 0;
-  background-color: azure;
-} */
+  font-weight: 600;
+}
+
+label {
+  display: inline;
+}
+
+.submit-button {
+  text-align: center;
+}

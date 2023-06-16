@@ -35,12 +35,12 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <a
+              <Link
                 className="ff_space fw_400 blk_clr fs_sm blue_hover_clr"
-                href="/Services"
+                to="/Services"
               >
                 Services
-              </a>
+              </Link>
             </li>
             <li>
               <a

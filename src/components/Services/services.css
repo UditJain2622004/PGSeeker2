@@ -12,7 +12,7 @@
 
 .blue_clr {
   color: #2549d3;
-  font-size: 32px;
+  /* font-size: 32px; */
   font-weight: bold;
   text-align: center;
   margin-bottom: 20px;
@@ -36,6 +36,7 @@
   line-height: 1.6;
   font-size: 1rem;
   color: #888888;
+  text-align: justify;
 }
 
 .services-image {
