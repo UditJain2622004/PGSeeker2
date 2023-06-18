@@ -1,72 +1,73 @@
 #cities-container {
-    background-color: white;
+  background-color: white;
 }
 
 #cities {
-    display: flex;
-    width: 80vw;
-    margin: auto;
-    justify-content: space-evenly;
+  display: flex;
+  width: 80vw;
+  margin: auto;
+  justify-content: space-evenly;
+  /* cursor: pointer; */
+}
 
-
-
+.city-box {
+  /* box-shadow: 0px 6px 10px rgba(74, 74, 235, 0.5); */
+  box-shadow: 2px 2px 4px #b9c1f0;
+  cursor: pointer;
+}
+.city-box:hover {
+  /* box-shadow: 0px 6px 10px rgba(74, 74, 235, 0.5); */
+  box-shadow: -2px -2px 4px #b9c1f0;
 }
 
 #cities .box {
-    border: 2px solid white;
-    padding: 14px;
-    width: 20%;
-    height: 15vw;
-    background-color: #008080;
-    border-radius: 100%;
-    margin-bottom: 20px;
-
+  border: 2px solid white;
+  padding: 14px;
+  width: 20%;
+  height: 15vw;
+  background-color: #008080;
+  border-radius: 100%;
+  margin-bottom: 20px;
 }
 
 .h-primary {
-    font-family: 'Bree Serif', serif;
-    font-size: 3.8rem;
-    padding: 20px;
-
+  font-family: "Bree Serif", serif;
+  font-size: 3.8rem;
+  padding: 20px;
 }
 
 .h2 {
-    font-family: 'Bree Serif', serif;
-    font-size: 1.6rem;
-    text-align: center;
-    margin: auto;
-    padding: auto;
-    align-self: center;
-    padding-top: 30%;
-    color: white;
-    opacity: 0;
+  font-family: "Bree Serif", serif;
+  font-size: 1.6rem;
+  text-align: center;
+  margin: auto;
+  padding: auto;
+  align-self: center;
+  padding-top: 30%;
+  color: white;
+  opacity: 0;
 }
 
 .center {
-    text-align: center;
+  text-align: center;
 }
 
 .city1 {
-    background: url('./images/city1.jpg') no-repeat center center/cover;
-
+  background: url("./images/city1.jpg") no-repeat center center/cover;
 }
 
 .city2 {
-    background: url('./images/city2.jpg') no-repeat center center/cover;
-
+  background: url("./images/city2.jpg") no-repeat center center/cover;
 }
 
 .city3 {
-    background: url('./images/city3.jpg') no-repeat center center/cover;
-
+  background: url("./images/city3.jpg") no-repeat center center/cover;
 }
 
 .city4 {
-    background: url('./images/city4.jpg') no-repeat center center/cover;
-
+  background: url("./images/city4.jpg") no-repeat center center/cover;
 }
 
 .city5 {
-    background: url('./images/city5.jpg') no-repeat center center/cover;
-
+  background: url("./images/city5.jpg") no-repeat center center/cover;
 }

@@ -9,6 +9,7 @@ import Homepage from "./components/Homepage/Homepage";
 import PGShow from "./components/ListPg/Pgshow";
 import PGOwnerForm from "./components/productpage/PGOwnerForm";
 import About from "./components/About Us/aboutus";
+import ContactUs from "./components/contact us/contactUs";
 import Services from "./components/Services/services";
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/PGowner" element={<PGOwnerForm />} />
           <Route path="/About" element={<About />} />
           <Route path="/Services" element={<Services />} />
+          <Route path="/contactUs" element={<ContactUs />} />
         </Routes>
       </Router>
     </>

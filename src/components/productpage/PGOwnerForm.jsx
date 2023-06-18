@@ -1,45 +1,34 @@
 import React, { useState } from "react";
-import { createPG } from "./api";
+import { useNavigate } from "react-router-dom";
+import { createPG } from "./../../api";
 import CheckBoxInput from "./checkboxInput";
+import PgAmenitiesLine from "./pgAmenitiesLine";
 
 import "./PGOwnerForm.css";
 
 const rules = ["guests", "smoking", "loudMusic", "alcohol"];
-const amenities = [
-  "wifi",
-  "ac",
-  "parking",
-  "fourWheelerParking",
-  "roomCleaning",
-  "tv",
-  "fridge",
-  "waterCooler",
-  "warden",
-  "microwave",
-  "lift",
-  "veg",
-  "nonVeg",
-  "powerBackup",
-];
-const amenities2 = [
-  "ac",
-  "fridge",
-  "wifi",
-  "parking",
-  "tv",
-  "nonVeg",
 
+const amenities = [
+  "ac",
+  "fridge",
+  "wifi",
+  "parking",
+  "tv",
+  "nonVeg",
   "tiffin",
   "laundry",
-
   "lift",
   "microwave",
   "cleaning",
-
   "warden",
+  "cctv",
+  "self cooking",
+  "attach washroom",
+  "wardrobe",
 ];
 
 const PGOwnerForm = () => {
+  const navigate = useNavigate();
   const [images, setImages] = useState([]);
   const [sharingOptions, setSharingOptions] = useState([]);
 
@@ -109,32 +98,6 @@ const PGOwnerForm = () => {
     setSharingOptions(updatedOptions);
   };
 
-  // const handleImageChange = (e) => {
-  //   const files = e.target.files;
-  //   const newImages = [];
-
-  //   for (let i = 0; i < files.length; i++) {
-  //     const file = files[i];
-  //     const reader = new FileReader();
-
-  //     reader.onload = () => {
-  //       // newImages.push(file);
-  //       newImages.push({ file, dataURL: reader.result });
-
-  //       if (newImages.length === files.length) {
-  //         setImages([...images, ...newImages]);
-  //       }
-  //     };
-
-  //     reader.readAsDataURL(file);
-  //   }
-  // };
-
-  // const handleImageDeselect = (index) => {
-  //   const updatedImages = images.filter((_, i) => i !== index);
-  //   setImages(updatedImages);
-  // };
-
   const handleImageChange = (e) => {
     const files = e.target.files;
     const newImages = [];
@@ -198,6 +161,13 @@ const PGOwnerForm = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    let loadingOverlay = document.querySelector(".loading-overlay");
+    let successMessage = document.querySelector(".success-message");
+    let form = document.querySelector(".form-container");
+
+    loadingOverlay.style.display = "block";
+    // successMessage.style.display = "block";
+
     const { name, description, pgType } = pgDetails;
     const { noticePeriod, securityDeposit, gateClosingTime } = pgRules;
     const pg_Amenities = [pgAmenities];
@@ -228,6 +198,20 @@ const PGOwnerForm = () => {
 
     const response = await createPG(pgData);
     console.log(response); // log the response from the server
+    if (response.status === "success") {
+      form.reset();
+      loadingOverlay.style.display = "none";
+      successMessage.style.display = "block";
+      setTimeout(function () {
+        successMessage.style.display = "none";
+        navigate("/");
+      }, 2000);
+    } else {
+      // Handle error scenario
+      console.log(form);
+      form.reset();
+      loadingOverlay.style.display = "none";
+    }
   };
 
   return (
@@ -560,8 +544,56 @@ const PGOwnerForm = () => {
             </div>
           </div>
           {/* Amenities **********************************************************************************************/}
-          <div className="row amenities parts part13">
-            {/* <div className="form-group"> */}
+
+          <PgAmenitiesLine
+            start={0}
+            end={3}
+            heading={"PG Amenities :"}
+            partNumber={13}
+            stateVar={pgAmenities}
+            handleChange={handlePgAmenitiesChange}
+          />
+          <PgAmenitiesLine
+            start={3}
+            end={6}
+            heading={""}
+            partNumber={14}
+            stateVar={pgAmenities}
+            handleChange={handlePgAmenitiesChange}
+          />
+          <PgAmenitiesLine
+            start={6}
+            end={9}
+            heading={""}
+            partNumber={15}
+            stateVar={pgAmenities}
+            handleChange={handlePgAmenitiesChange}
+          />
+          <PgAmenitiesLine
+            start={9}
+            end={12}
+            heading={""}
+            partNumber={16}
+            stateVar={pgAmenities}
+            handleChange={handlePgAmenitiesChange}
+          />
+          <PgAmenitiesLine
+            start={12}
+            end={15}
+            heading={""}
+            partNumber={17}
+            stateVar={pgAmenities}
+            handleChange={handlePgAmenitiesChange}
+          />
+          <PgAmenitiesLine
+            start={15}
+            end={18}
+            heading={""}
+            partNumber={18}
+            stateVar={pgAmenities}
+            handleChange={handlePgAmenitiesChange}
+          />
+          {/* <div className="row amenities parts part13">
             <div class="col-6 col-md-4">
               <label htmlFor="pgamenities">
                 <p className="input-heading">PG Amenities :</p>
@@ -570,17 +602,15 @@ const PGOwnerForm = () => {
             <div class="col-12 col-md-8">
               <div className="amenities-row">
                 <CheckBoxInput
-                  fields={amenities2.slice(0, 4)}
+                  fields={amenities2.slice(0, 3)}
                   type={pgAmenities}
                   handleChange={handlePgAmenitiesChange}
                   allowed={false}
                 />
               </div>
             </div>
-            {/* </div> */}
           </div>
           <div className="row amenities parts part14">
-            {/* <div className="form-group"> */}
             <div class="col-6 col-md-4">
               <label htmlFor="pgamenities">
                 <p className="input-heading"></p>
@@ -589,17 +619,15 @@ const PGOwnerForm = () => {
             <div class="col-12 col-md-8">
               <div className="amenities-row">
                 <CheckBoxInput
-                  fields={amenities2.slice(4, 8)}
+                  fields={amenities2.slice(4, 7)}
                   type={pgAmenities}
                   handleChange={handlePgAmenitiesChange}
                   allowed={false}
                 />
               </div>
             </div>
-            {/* </div> */}
           </div>
           <div className="row amenities parts part15">
-            {/* <div className="form-group"> */}
             <div class="col-6 col-md-4">
               <label htmlFor="pgamenities">
                 <p className="input-heading"></p>
@@ -608,18 +636,69 @@ const PGOwnerForm = () => {
             <div class="col-12 col-md-8">
               <div className="amenities-row">
                 <CheckBoxInput
-                  fields={amenities2.slice(8, 12)}
+                  fields={amenities2.slice(8, 11)}
                   type={pgAmenities}
                   handleChange={handlePgAmenitiesChange}
                   allowed={false}
                 />
               </div>
             </div>
-            {/* </div> */}
           </div>
-          {/* <hr /> */}
+          <div className="row amenities parts part16">
+            <div class="col-6 col-md-4">
+              <label htmlFor="pgamenities">
+                <p className="input-heading"></p>
+              </label>
+            </div>
+            <div class="col-12 col-md-8">
+              <div className="amenities-row">
+                <CheckBoxInput
+                  fields={amenities2.slice(12, 15)}
+                  type={pgAmenities}
+                  handleChange={handlePgAmenitiesChange}
+                  allowed={false}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="row amenities parts part17">
+            <div class="col-6 col-md-4">
+              <label htmlFor="pgamenities">
+                <p className="input-heading"></p>
+              </label>
+            </div>
+            <div class="col-12 col-md-8">
+              <div className="amenities-row">
+                <CheckBoxInput
+                  fields={amenities2.slice(12, 15)}
+                  type={pgAmenities}
+                  handleChange={handlePgAmenitiesChange}
+                  allowed={false}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="row amenities parts part18">
+            <div class="col-6 col-md-4">
+              <label htmlFor="pgamenities">
+                <p className="input-heading"></p>
+              </label>
+            </div>
+            <div class="col-12 col-md-8">
+              <div className="amenities-row">
+                <CheckBoxInput
+                  fields={amenities2.slice(12, 15)}
+                  type={pgAmenities}
+                  handleChange={handlePgAmenitiesChange}
+                  allowed={false}
+                />
+              </div>
+            </div>
+          </div> */}
+
           {/* Contact Info. **********************************************************************************************/}
-          <div className="row contact parts part16">
+
+          <div className="row contact parts part19">
             {/* <div className="form-group"> */}
             <div class="col-6 col-md-4">
               <label htmlFor="contact">
@@ -640,7 +719,7 @@ const PGOwnerForm = () => {
             </div>
             {/* </div> */}
           </div>
-          <div className="row contact parts part17">
+          <div className="row contact parts part20">
             {/* <div className="form-group"> */}
             <div class="col-6 col-md-4">
               <label htmlFor="contact">
@@ -662,7 +741,7 @@ const PGOwnerForm = () => {
             {/* </div> */}
           </div>
           {/* Images **********************************************************************************************/}
-          <div className="row images parts part18">
+          <div className="row images parts part21">
             {/* <div className="form-group"> */}
             <div class="col-6 col-md-4">
               <label htmlFor="images">
@@ -702,7 +781,6 @@ const PGOwnerForm = () => {
             </div>
             {/* </div> */}
           </div>
-
           {/* <section className="images parts part8">
           <h2 className="input-heading">Images</h2>
           <div>
@@ -735,9 +813,19 @@ const PGOwnerForm = () => {
         </div>
         <hr />
         <div className="submit-button">
-          <button type="submit">Submit</button>
+          <button type="submit" className="form-submit-buttom">
+            Submit
+          </button>
         </div>
       </form>
+      <div class="loading-overlay">
+        <div class="loading-spinner"></div>
+      </div>
+      <div class="success-message">
+        <i class="success-icon">&#10003;</i>
+        <p>PG Listed Successfully!</p>
+      </div>
+      {/* <div class="success-message"></div> */}
     </div>
   );
 };

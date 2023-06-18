@@ -7,17 +7,21 @@ import { useNavigate } from "react-router-dom";
 import "./header.css";
 import LoginPage from "../login/LoginPage";
 import Navbar from "../Navbar";
+import { allPgs } from "./../../api";
+
 function Header() {
   let navigate = useNavigate();
+
   const [keyword, setKeyword] = useState("");
 
-  const searchSubmitHandler = (e) => {
+  const searchSubmitHandler = async (e) => {
     e.preventDefault();
-    if (keyword.trim()) {
-      navigate(`/`);
-    } else {
-      navigate("/");
-    }
+    console.log(keyword);
+
+    const response = await allPgs({ city: keyword.trim().toLowerCase() });
+    console.log(response);
+
+    navigate("/listedpg", { state: response.data.pgs });
   };
   const [navShow, setNavShow] = useState(false);
   if (navShow) {

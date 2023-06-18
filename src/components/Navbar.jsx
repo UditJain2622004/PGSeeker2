@@ -43,20 +43,29 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <a
+              <Link
                 className="ff_space fw_400 blk_clr fs_sm blue_hover_clr"
-                href="#"
+                to="/contactUs"
               >
                 Contact Us
-              </a>
+              </Link>
             </li>
           </ul>
-          <Link
-            to="/login"
-            className="d-inline-block butn1 ff_space fw_700 fs_sm me-xl-4 d-none d-lg-flex"
-          >
-            Login
-          </Link>
+          <div className="d-flex">
+            <Link
+              to="/login"
+              className="d-inline-block butn1 ff_space fw_600 fs_sm me-xl-4 d-none d-lg-flex"
+            >
+              Login
+            </Link>
+            <Link
+              to="/signup"
+              className="d-inline-block butn1 ff_space fw_600 fs_sm me-xl-4 d-none d-lg-flex"
+            >
+              Sign Up
+            </Link>
+          </div>
+
           <button
             onClick={() => setNavShow(true)}
             className="d-flex d-lg-none p-2 rounded-2 border_none"

@@ -1,0 +1,116 @@
+.contact-us-page {
+  /* max-width: 500px;
+  margin: 0 auto;
+  padding: 20px; */
+  width: 25%;
+  border: none;
+  border-radius: 30px;
+  background-color: #ffffff;
+  padding: 50px;
+  margin: 0px auto;
+  /* background-color: #f6ffff; */
+  box-shadow: 0 2px 4px #90d7e8;
+}
+
+.whole-page {
+  background-image: url("./images/contactus2.jpg");
+  background-size: cover;
+  background-position: center;
+  margin: 0;
+  height: 88vh;
+  padding-top: 30px;
+  /* opacity: 0.5; */
+}
+
+.contact-heading {
+  /* text-align: center; */
+  margin-bottom: 20px;
+  color: #2f2f2fdc;
+  /* text-decoration: dashed; */
+  /* background-color: #aeb4f9; */
+}
+
+.contact-us-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.a-form-group {
+  margin-bottom: 15px;
+}
+
+.lables {
+  font-weight: bold;
+}
+
+.contact-us-inputs {
+  /* opacity: 10%; */
+  height: 50px !important;
+  width: 85% !important;
+  padding: 20px !important;
+  border-radius: 50px !important;
+  border: none !important;
+  background-color: #e4f8fd;
+  /* background-color: #f3f3f3dd; */
+  /* border: 1px solid #ccc; */
+  width: auto;
+  box-shadow: none !important;
+}
+.contact-us-inputs:hover {
+  /* border: none !important; */
+  box-shadow: 2px 2px 4px #90d7e8 !important;
+}
+.contact-us-inputs-textarea:hover {
+  /* border: none !important; */
+  box-shadow: 2px 2px 4px #90d7e8 !important;
+}
+.contact-us-inputs:focus {
+  outline: none;
+}
+.contact-us-inputs-textarea:focus {
+  outline: none;
+}
+.contact-us-inputs::placeholder {
+  /* border: none !important; */
+  color: #39a3bd;
+  opacity: 80%;
+}
+.contact-us-inputs-textarea::placeholder {
+  opacity: 80%;
+  color: #39a3bd;
+  /* color: #888888; */
+  /* border: none !important; */
+  /* box-shadow: 2px 2px 4px #888888 !important; */
+}
+.contact-us-inputs-textarea {
+  padding: 20px !important;
+  box-shadow: none !important;
+  background-color: #e4f8fd;
+
+  /* background-color: #f3f3f3dd; */
+  padding: 10px;
+  border-radius: 20px !important;
+  border: none;
+  width: auto;
+}
+
+.contact-us-button {
+  padding: 10px 20px;
+  background-color: #66d4f0 !important; /* Brown color */
+
+  /* background-color: #7e8de1 !important; */
+  /* background-color: #8294fc !important; */
+  color: #fff;
+  border: none;
+  border-radius: 50px !important;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.contact-us-button:hover {
+  box-shadow: 2px 2px 4px #90d7e8 !important;
+}
+
+.arrow {
+  font-weight: 700;
+}

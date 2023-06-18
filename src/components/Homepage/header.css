@@ -30,3 +30,14 @@
   border-radius: 10px;
   color: #ffffff !important;
 }
+
+.accomodation-card:hover {
+  box-shadow: 0px 6px 10px rgba(74, 74, 235, 0.5);
+  /* box-shadow: 0px 3px 4px rgba(74, 74, 235, 0.5); */
+  cursor: pointer;
+}
+
+.accomodation-arrow:hover {
+  cursor: pointer;
+  text-shadow: 1px 1px 1px rgba(81, 90, 211, 0.5);
+}

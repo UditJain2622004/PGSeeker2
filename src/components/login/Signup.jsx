@@ -133,12 +133,15 @@
 
 import "./style.css";
 import React, { useState } from "react";
+import { signup } from "../../api";
+import { useNavigate } from "react-router-dom";
 // import "./SignupPage.css";
 
 // import "./Sign.css";
 
 import house2 from "../Homepage/images/bg1.jpg";
 const Signup = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -193,26 +196,23 @@ const Signup = () => {
     return isValid;
   };
 
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
+    let loadingOverlay = document.querySelector(".loading-overlay");
     event.preventDefault();
 
     if (validateForm()) {
+      loadingOverlay.style.display = "block";
       // handle login logic here, e.g. send data to backend
-      console.log("Username:", username);
-
       console.log("Email:", email);
       console.log("Password:", password);
-      console.log("ConfirmPassword:", Confirmpassword);
-
-      // show alert and clear inputs
-      alert("Form submitted successfully");
-      setUsername("");
-      setConfirmPassword("");
-      setEmail("");
-      setPassword("");
+      const response = await signup(username, email, password, Confirmpassword);
+      console.log(response);
+      if (response.status === "success") {
+        loadingOverlay.style.display = "none";
+        navigate("/");
+      }
     }
   };
-
   return (
     <div>
       <div className="sign ff_space">
@@ -266,7 +266,7 @@ const Signup = () => {
               <label htmlFor="password">Confirm Password:</label>
               <input
                 type="password"
-                id="password"
+                id="confirmPassword"
                 value={Confirmpassword}
                 onChange={handleConfirmPasswordChange}
                 className={`${errors.Confirmpassword ? "error" : ""} passInput`}
@@ -276,8 +276,13 @@ const Signup = () => {
               )}
             </div>
 
-            <button type="submit">Signup</button>
+            <button type="submit" className="form-submit-buttom">
+              Signup
+            </button>
           </form>
+          <div class="loading-overlay">
+            <div class="loading-spinner"></div>
+          </div>
           {/* </div> */}
         </div>
       </div>

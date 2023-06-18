@@ -68,3 +68,43 @@
     Add Sharing Option
   </button>
 </section>;
+
+<div className="row amenities parts part13">
+  {/* <div className="form-group"> */}
+  <div class="col-6 col-md-4">
+    <label htmlFor="pgamenities">
+      <p className="input-heading">PG Amenities :</p>
+    </label>
+  </div>
+  <div class="col-12 col-md-8">
+    <div className="amenities-row">
+      <CheckBoxInput
+        fields={amenities2.slice(0, 3)}
+        type={pgAmenities}
+        handleChange={handlePgAmenitiesChange}
+        allowed={false}
+      />
+    </div>
+  </div>
+  {/* </div> */}
+</div>;
+
+<div className="row amenities parts part14">
+  {/* <div className="form-group"> */}
+  <div class="col-6 col-md-4">
+    <label htmlFor="pgamenities">
+      <p className="input-heading"></p>
+    </label>
+  </div>
+  <div class="col-12 col-md-8">
+    <div className="amenities-row">
+      <CheckBoxInput
+        fields={amenities2.slice(4, 7)}
+        type={pgAmenities}
+        handleChange={handlePgAmenitiesChange}
+        allowed={false}
+      />
+    </div>
+  </div>
+  {/* </div> */}
+</div>;

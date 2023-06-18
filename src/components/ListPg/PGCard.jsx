@@ -14,9 +14,12 @@ const PGCard = ({ pg }) => {
     if (el.ac) sharing += " with AC";
     return { sharing, price: `Rs.${el.price}` };
   });
-
+  const amenities = Object.keys(pg.pgAmenities[0]).filter(
+    (key) => pg.pgAmenities[0][key] === true
+  );
+  console.log(amenities);
   const mainAmenities =
-    pg.amenities.length > 5 ? pg.amenities.slice(0, 5) : pg.amenities;
+    amenities.length > 5 ? amenities.slice(0, 5) : amenities;
   return (
     <section className="pg-card" style={{ backgroundColor: "#ffffff" }}>
       {/* <section className="pg-card" style={{ backgroundColor: "#eee" }}> */}
@@ -27,7 +30,7 @@ const PGCard = ({ pg }) => {
               <div className="row">
                 <div className="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
                   <div className="ripple ripple-surface">
-                    <img src={pg.image} className="w-100" alt="product" />
+                    <img src={pg.images[0]} className="w-100" alt="product" />
                     <a href="#!">
                       <div className="hover-overlay">
                         <div
@@ -42,7 +45,7 @@ const PGCard = ({ pg }) => {
                   </div>
                 </div>
                 <div className="col-md-6 col-lg-6 col-xl-6">
-                  <div class={`banner banner-${pg.type}`}>{pg.type}</div>
+                  <div class={`banner banner-${pg.pgType}`}>{pg.pgType}</div>
                   <h5>
                     {pg.name}
                     <span className="locality"> in {pg.address.locality}</span>
@@ -84,17 +87,20 @@ const PGCard = ({ pg }) => {
                         </p>
                       </div>
                     </div>
-                    <div class="right-side">
-                      <div class="line"></div>
-                      <div class="text">
-                        <p className="sharing-text">
-                          {sharingoption[1].sharing}
-                        </p>
-                        <p className="sharing-price">
-                          {sharingoption[1].price}
-                        </p>
+
+                    {sharingoption.length > 1 && (
+                      <div class="right-side">
+                        <div class="line"></div>
+                        <div class="text">
+                          <p className="sharing-text">
+                            {sharingoption[1].sharing}
+                          </p>
+                          <p className="sharing-price">
+                            {sharingoption[1].price}
+                          </p>
+                        </div>
                       </div>
-                    </div>
+                    )}
                   </div>
                   <div className="li"></div>
 
@@ -104,7 +110,10 @@ const PGCard = ({ pg }) => {
                         return (
                           <>
                             {/* <span className="text-primary"> • </span> */}
-                            <span className="amenities"> • {el}</span>
+                            <span className="amenities">
+                              {" "}
+                              • {el.charAt(0).toUpperCase() + el.slice(1)}
+                            </span>
                           </>
                         );
                       })}
@@ -131,20 +140,20 @@ const PGCard = ({ pg }) => {
                 </div>
                 <div className="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
                   <div className="d-flex flex-row align-items-center mb-1">
-                    <h4 className="mb-1 me-1">Rs.{pg.price}</h4>
+                    <h4 className="mb-1 me-1">Rs.{pg.minPrice}</h4>
                     <span className="text-success">
                       <s>Onwards</s>
                     </span>
                   </div>
                   <div className="d-flex flex-column mt-4">
                     <button
-                      className="btn btn-primary btn-sm blue_bg button"
+                      className="btn btn-primary py-2 blue_bg button"
                       type="button"
                     >
                       Details
                     </button>
                     <button
-                      className="btn btn-outline-primary btn-sm mt-2 blue_bg_1 button"
+                      className="btn btn-outline-primary py-2 mt-2 blue_bg_1 button"
                       type="button"
                     >
                       Contact Owner

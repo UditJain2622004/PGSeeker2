@@ -92,9 +92,11 @@
 import React, { useState } from "react";
 import "./LoginPage.css";
 import house2 from "../Homepage/images/bg1.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { login } from "../../api";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
@@ -129,18 +131,25 @@ const LoginPage = () => {
     return isValid;
   };
 
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
+    let loadingOverlay = document.querySelector(".loading-overlay");
     event.preventDefault();
 
     if (validateForm()) {
+      loadingOverlay.style.display = "block";
       // handle login logic here, e.g. send data to backend
       console.log("Email:", email);
       console.log("Password:", password);
-
+      const response = await login(email, password);
+      console.log(response);
+      if (response.status === "success") {
+        loadingOverlay.style.display = "none";
+        navigate("/");
+      }
       // show alert and clear inputs
-      alert("Form submitted successfully");
-      setEmail("");
-      setPassword("");
+      // alert("Form submitted successfully");
+      // setEmail("");
+      // setPassword("");
     }
   };
 
@@ -176,15 +185,20 @@ const LoginPage = () => {
                 <span className="error-message">{errors.password}</span>
               )}
             </div>
-            <button type="submit">Login</button>
+            <button type="submit" className="form-submit-buttom">
+              Login
+            </button>
           </form>
           <p className="mt-3">
-            Don't have an account ? <Link to="/signup">SignUp Now</Link>
+            Don't have an account ? <Link to="/signup">SignUp</Link>
           </p>
         </div>
       </div>
       <div className=" img-section">
         <img className="image-sign" src={house2}></img>
+      </div>
+      <div class="loading-overlay">
+        <div class="loading-spinner"></div>
       </div>
     </div>
   );
