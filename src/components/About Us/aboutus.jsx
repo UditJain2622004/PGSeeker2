@@ -4,10 +4,11 @@ import img from "./../Homepage/images/aboutus5.jpg";
 import img2 from "./../Homepage/images/aboutus4.jpg";
 import img3 from "./../Homepage/images/aboutus3.jpg";
 
-const About = () => {
+const About = ({ user }) => {
+  // console.log(user);
   return (
     <div className="about-container">
-      <h1 className="blue_clr">About Us</h1>
+      <h1 className="blue_clr">ABOUT US</h1>
       <div className="about-content ">
         <div className="about-description container ">
           <div className="row m-5">

@@ -12,6 +12,7 @@ const Cities = () => {
     // console.log(response);
 
     navigate("/listedpg", { state: response.data.pgs });
+    window.scrollTo(0, 0);
   };
 
   return (

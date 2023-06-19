@@ -108,3 +108,51 @@
   </div>
   {/* </div> */}
 </div>;
+
+<>
+  <div class="row name parts part1">
+    {/* <div className="form-group"> */}
+    <div class="col-6 col-md-4">
+      <label htmlFor="name">
+        <p className="input-heading">Name :</p>
+      </label>
+    </div>
+    <div class="col-12 col-md-8">
+      <input
+        type="text"
+        id="name"
+        name="name"
+        size="10"
+        value={pgDetails.name}
+        onChange={handlePGDetailsChange}
+      />
+    </div>
+    {/* </div> */}
+  </div>
+</>;
+{
+    "city":"hisar",
+    "price":[5000,10000],
+    "pgType":["male","mixed"],
+    "sharing":["1","2","3"],
+    "amenities":["wifi","parking"],
+    "rules":["guests"],
+    "sort":-1
+}
+{pgs.length === 0 && (
+        <div className="d-flex">
+          <div className="filersection">
+            <Filters />
+          </div>
+          <div className="error-container">
+            <div>
+              <p className="no-pg-error">Sorry! No PG available.</p>
+            </div>
+            <div>
+              <p className="home-link">
+                Go back to <Link to={"/"}>Home</Link> Page
+              </p>
+            </div>
+          </div>
+        </div>
+      )}

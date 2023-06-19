@@ -17,7 +17,7 @@ const PGCard = ({ pg }) => {
   const amenities = Object.keys(pg.pgAmenities[0]).filter(
     (key) => pg.pgAmenities[0][key] === true
   );
-  console.log(amenities);
+  // console.log(amenities);
   const mainAmenities =
     amenities.length > 5 ? amenities.slice(0, 5) : amenities;
   return (

@@ -2,23 +2,25 @@
   /* max-width: 500px;
   margin: 0 auto;
   padding: 20px; */
-  width: 25%;
+  width: 50%;
   border: none;
   border-radius: 30px;
   background-color: #ffffff;
   padding: 50px;
   margin: 0px auto;
   /* background-color: #f6ffff; */
-  box-shadow: 0 2px 4px #90d7e8;
+  box-shadow: 0 2px 4px #d6dfe9;
 }
 
 .whole-page {
-  background-image: url("./images/contactus2.jpg");
-  background-size: cover;
-  background-position: center;
-  margin: 0;
+  max-width: 800px;
+  /* margin: 0 10px; */
   height: 88vh;
-  padding-top: 30px;
+  margin: 0 auto;
+  padding: 40px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   /* opacity: 0.5; */
 }
 
@@ -50,7 +52,7 @@
   padding: 20px !important;
   border-radius: 50px !important;
   border: none !important;
-  background-color: #e4f8fd;
+  background-color: #f6f8fa;
   /* background-color: #f3f3f3dd; */
   /* border: 1px solid #ccc; */
   width: auto;
@@ -58,11 +60,11 @@
 }
 .contact-us-inputs:hover {
   /* border: none !important; */
-  box-shadow: 2px 2px 4px #90d7e8 !important;
+  box-shadow: 2px 2px 4px #d6dfe9 !important;
 }
 .contact-us-inputs-textarea:hover {
   /* border: none !important; */
-  box-shadow: 2px 2px 4px #90d7e8 !important;
+  box-shadow: 2px 2px 4px #d6dfe9 !important;
 }
 .contact-us-inputs:focus {
   outline: none;
@@ -72,12 +74,12 @@
 }
 .contact-us-inputs::placeholder {
   /* border: none !important; */
-  color: #39a3bd;
-  opacity: 80%;
+  color: #878c91;
+  opacity: 60%;
 }
 .contact-us-inputs-textarea::placeholder {
-  opacity: 80%;
-  color: #39a3bd;
+  color: #878c91;
+  opacity: 60%;
   /* color: #888888; */
   /* border: none !important; */
   /* box-shadow: 2px 2px 4px #888888 !important; */
@@ -85,7 +87,7 @@
 .contact-us-inputs-textarea {
   padding: 20px !important;
   box-shadow: none !important;
-  background-color: #e4f8fd;
+  background-color: #f6f8fa;
 
   /* background-color: #f3f3f3dd; */
   padding: 10px;
@@ -96,7 +98,7 @@
 
 .contact-us-button {
   padding: 10px 20px;
-  background-color: #66d4f0 !important; /* Brown color */
+  background-color: #2277f7 !important; /* Brown color */
 
   /* background-color: #7e8de1 !important; */
   /* background-color: #8294fc !important; */

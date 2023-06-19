@@ -8,3 +8,16 @@
   top: 0;
   z-index: 99; */
 }
+
+.profile-icon {
+  width: 100px; /* Adjust the width and height as needed */
+  height: 50px;
+  border-radius: 10px; /* Make it circular */
+  overflow: hidden; /* Hide any overflowing content */
+}
+
+.profile-icon__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Maintain aspect ratio and cover the entire space */
+}

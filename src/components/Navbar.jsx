@@ -2,8 +2,28 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import LoginPage from "./login/LoginPage";
 import menu from "./Homepage/images/menu.svg";
+import profileImage from "./Homepage/images/profile.jpg";
 import "./navbar.css";
-const Navbar = () => {
+function getCookie(name) {
+  const cookieString = document.cookie;
+  const cookies = cookieString.split("; ");
+
+  for (let i = 0; i < cookies.length; i++) {
+    const cookie = cookies[i];
+    const [cookieName, cookieValue] = cookie.split("=");
+
+    if (cookieName === name) {
+      return cookieValue;
+    }
+  }
+
+  return null;
+}
+const Navbar = ({ user }) => {
+  // console.log(getCookie("jwt"));
+  const buttons = user
+    ? ["PGowner", "Add PG", "logout", "LogOut"]
+    : ["login", "Login", "signup", "Sign Up"];
   const [navShow, setNavShow] = useState(false);
   if (navShow) {
     document.body.style.overflow = "hidden";
@@ -53,17 +73,31 @@ const Navbar = () => {
           </ul>
           <div className="d-flex">
             <Link
-              to="/login"
+              to={`/${buttons[0]}`}
               className="d-inline-block butn1 ff_space fw_600 fs_sm me-xl-4 d-none d-lg-flex"
             >
-              Login
+              {buttons[1]}
             </Link>
             <Link
-              to="/signup"
+              to={`/${buttons[2]}`}
               className="d-inline-block butn1 ff_space fw_600 fs_sm me-xl-4 d-none d-lg-flex"
             >
-              Sign Up
+              {buttons[3]}
             </Link>
+            {user && (
+              <Link
+                to="/profile"
+                // className="d-inline-block butn1 ff_space fw_600 fs_sm me-xl-4 d-none d-lg-flex"
+              >
+                <div className="profile-icon">
+                  <img
+                    src={profileImage}
+                    alt="Profile"
+                    className="profile-icon__image"
+                  />
+                </div>
+              </Link>
+            )}
           </div>
 
           <button

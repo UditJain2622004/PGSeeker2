@@ -135,12 +135,13 @@ import "./style.css";
 import React, { useState } from "react";
 import { signup } from "../../api";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 // import "./SignupPage.css";
 
 // import "./Sign.css";
 
 import house2 from "../Homepage/images/bg1.jpg";
-const Signup = () => {
+const Signup = ({ setUser }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -208,6 +209,8 @@ const Signup = () => {
       const response = await signup(username, email, password, Confirmpassword);
       console.log(response);
       if (response.status === "success") {
+        setUser(response.data.user);
+
         loadingOverlay.style.display = "none";
         navigate("/");
       }
@@ -280,6 +283,9 @@ const Signup = () => {
               Signup
             </button>
           </form>
+          {/* <p className="mt-3">
+            Already have an account ? <Link to="/login">Login</Link>
+          </p> */}
           <div class="loading-overlay">
             <div class="loading-spinner"></div>
           </div>

@@ -1,61 +1,164 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import FilterCheckbox from "./filterCheckbox";
+import FilterRadio from "./filterRadio";
+import { allPgs } from "../../api";
 import "./filters.css";
 
+const getKeysWithTrueValues = (obj) => {
+  return Object.keys(obj).filter((key) => obj[key] === true);
+};
+
+const amenities = {
+  ac: "AC",
+  fridge: "Fridge",
+  wifi: "Wi-Fi",
+  parking: "Parking",
+  tv: "TV",
+  nonVeg: "Non-Veg",
+  tiffin: "Tiffin",
+  laundry: "Laundry",
+  lift: "Lift",
+  microwave: "Microwave",
+  cleaning: "Cleaning",
+  warden: "Warden",
+  cctv: "CCTV",
+  selfCooking: "Self Cooking",
+  attachWashroom: "Attach Washroom",
+  wardrobe: "Washroom",
+  powerBackup: "Power Backup",
+  library: "Library",
+};
+const rules = {
+  loudMusicAllowed: "Loud Music",
+  smoking: "Smoking",
+  alcoholAllowed: "Alcohol",
+  guests: "Guests",
+};
+
+const sharing = { 1: "Single", 2: "Double", 3: "Triple", 4: "Four" };
+
+const pgTypeOptions = { male: "Boys", female: "Girls", coLiving: "Co-Living" };
+
 const Filters = () => {
-  const [checkboxValues, setCheckboxValues] = useState({
+  const navigate = useNavigate();
+  const [amenitiesValues, setamenitiesValues] = useState({
     wifi: false,
-    AC: false,
+    ac: false,
     parking: false,
-    // wheelerparking: false,
-    // powerbackup: false,
-    TV: false,
+    warden: false,
+    cctv: false,
+    selfCooking: false,
+    attachWashroom: false,
+    wardrobe: false,
+    powerbackup: false,
+    tv: false,
     fridge: false,
     microwave: false,
     cleaning: false,
     laundry: false,
-    // watercooler: false,
-    // veg: false/,
-    // nonVeg: false,
+    tiffin: false,
+    lift: false,
+    nonVeg: false,
+    library: false,
   });
-  const [selected2Option, setSelected2Option] = useState("");
-  const [submittedPrice, setSubmittedPrice] = useState("");
-  const [selectedOption, setSelectedOption] = useState("");
-  const [selectedOption3, setSelectedOption3] = useState("");
-  const handleDropdownChange = (event) => {
+  const [rulesValues, setRulesValues] = useState({
+    loudMusicAllowed: false,
+    smoking: false,
+    alcoholAllowed: false,
+    guests: false,
+  });
+  const [PgType, setPgType] = useState({
+    male: false,
+    female: false,
+    coLiving: false,
+  });
+  const [sharingOption, setSharingOption] = useState({
+    1: false,
+    2: false,
+    3: false,
+    4: false,
+  });
+  const [price, setPrice] = useState();
+  // const [submittedPrice, setSubmittedPrice] = useState("");
+  // const [pgType, setPgType] = useState("");
+
+  const handlePriceChange = (event) => {
     const selectedValue = event.target.value;
-    setSelected2Option(selectedValue);
+    const arr = selectedValue.split(" ");
+    if (arr[0] === "Upto") {
+      setPrice([0, arr[1] * 1]);
+    } else if (arr[0] === "Above") {
+      setPrice([arr[1] * 1, 100000]);
+    }
   };
 
-  const handleCheckboxChange = (event) => {
+  const handleAmenitiesChange = (event) => {
     const { name, checked } = event.target;
-    setCheckboxValues((prevValues) => ({
+    setamenitiesValues((prevValues) => ({
       ...prevValues,
       [name]: checked,
     }));
   };
-  const handleRadioChange = (event) => {
-    setSelectedOption(event.target.value);
+  const handleRulesChange = (event) => {
+    const { name, checked } = event.target;
+    setRulesValues((prevValues) => ({
+      ...prevValues,
+      [name]: checked,
+    }));
   };
-
-  const handleRadio2Change = (event) => {
-    setSelectedOption3(event.target.value);
+  const handlePgTypeChange = (event) => {
+    const { name, checked } = event.target;
+    setPgType((prevValues) => ({
+      ...prevValues,
+      [name]: checked,
+    }));
   };
+  const handleSharingChange = (event) => {
+    const { name, checked } = event.target;
+    setSharingOption((prevValues) => ({
+      ...prevValues,
+      [name]: checked,
+    }));
+  };
+  // const handlePgTypeChange = (event) => {
+  //   setPgType(event.target.value);
+  // };
 
-  const handleLogin = (event) => {
-    setSubmittedPrice(selected2Option);
-
+  const handleLogin = async (event) => {
     event.preventDefault();
-    // handle login logic here, e.g. send data to backend
-    console.log("Amenities:", checkboxValues);
+    let loadingOverlay = document.querySelector(".loading-overlay");
 
-    console.log("Gender:", selectedOption);
+    // setSubmittedPrice(price);
 
-    console.log("Sharing:", selectedOption3);
+    loadingOverlay.style.display = "block";
+
+    const filterOptions = {
+      price,
+      pgType: getKeysWithTrueValues(PgType),
+      sharing: getKeysWithTrueValues(sharingOption),
+      amenities: getKeysWithTrueValues(amenitiesValues),
+      rules: getKeysWithTrueValues(rulesValues),
+    };
+    const response = await allPgs(filterOptions);
+    console.log(response);
+    loadingOverlay.style.display = "none";
+    navigate("/listedpg", { state: response.data.pgs });
+    window.scrollTo(0, 0);
+    // console.log("Amenities:", getKeysWithTrueValues(amenitiesValues));
+
+    // console.log("Rules:", getKeysWithTrueValues(rulesValues));
+
+    // console.log(getKeysWithTrueValues(sharingOption));
+
+    // console.log("Price: ", price);
+    // console.log(getKeysWithTrueValues(PgType));
+    console.log(filterOptions);
   };
-  useEffect(() => {
-    // Log the submitted option
-    console.log("Price:", submittedPrice);
-  }, [submittedPrice]);
+  // useEffect(() => {
+  //   // Log the submitted option
+  //   console.log("Price:", submittedPrice);
+  // }, [submittedPrice]);
 
   return (
     <section className="filters">
@@ -72,8 +175,8 @@ const Filters = () => {
                   Price:
                   <select
                     classname="select-dropdown"
-                    value={selected2Option}
-                    onChange={handleDropdownChange}
+                    value={price}
+                    onChange={handlePriceChange}
                   >
                     <option value="selected">Price Range</option>
                     <option value="Upto 5000">Upto 5000</option>
@@ -82,166 +185,56 @@ const Filters = () => {
                   </select>
                 </label>
               </div>
-
               <h2>Gender:</h2>
               <div>
-                <div>
-                  <label>
-                    <input
-                      type="radio"
-                      name="option"
-                      value="boys"
-                      checked={selectedOption === "boys"}
-                      onChange={handleRadioChange}
+                {Object.keys(pgTypeOptions).map((el) => {
+                  return (
+                    <FilterCheckbox
+                      name={el}
+                      displayName={pgTypeOptions[el]}
+                      handleChange={handlePgTypeChange}
                     />
-                    Boys
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    <input
-                      type="radio"
-                      name="option"
-                      value="girls"
-                      checked={selectedOption === "girls"}
-                      onChange={handleRadioChange}
-                    />
-                    Girls
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    <input
-                      type="radio"
-                      name="option"
-                      value="others"
-                      checked={selectedOption === "others"}
-                      onChange={handleRadioChange}
-                    />
-                    Others
-                  </label>
-                </div>
+                  );
+                })}
               </div>
+
               <h2>Sharing:</h2>
               <div>
-                <div>
-                  <label>
-                    <input
-                      type="radio"
-                      name="sharings"
-                      value="single"
-                      checked={selectedOption3 === "single"}
-                      onChange={handleRadio2Change}
+                {Object.keys(sharing).map((el) => {
+                  return (
+                    <FilterCheckbox
+                      name={el}
+                      // name="sharing"
+                      // value={el}
+                      displayName={sharing[el]}
+                      handleChange={handleSharingChange}
                     />
-                    Single
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    <input
-                      type="radio"
-                      name="sharings"
-                      value="double"
-                      checked={selectedOption3 === "double"}
-                      onChange={handleRadio2Change}
-                    />
-                    Double
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    <input
-                      type="radio"
-                      name="sharings"
-                      value="multi"
-                      checked={selectedOption3 === "multi"}
-                      onChange={handleRadio2Change}
-                    />
-                    Multi
-                  </label>
-                </div>
+                  );
+                })}
               </div>
               <h2>Amenities:</h2>
               <div>
-                <div>
-                  <label>
-                    <input
-                      type="checkbox"
-                      name="wifi"
-                      checked={checkboxValues.wifi}
-                      onChange={handleCheckboxChange}
+                {Object.keys(amenities).map((el) => {
+                  return (
+                    <FilterCheckbox
+                      name={el}
+                      displayName={amenities[el]}
+                      handleChange={handleAmenitiesChange}
                     />
-                    Wi-Fi
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    <input
-                      type="checkbox"
-                      name="AC"
-                      checked={checkboxValues.AC}
-                      onChange={handleCheckboxChange}
+                  );
+                })}
+              </div>
+              <h2>Rules:</h2>
+              <div>
+                {Object.keys(rules).map((el) => {
+                  return (
+                    <FilterCheckbox
+                      name={el}
+                      displayName={rules[el]}
+                      handleChange={handleRulesChange}
                     />
-                    AC
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    <input
-                      type="checkbox"
-                      name="parking"
-                      checked={checkboxValues.parking}
-                      onChange={handleCheckboxChange}
-                    />
-                    Parking
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    <input
-                      type="checkbox"
-                      name="laundry"
-                      checked={checkboxValues.laundry}
-                      onChange={handleCheckboxChange}
-                    />
-                    Laundry
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    <input
-                      type="checkbox"
-                      name="cleaning"
-                      checked={checkboxValues.cleaning}
-                      onChange={handleCheckboxChange}
-                    />
-                    Room-Cleaning
-                  </label>
-                </div>
-
-                <div>
-                  <label>
-                    <input
-                      type="checkbox"
-                      name="fridge"
-                      checked={checkboxValues.fridge}
-                      onChange={handleCheckboxChange}
-                    />
-                    Fridge
-                  </label>
-                </div>
-
-                <div>
-                  <label>
-                    <input
-                      type="checkbox"
-                      name="microwave"
-                      checked={checkboxValues.microwave}
-                      onChange={handleCheckboxChange}
-                    />
-                    Microwave
-                  </label>
-                </div>
+                  );
+                })}
               </div>
               <button type="submit">Apply</button>
             </form>

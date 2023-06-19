@@ -89,7 +89,7 @@ export const OurFeatured = () => {
                   className="w-100 border-hero accomodation-card"
                   src={house3}
                   alt="Rhouse1"
-                  onClick={() => makeRequest("co-living")}
+                  onClick={() => makeRequest("coiving")}
                 />
                 <div className="d-flex justify-content-between mt-2 align-items-center">
                   <h5 className="m-0 ff_space fw_500 fs_md">Co-Living PG</h5>
@@ -97,7 +97,7 @@ export const OurFeatured = () => {
                 <div className="d-flex justify-content-between align-items-center mb-3">
                   <h5
                     className="m-0 ff_space fw_400 fs_xsm opacity-75 accomodation-arrow"
-                    onClick={() => makeRequest("co-living")}
+                    onClick={() => makeRequest("coLiving")}
                   >
                     Explore <img src={arrow} alt="" className="w_20" />
                   </h5>

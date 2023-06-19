@@ -90,12 +90,17 @@
 // export default LoginPage;
 
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+// import { setUser } from "../../api";
+
 import "./LoginPage.css";
 import house2 from "../Homepage/images/bg1.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../api";
+// import store from "../../store";
 
-const LoginPage = () => {
+const LoginPage = ({ setUser }) => {
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -143,9 +148,15 @@ const LoginPage = () => {
       const response = await login(email, password);
       console.log(response);
       if (response.status === "success") {
+        // console.log(store.getState());
+        setUser(response.data.user);
         loadingOverlay.style.display = "none";
         navigate("/");
+        // dispatch(setUser(response.data.user));
+        // console.log(store.getState());
+        // console.log(user);
       }
+      // console.log(req.user);
       // show alert and clear inputs
       // alert("Form submitted successfully");
       // setEmail("");

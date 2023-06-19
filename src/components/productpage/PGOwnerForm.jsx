@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+// import { connect } from "react-redux";
+
 import { createPG } from "./../../api";
 import CheckBoxInput from "./checkboxInput";
 import PgAmenitiesLine from "./pgAmenitiesLine";
 
 import "./PGOwnerForm.css";
+// import store from "../../store";
 
 const rules = ["guests", "smoking", "loudMusic", "alcohol"];
 
@@ -27,7 +30,9 @@ const amenities = [
   "wardrobe",
 ];
 
-const PGOwnerForm = () => {
+const PGOwnerForm = ({ user }) => {
+  // console.log(user);
+  // console.log(store.getState());
   const navigate = useNavigate();
   const [images, setImages] = useState([]);
   const [sharingOptions, setSharingOptions] = useState([]);
@@ -58,7 +63,7 @@ const PGOwnerForm = () => {
 
   const [ContactInfo, setContactInfo] = useState({
     phone: "",
-    email: "",
+    email: user.email,
   });
 
   const [pgAmenities, setPGAmenities] = useState({
@@ -163,6 +168,7 @@ const PGOwnerForm = () => {
     event.preventDefault();
     let loadingOverlay = document.querySelector(".loading-overlay");
     let successMessage = document.querySelector(".success-message");
+    let errorMessage = document.querySelector(".error-message");
     let form = document.querySelector(".form-container");
 
     loadingOverlay.style.display = "block";
@@ -172,12 +178,14 @@ const PGOwnerForm = () => {
     const { noticePeriod, securityDeposit, gateClosingTime } = pgRules;
     const pg_Amenities = [pgAmenities];
     const pg_rules = [pgRules];
+    // setContactInfo({ ...ContactInfo, email: user.email });
 
     const pgData = new FormData();
     // Add other fields to the FormData
     pgData.append("name", name);
     pgData.append("description", description);
     pgData.append("pgType", pgType);
+    pgData.append("userID", user._id);
 
     // Append images to FormData
     images.forEach((image) => {
@@ -208,6 +216,12 @@ const PGOwnerForm = () => {
       }, 2000);
     } else {
       // Handle error scenario
+      console.log(response.error);
+      // errorMessage.textContent =
+      errorMessage.style.display = "block";
+      setTimeout(function () {
+        errorMessage.style.display = "none";
+      }, 2000);
       console.log(form);
       form.reset();
       loadingOverlay.style.display = "none";
@@ -234,6 +248,7 @@ const PGOwnerForm = () => {
                 id="name"
                 name="name"
                 size="10"
+                // value={user.name}
                 value={pgDetails.name}
                 onChange={handlePGDetailsChange}
               />
@@ -298,8 +313,8 @@ const PGOwnerForm = () => {
                     type="radio"
                     id="coLiving"
                     name="pgType"
-                    value="co-living"
-                    checked={pgDetails.pgType === "co-living"}
+                    value="coLiving"
+                    // checked={pgDetails.pgType === "coliving"}
                     onChange={handlePGDetailsChange}
                   />
                   <label htmlFor="coLiving">Co-Living</label>
@@ -719,8 +734,7 @@ const PGOwnerForm = () => {
             </div>
             {/* </div> */}
           </div>
-          <div className="row contact parts part20">
-            {/* <div className="form-group"> */}
+          {/* <div className="row contact parts part20">
             <div class="col-6 col-md-4">
               <label htmlFor="contact">
                 <p className="input-heading"></p>
@@ -738,10 +752,9 @@ const PGOwnerForm = () => {
                 onChange={handleContactInfo}
               />
             </div>
-            {/* </div> */}
-          </div>
+          </div> */}
           {/* Images **********************************************************************************************/}
-          <div className="row images parts part21">
+          <div className="row images parts part20">
             {/* <div className="form-group"> */}
             <div class="col-6 col-md-4">
               <label htmlFor="images">
@@ -821,13 +834,24 @@ const PGOwnerForm = () => {
       <div class="loading-overlay">
         <div class="loading-spinner"></div>
       </div>
-      <div class="success-message">
+      <div class="message success-message">
         <i class="success-icon">&#10003;</i>
         <p>PG Listed Successfully!</p>
+      </div>
+      <div class="message error-message">
+        <i class="error-icon">&#10007;</i>
+        <p>Error! Please Try Again</p>
       </div>
       {/* <div class="success-message"></div> */}
     </div>
   );
 };
 
+// const mapStateToProps = (state) => {
+//   return {
+//     user: state.user,
+//   };
+// };
+
+// export default connect(mapStateToProps)(PGOwnerForm);
 export default PGOwnerForm;

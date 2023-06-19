@@ -10,6 +10,7 @@ import Footer from "./Footer";
 import BackToTop from "./BackToTop";
 import Cities from "./Cities";
 import Offers from "./Offers";
+
 function Homepage() {
   return (
     <>
@@ -19,8 +20,6 @@ function Homepage() {
       <HowItWork />
       <Cities />
 
-
-
       <Offers />
       {/* <Loader /> */}
 
@@ -28,7 +27,6 @@ function Homepage() {
       <Footer />
 
       <BackToTop />
-
     </>
   );
 }
