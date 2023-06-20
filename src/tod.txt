@@ -3,5 +3,5 @@ sort in filters
 no validation in add pg form(for empty fields)
 what after contactUs page??
 if no photo uploaded , pgcard will show show error when trying to access images
-city suggestions
+city names
 store persisting even on restart

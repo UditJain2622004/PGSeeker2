@@ -8,8 +8,92 @@ import "./header.css";
 import LoginPage from "../login/LoginPage";
 import Navbar from "../Navbar";
 import { allPgs } from "./../../api";
+import { cityNames } from "./cityNames";
 
 function Header() {
+  const autoSuggest = (e) => {
+    let names = [
+      "Ayla",
+      "Jake",
+      "Sean",
+      "Henry",
+      "Brad",
+      "Stephen",
+      "Taylor",
+      "Timmy",
+      "Cathy",
+      "John",
+      "Amanda",
+      "Amara",
+      "Sam",
+      "Sandy",
+      "Danny",
+      "Ellen",
+      "Camille",
+      "Chloe",
+      "Emily",
+      "Nadia",
+      "Mitchell",
+      "Harvey",
+      "Lucy",
+      "Amy",
+      "Glen",
+      "Peter",
+      "Hisar",
+    ];
+    //Sort names in ascending order
+    let sortedNames = cityNames.sort();
+
+    //reference
+    let input = document.getElementById("input");
+    let autoSuggestContainer = document.querySelector(".autoSuggestContainer");
+    removeElements();
+    for (let i of sortedNames) {
+      //convert input to lowercase and compare with each string
+
+      if (
+        i.toLowerCase().startsWith(input.value.toLowerCase()) &&
+        input.value != ""
+      ) {
+        //create li element
+        let listItem = document.createElement("li");
+        //One common class name
+        listItem.classList.add("list-items");
+        listItem.style.cursor = "pointer";
+        listItem.addEventListener("click", function () {
+          displayNames(i);
+        });
+        //Display matched part in bold
+        let word = "<b>" + i.substr(0, input.value.length) + "</b>";
+        word += i.substr(input.value.length);
+        //display the value in array
+        listItem.innerHTML = word;
+        autoSuggestContainer.style.display = "block";
+        document.querySelector(".list").appendChild(listItem);
+      }
+    }
+
+    //Execute function on keyup
+    // input.addEventListener("keyup", (e) => {
+    //   //loop through above array
+    //   //Initially remove all elements ( so if user erases a letter or adds new letter then clean previous outputs)
+
+    // });
+    function displayNames(value) {
+      console.log("Hi");
+      setKeyword(value.toLowerCase());
+      input.value = value;
+      removeElements();
+    }
+    function removeElements() {
+      //clear all the item
+      autoSuggestContainer.style.display = "none";
+      let items = document.querySelectorAll(".list-items");
+      items.forEach((item) => {
+        item.remove();
+      });
+    }
+  };
   let navigate = useNavigate();
 
   const [keyword, setKeyword] = useState("");
@@ -49,15 +133,19 @@ function Header() {
             </p>
             <div className="d-flex align-items-center">
               <form
+                autoComplete="off"
                 className="searchBox gap-3 ms-0"
                 onSubmit={searchSubmitHandler}
               >
                 <input
+                  id="input"
                   className="main-search"
                   type="text"
                   placeholder="Enter city ..."
+                  onKeyUp={autoSuggest}
                   onChange={(e) => setKeyword(e.target.value)}
                 />
+                {/* <ul class="list"></ul> */}
                 <div className='"ps-sm-2 col-lg-5  text-center ms-0'>
                   <input
                     className="d-inline-block searchBtn ff_space fw_700 fs_sm text-nowrap ms-0 w-100"
@@ -68,10 +156,16 @@ function Header() {
               </form>
             </div>
           </div>
+          <div className="autoSuggestContainer">
+            <ul class="list"></ul>
+          </div>
           <div className="col-lg-6">
             <img className="w-100 border-hero" src={hero_img} alt="hero_img" />
           </div>
         </div>
+        {/* <div className="autoSuggestContainer">
+          <ul class="list"></ul>
+        </div> */}
       </section>
     </header>
   );
