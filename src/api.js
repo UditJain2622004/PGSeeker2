@@ -83,7 +83,6 @@ export const checkAuthentication = async () => {
         },
       }
     );
-    // console.log(response);
     if (response.status === 200) {
       return true;
     } else {
@@ -96,7 +95,6 @@ export const checkAuthentication = async () => {
 
 // actions.js
 export const setUser = (user) => {
-  // console.log("API : ", user);
   return {
     type: "SET_USER",
     payload: user,

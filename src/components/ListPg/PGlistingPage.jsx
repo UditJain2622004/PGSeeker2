@@ -26,12 +26,13 @@ import { Link } from "react-router-dom";
 //     </>
 //   );
 // };
-const PGListingPage = ({ pgs }) => {
+const PGListingPage = ({ pgs, filters }) => {
+  // console.log(filters);
   return (
     <>
       <div className="d-flex">
         <div className="filersection">
-          <Filters />
+          <Filters filters={filters} />
         </div>
         <div className="listings-section">
           {pgs.length > 0 && (

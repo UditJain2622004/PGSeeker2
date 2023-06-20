@@ -5,11 +5,17 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 import { Provider } from "react-redux";
+import { useSelector } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { store, persistedStore } from "./persistStore";
 
+const clearPersistedStore = () => {
+  persistedStore.purge(); // Clear the persisted store
+};
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
 root.render(
+  // {const user = useSelector((state) => state.user)}
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistedStore}>
@@ -19,7 +25,9 @@ root.render(
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+// window.addEventListener("load", (event) => {
+//   if (!event.persisted) {
+//     clearPersistedStore();
+//   }
+// });

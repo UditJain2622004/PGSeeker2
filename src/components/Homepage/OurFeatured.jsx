@@ -11,11 +11,16 @@ export const OurFeatured = () => {
   let navigate = useNavigate();
 
   const makeRequest = async (filter) => {
-    console.log(filter);
-    const response = await allPgs({ pgType: filter });
-    // console.log(response);
+    let loadingOverlay = document.querySelector(".loading-overlay");
 
-    navigate("/listedpg", { state: response.data.pgs });
+    loadingOverlay.style.display = "block";
+    const response = await allPgs({ pgType: filter });
+    loadingOverlay.style.display = "none";
+
+    navigate("/listedpg", {
+      state: [response.data.pgs, { pgType: filter }],
+    });
+    window.scrollTo(0, 0);
   };
   return (
     <>
@@ -89,7 +94,7 @@ export const OurFeatured = () => {
                   className="w-100 border-hero accomodation-card"
                   src={house3}
                   alt="Rhouse1"
-                  onClick={() => makeRequest("coiving")}
+                  onClick={() => makeRequest("coLiving")}
                 />
                 <div className="d-flex justify-content-between mt-2 align-items-center">
                   <h5 className="m-0 ff_space fw_500 fs_md">Co-Living PG</h5>

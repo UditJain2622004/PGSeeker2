@@ -1,6 +1,7 @@
-city,sort in filters
-price not showing in price filter
+sort in filters
+
 no validation in add pg form(for empty fields)
-state resetting on refresh
 what after contactUs page??
 if no photo uploaded , pgcard will show show error when trying to access images
+city suggestions
+store persisting even on restart

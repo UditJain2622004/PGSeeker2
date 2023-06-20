@@ -2,14 +2,11 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-// import { connect } from "react-redux";
-
 import { createPG } from "./../../api";
 import CheckBoxInput from "./checkboxInput";
 import PgAmenitiesLine from "./pgAmenitiesLine";
 
 import "./PGOwnerForm.css";
-// import store from "../../store";
 
 const rules = ["guests", "smoking", "loudMusic", "alcohol"];
 
@@ -32,11 +29,9 @@ const amenities = [
   "wardrobe",
 ];
 
-const PGOwnerForm = ({ user }) => {
-  // console.log(user);
-  // console.log(store.getState());
-  const user2 = useSelector((state) => state.user);
-  console.log(user2);
+const PGOwnerForm = () => {
+  const user = useSelector((state) => state.user);
+  console.log(user);
   const navigate = useNavigate();
   const [images, setImages] = useState([]);
   const [sharingOptions, setSharingOptions] = useState([]);
@@ -67,7 +62,7 @@ const PGOwnerForm = ({ user }) => {
 
   const [ContactInfo, setContactInfo] = useState({
     phone: "",
-    email: user2.email,
+    email: user.email,
   });
 
   const [pgAmenities, setPGAmenities] = useState({
@@ -145,7 +140,6 @@ const PGOwnerForm = ({ user }) => {
   };
 
   const handlePGRulesChange = (event) => {
-    // console.log(event.target.type);
     if (event.target.type == "checkbox") {
       setPGRules({
         ...pgRules,
@@ -172,7 +166,7 @@ const PGOwnerForm = ({ user }) => {
     event.preventDefault();
     let loadingOverlay = document.querySelector(".loading-overlay");
     let successMessage = document.querySelector(".success-message");
-    let errorMessage = document.querySelector(".error-message");
+    let errorMessage = document.querySelector(".error-msg");
     let form = document.querySelector(".form-container");
 
     loadingOverlay.style.display = "block";
@@ -209,7 +203,7 @@ const PGOwnerForm = ({ user }) => {
     // });
 
     const response = await createPG(pgData);
-    console.log(response); // log the response from the server
+    // console.log(response); // log the response from the server
     if (response.status === "success") {
       form.reset();
       loadingOverlay.style.display = "none";
@@ -842,7 +836,7 @@ const PGOwnerForm = ({ user }) => {
         <i class="success-icon">&#10003;</i>
         <p>PG Listed Successfully!</p>
       </div>
-      <div class="message error-message">
+      <div class="message error-msg">
         <i class="error-icon">&#10007;</i>
         <p>Error! Please Try Again</p>
       </div>

@@ -8,14 +8,8 @@ const initialState = {
 
 // Define the reducer
 const reducer = (state = initialState, action) => {
-  // console.log("Store: ", action);
   switch (action.type) {
     case "SET_USER":
-      // console.log("Store: ", action);
-      // console.log({
-      //   ...state,
-      //   user: action.payload,
-      // });
       return {
         ...state,
         user: action.payload,

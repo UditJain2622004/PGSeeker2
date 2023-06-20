@@ -1,147 +1,16 @@
-// import React, { useState } from "react";
-// import "./SignupPage.css"
-
-// const Signup = () => {
-//   const [email, setEmail] = useState("");
-//   const [username, setUsername] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [Confirmpassword, setConfirmPassword] = useState("");
-//   const [errors, setErrors] = useState({});
-
-//   const handleEmailChange = (event) => {
-//     setEmail(event.target.value);
-//   };
-//   const handleUserChange = (event) => {
-//     setUsername(event.target.value);
-//   };
-
-//   const handlePasswordChange = (event) => {
-//     setPassword(event.target.value);
-//   };
-//   const handleConfirmPasswordChange = (event) => {
-
-//     setConfirmPassword(event.target.value);
-//   };
-
-//   const validateForm = () => {
-//     let errors = {};
-//     let isValid = true;
-
-//     if (!email) {
-//       errors.email = "Email is required";
-//       isValid = false;
-//     } else if (!/\S+@\S+\.\S+/.test(email)) {
-//       errors.email = "Email is invalid";
-//       isValid = false;
-//     }
-
-//     if (!password) {
-//       errors.password = "Password is required";
-//       isValid = false;
-//     }
-//     if(Confirmpassword != password){
-//       errors.confirmpassword = "values does not matched with password "
-//     }
-
-//     setErrors(errors);
-
-//     return isValid;
-//   };
-
-//   const handleLogin = (event) => {
-//     event.preventDefault();
-
-//     if (validateForm()) {
-//       // handle login logic here, e.g. send data to backend
-//       console.log("Username:", username);
-
-//       console.log("Email:", email);
-//       console.log("Password:", password);
-//       console.log("ConfirmPassword:", Confirmpassword);
-
-//       // show alert and clear inputs
-//       alert("Form submitted successfully");
-//       setUsername("");
-//       setConfirmPassword("");
-//       setEmail("");
-//       setPassword("");
-//     }
-//   };
-
-//   return (
-//     <div className="login-page">
-//       <div className="login-container">
-//         <h2>Signup</h2>
-//         <form onSubmit={handleLogin}>
-//         <div className="form-group">
-//             <label htmlFor="email">Username:</label>
-//             <input
-//               type="text"
-//               id="text"
-//               value={username}
-//               onChange={handleUserChange}
-//               className={errors.email ? "error" : ""}
-//             />
-//             {errors.email && <span className="error-message">{errors.email}</span>}
-//           </div>
-//           <div className="form-group">
-//             <label htmlFor="email">Email:</label>
-//             <input
-//               type="email"
-//               id="email"
-//               value={email}
-//               onChange={handleEmailChange}
-//               className={errors.email ? "error" : ""}
-//             />
-//             {errors.email && <span className="error-message">{errors.email}</span>}
-//           </div>
-//           <div className="form-group">
-//             <label htmlFor="password">Password:</label>
-//             <input
-//               type="password"
-//               id="password"
-//               value={password}
-//               onChange={handlePasswordChange}
-//               className={errors.password ? "error" : ""}
-//             />
-//             {errors.password && (
-//               <span className="error-message">{errors.password}</span>
-//             )}
-//           </div>
-//           <div className="form-group">
-//             <label htmlFor="password">Confirm Password:</label>
-//             <input
-//               type="password"
-//               id="password"
-//               value={Confirmpassword}
-//               onChange={handleConfirmPasswordChange}
-//               className={errors.password ? "error" : ""}
-//             />
-//             {errors.password && (
-//               <span className="error-message">{errors.password}</span>
-//             )}
-//           </div>
-
-//           <button type="submit">Signup</button>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Signup;
-
 import "./style.css";
 import React, { useState } from "react";
+// import { useSelector } from "react-redux";
 import { signup } from "../../api";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-// import "./SignupPage.css";
-
+// import { Link } from "react-router-dom";
+import { store } from "../../persistStore";
 // import "./Sign.css";
 
 import house2 from "../Homepage/images/bg1.jpg";
-const Signup = ({ setUser }) => {
+const Signup = () => {
+  // const user = useSelector((state) => state.user);
+
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -197,22 +66,32 @@ const Signup = ({ setUser }) => {
     return isValid;
   };
 
-  const handleLogin = async (event) => {
+  const handleSignup = async (event) => {
+    let errorMessage = document.querySelector(".error-msg");
     let loadingOverlay = document.querySelector(".loading-overlay");
     event.preventDefault();
 
     if (validateForm()) {
       loadingOverlay.style.display = "block";
-      // handle login logic here, e.g. send data to backend
-      console.log("Email:", email);
-      console.log("Password:", password);
+
       const response = await signup(username, email, password, Confirmpassword);
       console.log(response);
       if (response.status === "success") {
-        setUser(response.data.user);
+        store.dispatch({
+          type: "SET_USER",
+          payload: response.data.user,
+        });
 
         loadingOverlay.style.display = "none";
         navigate("/");
+      } else {
+        errorMessage.textContent = response.error;
+        errorMessage.style.display = "block";
+        setTimeout(function () {
+          errorMessage.style.display = "none";
+        }, 2000);
+
+        loadingOverlay.style.display = "none";
       }
     }
   };
@@ -220,12 +99,11 @@ const Signup = ({ setUser }) => {
     <div>
       <div className="sign ff_space">
         <div className=" img-section">
-          <img className="image-sign" src={house2}></img>
+          <img className="image-sign" src={house2} alt="bg"></img>
         </div>
         <div className=" form-section">
-          {/* <div className="login-container"> */}
           <h2>Signup</h2>
-          <form onSubmit={handleLogin}>
+          <form onSubmit={handleSignup}>
             <div className="form-group">
               <label htmlFor="name">Name:</label>
               <input
@@ -289,7 +167,10 @@ const Signup = ({ setUser }) => {
           <div class="loading-overlay">
             <div class="loading-spinner"></div>
           </div>
-          {/* </div> */}
+          <div class="message error-msg">
+            <i class="error-icon">&#10007;</i>
+            <p></p>
+          </div>
         </div>
       </div>
     </div>

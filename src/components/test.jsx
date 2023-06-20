@@ -139,6 +139,13 @@
     "rules":["guests"],
     "sort":-1
 }
+"city":"hisar",
+    "price":[5000,10000],
+    "pgType":["male","coLiving","female"],
+    "sharing":["1","2","3"],
+    "amenities":["wifi","parking"],
+    "rules":["guests"],
+    "sort":-1
 {pgs.length === 0 && (
         <div className="d-flex">
           <div className="filersection">

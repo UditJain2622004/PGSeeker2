@@ -10,7 +10,7 @@ function Logout({ setUser }) {
     async function logoutAndNavigate() {
       // Perform logout logic here
       await logout();
-      setUser();
+      // setUser();
       store.dispatch({ type: "CLEAR_USER" });
       // Navigate to the desired route
       navigate("/");

@@ -1,30 +1,15 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import LoginPage from "./login/LoginPage";
 import menu from "./Homepage/images/menu.svg";
 import profileImage from "./Homepage/images/profile.jpg";
 import "./navbar.css";
-function getCookie(name) {
-  const cookieString = document.cookie;
-  const cookies = cookieString.split("; ");
 
-  for (let i = 0; i < cookies.length; i++) {
-    const cookie = cookies[i];
-    const [cookieName, cookieValue] = cookie.split("=");
+const Navbar = () => {
+  const user = useSelector((state) => state.user);
+  console.log(user);
 
-    if (cookieName === name) {
-      return cookieValue;
-    }
-  }
-
-  return null;
-}
-const Navbar = ({ user }) => {
-  // console.log(getCookie("jwt"));
-  const user2 = useSelector((state) => state.user);
-
-  const buttons = user2
+  const buttons = user
     ? ["PGowner", "Add PG", "logout", "LogOut"]
     : ["login", "Login", "signup", "Sign Up"];
   const [navShow, setNavShow] = useState(false);

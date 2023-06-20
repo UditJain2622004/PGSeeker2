@@ -16,12 +16,17 @@ function Header() {
 
   const searchSubmitHandler = async (e) => {
     e.preventDefault();
-    console.log(keyword);
+    let loadingOverlay = document.querySelector(".loading-overlay");
+
+    loadingOverlay.style.display = "block";
 
     const response = await allPgs({ city: keyword.trim().toLowerCase() });
-    console.log(response);
+    loadingOverlay.style.display = "none";
 
-    navigate("/listedpg", { state: response.data.pgs });
+    navigate("/listedpg", {
+      state: [response.data.pgs, { city: keyword.trim() }],
+    });
+    window.scrollTo(0, 0);
   };
   const [navShow, setNavShow] = useState(false);
   if (navShow) {

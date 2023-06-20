@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import FilterCheckbox from "./filterCheckbox";
-import FilterRadio from "./filterRadio";
+// import FilterRadio from "./filterRadio";
 import { allPgs } from "../../api";
 import "./filters.css";
 
@@ -40,7 +40,21 @@ const sharing = { 1: "Single", 2: "Double", 3: "Triple", 4: "Four" };
 
 const pgTypeOptions = { male: "Boys", female: "Girls", coLiving: "Co-Living" };
 
-const Filters = () => {
+const Filters = ({ filters }) => {
+  console.log(filters);
+  let pgTypeInitial = {
+    male: false,
+    female: false,
+    coLiving: false,
+  };
+  let cityInitial = "";
+  if (filters.pgType) {
+    pgTypeInitial[filters.pgType] = true;
+  }
+  if (filters.city) {
+    cityInitial = filters.city;
+  }
+  console.log(pgTypeInitial);
   const navigate = useNavigate();
   const [amenitiesValues, setamenitiesValues] = useState({
     wifi: false,
@@ -68,11 +82,13 @@ const Filters = () => {
     alcoholAllowed: false,
     guests: false,
   });
-  const [PgType, setPgType] = useState({
-    male: false,
-    female: false,
-    coLiving: false,
-  });
+  const [PgType, setPgType] = useState(pgTypeInitial);
+  const [city, setCity] = useState(cityInitial);
+  // const [PgType, setPgType] = useState({
+  //   male: false,
+  //   female: false,
+  //   coLiving: false,
+  // });
   const [sharingOption, setSharingOption] = useState({
     1: false,
     2: false,
@@ -80,11 +96,17 @@ const Filters = () => {
     4: false,
   });
   const [price, setPrice] = useState();
+  const [priceInputTitle, setPriceInputTitle] = useState("Price Range");
   // const [submittedPrice, setSubmittedPrice] = useState("");
   // const [pgType, setPgType] = useState("");
 
+  const handleCityChange = (event) => {
+    setCity(event.target.value);
+  };
+
   const handlePriceChange = (event) => {
     const selectedValue = event.target.value;
+    setPriceInputTitle(selectedValue);
     const arr = selectedValue.split(" ");
     if (arr[0] === "Upto") {
       setPrice([0, arr[1] * 1]);
@@ -121,11 +143,8 @@ const Filters = () => {
       [name]: checked,
     }));
   };
-  // const handlePgTypeChange = (event) => {
-  //   setPgType(event.target.value);
-  // };
 
-  const handleLogin = async (event) => {
+  const applyFilters = async (event) => {
     event.preventDefault();
     let loadingOverlay = document.querySelector(".loading-overlay");
 
@@ -134,6 +153,7 @@ const Filters = () => {
     loadingOverlay.style.display = "block";
 
     const filterOptions = {
+      city,
       price,
       pgType: getKeysWithTrueValues(PgType),
       sharing: getKeysWithTrueValues(sharingOption),
@@ -141,18 +161,11 @@ const Filters = () => {
       rules: getKeysWithTrueValues(rulesValues),
     };
     const response = await allPgs(filterOptions);
-    console.log(response);
+    // console.log(response);
     loadingOverlay.style.display = "none";
-    navigate("/listedpg", { state: response.data.pgs });
+    navigate("/listedpg", { state: [response.data.pgs, filterOptions] });
     window.scrollTo(0, 0);
-    // console.log("Amenities:", getKeysWithTrueValues(amenitiesValues));
 
-    // console.log("Rules:", getKeysWithTrueValues(rulesValues));
-
-    // console.log(getKeysWithTrueValues(sharingOption));
-
-    // console.log("Price: ", price);
-    // console.log(getKeysWithTrueValues(PgType));
     console.log(filterOptions);
   };
   // useEffect(() => {
@@ -169,16 +182,24 @@ const Filters = () => {
 
             <h2>Filters</h2>
 
-            <form onSubmit={handleLogin}>
+            <form onSubmit={applyFilters}>
               <div className="select-container">
+                <h2>City:</h2>
+                <input
+                  type="text"
+                  name="city"
+                  id="city"
+                  value={city}
+                  onChange={handleCityChange}
+                />
                 <label>
-                  Price:
+                  <h2>Price:</h2>
                   <select
                     classname="select-dropdown"
                     value={price}
                     onChange={handlePriceChange}
                   >
-                    <option value="selected">Price Range</option>
+                    <option value="selected">{priceInputTitle}</option>
                     <option value="Upto 5000">Upto 5000</option>
                     <option value="Upto 10000">Upto 10000</option>
                     <option value="Above 10000">Above 10000</option>
@@ -191,6 +212,7 @@ const Filters = () => {
                   return (
                     <FilterCheckbox
                       name={el}
+                      stateVar={PgType}
                       displayName={pgTypeOptions[el]}
                       handleChange={handlePgTypeChange}
                     />
@@ -204,6 +226,7 @@ const Filters = () => {
                   return (
                     <FilterCheckbox
                       name={el}
+                      stateVar={sharingOption}
                       // name="sharing"
                       // value={el}
                       displayName={sharing[el]}
@@ -218,6 +241,7 @@ const Filters = () => {
                   return (
                     <FilterCheckbox
                       name={el}
+                      stateVar={amenitiesValues}
                       displayName={amenities[el]}
                       handleChange={handleAmenitiesChange}
                     />
@@ -230,6 +254,7 @@ const Filters = () => {
                   return (
                     <FilterCheckbox
                       name={el}
+                      stateVar={rulesValues}
                       displayName={rules[el]}
                       handleChange={handleRulesChange}
                     />
