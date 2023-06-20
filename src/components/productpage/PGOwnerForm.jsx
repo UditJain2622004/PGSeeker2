@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 // import { connect } from "react-redux";
 
 import { createPG } from "./../../api";
@@ -33,6 +35,8 @@ const amenities = [
 const PGOwnerForm = ({ user }) => {
   // console.log(user);
   // console.log(store.getState());
+  const user2 = useSelector((state) => state.user);
+  console.log(user2);
   const navigate = useNavigate();
   const [images, setImages] = useState([]);
   const [sharingOptions, setSharingOptions] = useState([]);
@@ -63,7 +67,7 @@ const PGOwnerForm = ({ user }) => {
 
   const [ContactInfo, setContactInfo] = useState({
     phone: "",
-    email: user.email,
+    email: user2.email,
   });
 
   const [pgAmenities, setPGAmenities] = useState({

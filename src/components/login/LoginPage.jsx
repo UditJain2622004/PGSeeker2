@@ -90,16 +90,19 @@
 // export default LoginPage;
 
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 // import { setUser } from "../../api";
+import { useSelector } from "react-redux";
 
 import "./LoginPage.css";
 import house2 from "../Homepage/images/bg1.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../api";
-// import store from "../../store";
+import { store } from "./../../persistStore";
 
 const LoginPage = ({ setUser }) => {
+  const user2 = useSelector((state) => state.user);
+  console.log(user2);
   // const dispatch = useDispatch();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -150,9 +153,13 @@ const LoginPage = ({ setUser }) => {
       if (response.status === "success") {
         // console.log(store.getState());
         setUser(response.data.user);
+        // dispatch(setUser(response.data.user));
+        store.dispatch({
+          type: "SET_USER",
+          payload: response.data.user,
+        });
         loadingOverlay.style.display = "none";
         navigate("/");
-        // dispatch(setUser(response.data.user));
         // console.log(store.getState());
         // console.log(user);
       }

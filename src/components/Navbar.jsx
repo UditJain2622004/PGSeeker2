@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import LoginPage from "./login/LoginPage";
 import menu from "./Homepage/images/menu.svg";
 import profileImage from "./Homepage/images/profile.jpg";
@@ -21,7 +22,9 @@ function getCookie(name) {
 }
 const Navbar = ({ user }) => {
   // console.log(getCookie("jwt"));
-  const buttons = user
+  const user2 = useSelector((state) => state.user);
+
+  const buttons = user2
     ? ["PGowner", "Add PG", "logout", "LogOut"]
     : ["login", "Login", "signup", "Sign Up"];
   const [navShow, setNavShow] = useState(false);
