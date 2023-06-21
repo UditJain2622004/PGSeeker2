@@ -1,4 +1,11 @@
 sort in filters
+api call on pg details page
+city hyderabad not working from filters page
+autoSuggest container position
+loader on create review
+errorHandling on all api functions
+self review on top
+sharing options
 
 no validation in add pg form(for empty fields)
 what after contactUs page??
