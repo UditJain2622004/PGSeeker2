@@ -1,0 +1,11 @@
+.sidebar {
+  /* width: 200px; */
+  /* color: #888888; */
+}
+.sidebar-link {
+  color: #d4d2d2 !important;
+}
+.det {
+  text-decoration: underline;
+  background-color: #fcf7f7;
+}

@@ -12,35 +12,6 @@ import { cityNames } from "./cityNames";
 
 function Header() {
   const autoSuggest = (e) => {
-    let names = [
-      "Ayla",
-      "Jake",
-      "Sean",
-      "Henry",
-      "Brad",
-      "Stephen",
-      "Taylor",
-      "Timmy",
-      "Cathy",
-      "John",
-      "Amanda",
-      "Amara",
-      "Sam",
-      "Sandy",
-      "Danny",
-      "Ellen",
-      "Camille",
-      "Chloe",
-      "Emily",
-      "Nadia",
-      "Mitchell",
-      "Harvey",
-      "Lucy",
-      "Amy",
-      "Glen",
-      "Peter",
-      "Hisar",
-    ];
     //Sort names in ascending order
     let sortedNames = cityNames.sort();
 

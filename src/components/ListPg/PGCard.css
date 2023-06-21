@@ -212,3 +212,10 @@ h5 {
   font-weight: 500;
   padding: 0;
 }
+
+.cardImage {
+  cursor: pointer;
+}
+.cardDetails {
+  cursor: pointer;
+}

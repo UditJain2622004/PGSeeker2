@@ -163,3 +163,27 @@
           </div>
         </div>
       )}
+
+      <div className="row sub-address parts part4">
+            {/* <div className="form-group"> */}
+            <div class="col-6 col-md-4">
+              <label htmlFor="address">
+                <p className="input-heading">Address :</p>
+              </label>
+            </div>
+
+            <div class="col-6 col-md-2">
+              <label htmlFor="locality">Locality :</label>
+            </div>
+            <div class="col-6 col-md-4">
+              <input
+                type="text"
+                id="locality"
+                name="locality"
+                value={addressDetails.locality}
+                onChange={handleAddressDetailsChange}
+              />
+            </div>
+
+            {/* </div> */}
+          </div>

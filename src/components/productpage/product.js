@@ -5,36 +5,46 @@ import Amenities from "./Amenities";
 import UseStateDesc from "./UseStateDesc";
 
 import Header from "./Header";
+import Footer from "../Homepage/Footer";
+import { useLocation } from "react-router-dom";
+import { getReviews } from "../../api";
+import { useState, useEffect } from "react";
 
-const amenitiesData = [
-  { id: 1, name: "Wifi", icon: "" },
-  { id: 2, name: "AC", icon: "" },
-  { id: 3, name: "Power Backup", icon: "" },
-  { id: 4, name: "Room Cleaning", icon: "" },
-  { id: 5, name: "Parking", icon: "" },
-  { id: 6, name: "TV", icon: "" },
-  { id: 7, name: "4-Wheeler Parking", icon: "" },
-  { id: 8, name: "Fridge", icon: "" },
-  { id: 9, name: "Water Cooler", icon: "" },
-  { id: 10, name: "Warden", icon: "" },
-  { id: 11, name: "Microwave", icon: "" },
-  { id: 12, name: "Veg", icon: "" },
-  { id: 13, name: "Non-Veg", icon: "" },
-  { id: 14, name: "Lift", icon: "" },
-];
+const Product = () => {
+  const location = useLocation();
+  const pg = location.state;
+  // console.log(pg);
 
-const product = () => {
-  const amenities = amenitiesData.filter((amenity) => {
-    // replace this condition with the one that checks if the PG owner entered this amenity
-    return amenity.id % 2 === 0;
-  });
+  const [reviews, setReviews] = useState([]);
+  const amenities = ["wifi", "ac", "parking", "battery", "tv", "fridge"];
+  const rules = ["smoking", "guests", "loud-music"];
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      const fetchedReviews = await getReviews(pg._id);
+      // console.log(fetchedReviews);
+      // Fetch the amenities data asynchronously
+      // const amenitiesData = await getAmenities(); // Replace with your actual data fetching function
+
+      // Update the state with the fetched data
+      // setAmenities(amenitiesData);
+      // console.log(reviews);
+      // console.log(fetchedReviews.data.reviews);
+      setReviews(fetchedReviews.data.reviews);
+      // console.log(reviews);
+    };
+
+    fetchReviews();
+  }, []);
+
   return (
     <div>
       <Header />
       <Amenities amenities={amenities} />
-      <UseStateDesc />
+      {/* <UseStateDesc /> */}
+      <Footer />
     </div>
   );
 };
 
-export default product;
+export default Product;

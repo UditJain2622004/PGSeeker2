@@ -1,7 +1,13 @@
 import React from "react";
 import "./PGCard.css";
+import { useNavigate } from "react-router-dom";
 
 const PGCard = ({ pg }) => {
+  const navigate = useNavigate();
+  const goTo = () => {
+    navigate("/pg", { state: pg });
+    // console.log(pg);
+  };
   const sharingoption = pg.sharing.slice(0, 2).map((el) => {
     const share = {
       1: "Single",
@@ -27,7 +33,10 @@ const PGCard = ({ pg }) => {
           <div className="card shadow-0 border ">
             <div className="card-body">
               <div className="row">
-                <div className="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
+                <div
+                  className="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0 cardImage"
+                  onClick={goTo}
+                >
                   <div className="ripple ripple-surface">
                     <img src={pg.images[0]} className="w-100" alt="product" />
                     <a href="#!">
@@ -43,7 +52,10 @@ const PGCard = ({ pg }) => {
                     </a>
                   </div>
                 </div>
-                <div className="col-md-6 col-lg-6 col-xl-6">
+                <div
+                  className="col-md-6 col-lg-6 col-xl-6 cardDetails"
+                  onClick={goTo}
+                >
                   <div class={`banner banner-${pg.pgType}`}>{pg.pgType}</div>
                   <h5>
                     {pg.name}
@@ -148,6 +160,7 @@ const PGCard = ({ pg }) => {
                     <button
                       className="btn btn-primary py-2 blue_bg button"
                       type="button"
+                      onClick={goTo}
                     >
                       Details
                     </button>
