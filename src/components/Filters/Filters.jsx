@@ -4,6 +4,7 @@ import FilterCheckbox from "./filterCheckbox";
 // import FilterRadio from "./filterRadio";
 import { allPgs } from "../../api";
 import "./filters.css";
+import CitySuggestList from "../Homepage/citySuggestList";
 
 const getKeysWithTrueValues = (obj) => {
   return Object.keys(obj).filter((key) => obj[key] === true);
@@ -200,7 +201,10 @@ const Filters = ({ filters, sortOption, handleSort }) => {
                   id="city"
                   value={city}
                   onChange={handleCityChange}
+                  list="cityNames"
+                  autoComplete="off"
                 />
+                {city !== "" && <CitySuggestList />}
                 <label>
                   <h2>Price:</h2>
                   <select

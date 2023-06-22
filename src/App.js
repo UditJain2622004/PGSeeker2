@@ -18,6 +18,7 @@ import Services from "./components/Services/services";
 import ProfilePage from "./components/profile/profilePage";
 import ProfilePage2 from "./components/profile/ProfilePage2";
 import ProtectedRoute from "./ProtectedRoute";
+import Test from "./components/test";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
           <Route path="/Services" element={<Services />} />
           <Route path="/contactUs" element={<ContactUs />} />
           <Route path="/profile" element={<ProfilePage2 />} />
+          <Route path="/test" element={<Test />} />
         </Routes>
       </Router>
     </>

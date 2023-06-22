@@ -1,70 +1,53 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import menu from "./images/menu.svg";
-import play_btn from "./images/Video_play_btn.svg";
 import hero_img from "./images/hero2.jpg";
 import { useNavigate } from "react-router-dom";
 import "./header.css";
 import LoginPage from "../login/LoginPage";
 import Navbar from "../Navbar";
 import { allPgs } from "./../../api";
-import { cityNames } from "./cityNames";
+import CitySuggestList from "./citySuggestList";
 
 function Header() {
-  const autoSuggest = (e) => {
-    //Sort names in ascending order
-    let sortedNames = cityNames.sort();
+  // const autoSuggest = (e) => {
+  //   let sortedNames = cityNames.sort();
 
-    //reference
-    let input = document.getElementById("input");
-    let autoSuggestContainer = document.querySelector(".autoSuggestContainer");
-    removeElements();
-    for (let i of sortedNames) {
-      //convert input to lowercase and compare with each string
+  //   let input = document.getElementById("input");
+  //   let autoSuggestContainer = document.querySelector(".autoSuggestContainer");
+  //   removeElements();
+  //   for (let i of sortedNames) {
 
-      if (
-        i.toLowerCase().startsWith(input.value.toLowerCase()) &&
-        input.value != ""
-      ) {
-        //create li element
-        let listItem = document.createElement("li");
-        //One common class name
-        listItem.classList.add("list-items");
-        listItem.style.cursor = "pointer";
-        listItem.addEventListener("click", function () {
-          displayNames(i);
-        });
-        //Display matched part in bold
-        let word = "<b>" + i.substr(0, input.value.length) + "</b>";
-        word += i.substr(input.value.length);
-        //display the value in array
-        listItem.innerHTML = word;
-        autoSuggestContainer.style.display = "block";
-        document.querySelector(".list").appendChild(listItem);
-      }
-    }
-
-    //Execute function on keyup
-    // input.addEventListener("keyup", (e) => {
-    //   //loop through above array
-    //   //Initially remove all elements ( so if user erases a letter or adds new letter then clean previous outputs)
-
-    // });
-    function displayNames(value) {
-      console.log("Hi");
-      setKeyword(value.toLowerCase());
-      input.value = value;
-      removeElements();
-    }
-    function removeElements() {
-      //clear all the item
-      autoSuggestContainer.style.display = "none";
-      let items = document.querySelectorAll(".list-items");
-      items.forEach((item) => {
-        item.remove();
-      });
-    }
-  };
+  //     if (
+  //       i.toLowerCase().startsWith(input.value.toLowerCase()) &&
+  //       input.value != ""
+  //     ) {
+  //       let listItem = document.createElement("li");
+  //       listItem.classList.add("list-items");
+  //       listItem.style.cursor = "pointer";
+  //       listItem.addEventListener("click", function () {
+  //         displayNames(i);
+  //       });
+  //       let word = "<b>" + i.substr(0, input.value.length) + "</b>";
+  //       word += i.substr(input.value.length);
+  //       listItem.innerHTML = word;
+  //       autoSuggestContainer.style.display = "block";
+  //       document.querySelector(".list").appendChild(listItem);
+  //     }
+  //   }
+  //   function displayNames(value) {
+  //     console.log("Hi");
+  //     setKeyword(value.toLowerCase());
+  //     input.value = value;
+  //     removeElements();
+  //   }
+  //   function removeElements() {
+  //     autoSuggestContainer.style.display = "none";
+  //     let items = document.querySelectorAll(".list-items");
+  //     items.forEach((item) => {
+  //       item.remove();
+  //     });
+  //   }
+  // };
   let navigate = useNavigate();
 
   const [keyword, setKeyword] = useState("");
@@ -122,10 +105,11 @@ function Header() {
                   className="main-search"
                   type="text"
                   placeholder="Enter city ..."
-                  onKeyUp={autoSuggest}
+                  // onKeyUp={autoSuggest}
                   onChange={(e) => setKeyword(e.target.value)}
+                  list="cityNames"
                 />
-                {/* <ul class="list"></ul> */}
+                {keyword !== "" && <CitySuggestList />}
                 <div className='"ps-sm-2 col-lg-5  text-center ms-0'>
                   <input
                     className="d-inline-block searchBtn ff_space fw_700 fs_sm text-nowrap ms-0 w-100"
@@ -136,9 +120,9 @@ function Header() {
               </form>
             </div>
           </div>
-          <div className="autoSuggestContainer">
+          {/* <div className="autoSuggestContainer">
             <ul class="list"></ul>
-          </div>
+          </div> */}
           <div className="col-lg-6">
             <img className="w-100 border-hero" src={hero_img} alt="hero_img" />
           </div>
