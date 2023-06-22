@@ -72,16 +72,25 @@ function Header() {
   const searchSubmitHandler = async (e) => {
     e.preventDefault();
     let loadingOverlay = document.querySelector(".loading-overlay");
+    let errorMessage = document.querySelector(".error-msg");
 
     loadingOverlay.style.display = "block";
 
     const response = await allPgs({ city: keyword.trim().toLowerCase() });
     loadingOverlay.style.display = "none";
 
-    navigate("/listedpg", {
-      state: [response.data.pgs, { city: keyword.trim() }],
-    });
-    window.scrollTo(0, 0);
+    if (response.status === "success") {
+      navigate("/listedpg", {
+        state: [response.data.pgs, { city: keyword.trim() }],
+      });
+      window.scrollTo(0, 0);
+    } else {
+      errorMessage.textContent = response.error;
+      errorMessage.style.display = "block";
+      setTimeout(function () {
+        errorMessage.style.display = "none";
+      }, 2000);
+    }
   };
   const [navShow, setNavShow] = useState(false);
   if (navShow) {
@@ -134,9 +143,6 @@ function Header() {
             <img className="w-100 border-hero" src={hero_img} alt="hero_img" />
           </div>
         </div>
-        {/* <div className="autoSuggestContainer">
-          <ul class="list"></ul>
-        </div> */}
       </section>
     </header>
   );

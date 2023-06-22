@@ -10,25 +10,29 @@ const AddressInput = ({
   heading,
   stateVar,
   subHeading,
-  key,
+  keyIndex,
+  inputType,
 }) => {
   return (
     <>
-      <React.Fragment key={key}>
+      <React.Fragment key={keyIndex}>
         <div className={`row sub-address parts part${partNum}`}>
           {/* <div className="form-group"> */}
-          <div class="col-6 col-md-4">
+          <div className="col-6 col-md-4">
             <label htmlFor="address">
               <p className="input-heading">{heading}</p>
             </label>
           </div>
 
-          <div class="col-6 col-md-2">
-            <label htmlFor={subHeading}>{`${capitalize(subHeading)} :`}</label>
+          <div className="col-6 col-md-2">
+            <label htmlFor={subHeading}>
+              {`${capitalize(subHeading)}`}
+              <span className="required-marker"> *</span>
+            </label>
           </div>
-          <div class="col-6 col-md-4">
+          <div className="col-6 col-md-4">
             <input
-              type="text"
+              type={inputType}
               id={subHeading}
               name={subHeading}
               value={stateVar[subHeading]}

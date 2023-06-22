@@ -1,14 +1,14 @@
-sort in filters
-api call on pg details page
-city hyderabad not working from filters page
 autoSuggest container position
-loader on create review
-errorHandling on all api functions
-self review on top
 sharing options
+size of images carousel changing due to no. of images
+if only 1 photo, carousel not working
 
-no validation in add pg form(for empty fields)
+self review on top
+inputs of price and phone no. changing
+
+in pg owner form, deselcting images submits the form
+handle image not uploading in pg owner form
+
+bad validation in add pg form(for empty fields)
 what after contactUs page??
-if no photo uploaded , pgcard will show show error when trying to access images
-city names
 store persisting even on restart

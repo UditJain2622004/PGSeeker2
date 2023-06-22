@@ -63,6 +63,7 @@ const LoginPage = () => {
         });
         loadingOverlay.style.display = "none";
         navigate("/");
+        window.scrollTo(0, 0);
       } else {
         errorMessage.textContent = response.error;
         errorMessage.style.display = "block";

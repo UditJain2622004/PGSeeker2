@@ -9,65 +9,26 @@ import pg3 from "./PG/pic4.png";
 import pg4 from "./PG/pic5.png";
 import pg5 from "./PG/pic6.png";
 import pg6 from "./PG/pic7.png";
+import defaultPic from "./images/default.jpg";
 
 function Header({ headerDetails }) {
+  console.log(headerDetails.images);
   const pgTypeDisplayName = {
     male: "Male",
     female: "Female",
     coLiving: "Co-Living",
   };
-  // const [inc, setInc] = useState(1);
-  // const [Change, setChange] = useState(2);
-  // let setOne = () => {
-  //     if (inc == 1) {
-  //         setInc(1);
-  //     }
-  //     else if (inc == 6) {
-  //         inc = 1
-
-  //     }
-  //     else {
-  //         setInc(inc - 1);
-  //     }
-  // };
-  const data = [
-    {
-      image: pg1,
-    },
-    {
-      image: pg2,
-    },
-    {
-      image: pg3,
-    },
-    {
-      image: pg4,
-    },
-    {
-      image: pg5,
-    },
-    {
-      image: pg6,
-    },
-  ];
-
+  const data = [];
+  headerDetails.images.forEach((el) => data.push({ image: el }));
+  if (data.length === 0) {
+    data.push({ image: defaultPic });
+  }
+  console.log(data);
   const slideNumberStyle = {
     fontSize: "20px",
     fontWeight: "bold",
   };
-  // const [sharingCount, setSharingCount] = useState(1);
 
-  // const handleIncrement = () => {
-  //   if (sharingCount < 5) {
-  //     setSharingCount((prevCount) => prevCount + 1);
-  //   }
-  // };
-
-  // const handleDecrement = () => {
-  //   if (sharingCount > 1) {
-  //     setSharingCount((prevCount) => prevCount - 1);
-  //   }
-  // };
   return (
     <div className="container">
       <div className="pg-details-container">

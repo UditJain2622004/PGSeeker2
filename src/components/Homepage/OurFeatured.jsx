@@ -12,15 +12,24 @@ export const OurFeatured = () => {
 
   const makeRequest = async (filter) => {
     let loadingOverlay = document.querySelector(".loading-overlay");
+    let errorMessage = document.querySelector(".error-msg");
 
     loadingOverlay.style.display = "block";
     const response = await allPgs({ pgType: filter });
     loadingOverlay.style.display = "none";
-
-    navigate("/listedpg", {
-      state: [response.data.pgs, { pgType: filter }],
-    });
-    window.scrollTo(0, 0);
+    console.log({ pgType: [filter] });
+    if (response.status === "success") {
+      navigate("/listedpg", {
+        state: [response.data.pgs, { pgType: [filter] }],
+      });
+      window.scrollTo(0, 0);
+    } else {
+      errorMessage.textContent = response.error;
+      errorMessage.style.display = "block";
+      setTimeout(function () {
+        errorMessage.style.display = "none";
+      }, 2000);
+    }
   };
   return (
     <>

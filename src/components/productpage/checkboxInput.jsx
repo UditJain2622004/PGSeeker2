@@ -5,9 +5,10 @@ function capitalize(string) {
 }
 
 const checkboxInput = ({ fields, type, handleChange, allowed }) => {
+  // console.log(Object.keys(fields));
   return (
     <>
-      {fields.map((el, index) => {
+      {Object.keys(fields).map((el, index) => {
         return (
           <React.Fragment key={index}>
             <div className="form-group">
@@ -20,7 +21,8 @@ const checkboxInput = ({ fields, type, handleChange, allowed }) => {
                 onChange={handleChange}
               />
               <label htmlFor={el}>
-                {capitalize(el)}
+                {/* {capitalize(el)} */}
+                {fields[el]}
                 {allowed ? " Allowed" : ""}
               </label>
             </div>

@@ -1,48 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PGCard from "./PGCard";
 import "./PGListingPage.css";
 import Filters from "../Filters/Filters";
 import { Link } from "react-router-dom";
 
-// const PGListingPage = ({ pgs }) => {
-
-//   return (
-//     <>
-//       {pgs.length > 0 && (
-//         <div className="d-flex">
-//           <div className="filersection">
-//             <Filters />
-//           </div>
-//           <div className="listings-section">
-//             <div className="pg-list">
-//               {pgs.map((pg) => (
-//                 <PGCard key={pg.id} pg={pg} />
-//               ))}
-//             </div>
-//           </div>
-//         </div>
-//       )}
-
-//     </>
-//   );
-// };
 const PGListingPage = ({ pgs, filters }) => {
+  const [pgData, setPgData] = useState([]);
+  const [sortOption, setSortOption] = useState("ascending");
+  useEffect(() => {
+    setPgData(pgs);
+  }, [pgs]);
+  const handleSort = (event) => {
+    const selectedOption = event.target.value;
+    setSortOption(selectedOption);
+    if (sortOption === "descending") {
+      setPgData([...pgData].sort((a, b) => a.minPrice - b.minPrice));
+    } else if (sortOption === "ascending") {
+      setPgData([...pgData].sort((a, b) => b.minPrice - a.minPrice));
+    }
+    // Check if the selected option is different from the current sort option
+    // if (selectedOption !== sortOption) {
+    //   setSortOption(selectedOption);
+    //   setPgData([...pgData].reverse());
+    // }
+  };
   // console.log(filters);
   return (
     <>
       <div className="d-flex">
         <div className="filersection">
-          <Filters filters={filters} />
+          <Filters
+            filters={filters}
+            sortOption={sortOption}
+            handleSort={handleSort}
+          />
         </div>
         <div className="listings-section">
-          {pgs.length > 0 && (
+          {pgData.length > 0 && (
             <div className="pg-list">
-              {pgs.map((pg) => (
+              {pgData.map((pg) => (
                 <PGCard key={pg.id} pg={pg} />
               ))}
             </div>
           )}
-          {pgs.length === 0 && (
+          {pgData.length === 0 && (
             <div className="d-flex">
               <div className="error-container">
                 <div>

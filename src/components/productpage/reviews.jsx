@@ -56,7 +56,7 @@ const ReviewSection = ({ reviews, pgID }) => {
       error.style.display = "block";
       setTimeout(() => {
         error.style.display = "none";
-      }, 2000);
+      }, 3000);
     };
     e.preventDefault();
     if (!user) {
@@ -89,6 +89,8 @@ const ReviewSection = ({ reviews, pgID }) => {
     } else {
       if (newReview.error === "Duplicate pg,user entered") {
         showMsg("You have already given a review for this PG!!", "error");
+      } else {
+        showMsg(newReview.error, "error");
       }
     }
     // if (!newReview.success) {

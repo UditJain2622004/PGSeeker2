@@ -1,72 +1,113 @@
 export const allPgs = async (filters) => {
-  console.log(filters);
-  const response = await fetch("http://localhost:5000/api/v1/pg/search", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(filters),
-  });
+  try {
+    console.log(filters);
+    const response = await fetch("http://localhost:5000/api/v1/pg/search", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(filters),
+    });
 
-  const data = await response.json();
-  return data;
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error.message);
+    return {
+      status: "requestFail",
+      error: "Something went wrong!!",
+    };
+  }
 };
 
 // api.js
 export const createPG = async (pgData) => {
-  console.log(pgData);
-  const response = await fetch("http://localhost:5000/api/v1/pg", {
-    method: "POST",
-    // headers: {
-    //   "Content-Type": "application/json",
-    // },
-    body: pgData,
-    credentials: "include",
-  });
+  try {
+    console.log(pgData);
+    const response = await fetch("http://localhost:5000/api/v1/pg", {
+      method: "POST",
+      // headers: {
+      //   "Content-Type": "application/json",
+      // },
+      body: pgData,
+      credentials: "include",
+    });
 
-  const data = await response.json();
-  return data;
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error.message);
+    return {
+      status: "requestFail",
+      error: "Something went wrong!!",
+    };
+  }
 };
 
 export const login = async (email, password) => {
-  const response = await fetch("http://localhost:5000/api/v1/user/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ email, password }),
-    credentials: "include",
-  });
+  try {
+    const response = await fetch("http://localhost:5000/api/v1/user/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+      credentials: "include",
+    });
 
-  const data = await response.json();
-  return data;
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error.message);
+    return {
+      status: "requestFail",
+      error: "Something went wrong!!",
+    };
+  }
 };
-export const logout = async () => {
-  const response = await fetch("http://localhost:5000/api/v1/user/logout", {
-    method: "Get",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    // body: JSON.stringify({ email, password }),
-    credentials: "include",
-  });
 
-  const data = await response.json();
-  return data;
+export const logout = async () => {
+  try {
+    const response = await fetch("http://localhost:5000/api/v1/user/logout", {
+      method: "Get",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      // body: JSON.stringify({ email, password }),
+      credentials: "include",
+    });
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error.message);
+    return {
+      status: "requestFail",
+      error: "Something went wrong!!",
+    };
+  }
 };
 
 export const signup = async (name, email, password, passwordConfirm) => {
-  const response = await fetch("http://localhost:5000/api/v1/user/signup", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ name, email, password, passwordConfirm }),
-    credentials: "include",
-  });
-
-  const data = await response.json();
-  return data;
+  try {
+    const response = await fetch("http://localhost:5000/api/v1/user/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, email, password, passwordConfirm }),
+      credentials: "include",
+    });
+    console.log(response);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+    return {
+      status: "requestFail",
+      error: "Something went wrong!!",
+    };
+  }
 };
 
 export const checkAuthentication = async () => {
@@ -102,43 +143,68 @@ export const setUser = (user) => {
 };
 
 export const getPG = async (pgID) => {
-  const response = await fetch(`http://localhost:5000/api/v1/pg/${pgID}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-
-  const data = await response.json();
-  return data;
-};
-export const getReviews = async (pgID) => {
-  const response = await fetch(
-    `http://localhost:5000/api/v1/pg/${pgID}/reviews`,
-    {
+  try {
+    const response = await fetch(`http://localhost:5000/api/v1/pg/${pgID}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-    }
-  );
+    });
 
-  const data = await response.json();
-  return data;
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error.message);
+    return {
+      status: "requestFail",
+      error: "Something went wrong!!",
+    };
+  }
+};
+
+export const getReviews = async (pgID) => {
+  try {
+    const response = await fetch(
+      `http://localhost:5000/api/v1/pg/${pgID}/reviews`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error.message);
+    return {
+      status: "requestFail",
+      error: "Something went wrong!!",
+    };
+  }
 };
 export const createReview = async (review, rating, pgID, user) => {
-  const response = await fetch(
-    `http://localhost:5000/api/v1/pg/${pgID}/reviews`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ review, rating, user }),
-      credentials: "include",
-    }
-  );
+  try {
+    const response = await fetch(
+      `http://localhost:5000/api/v1/pg/${pgID}/reviews`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ review, rating, user }),
+        credentials: "include",
+      }
+    );
 
-  const data = await response.json();
-  return data;
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error.message);
+    return {
+      status: "requestFail",
+      error: "Something went wrong!!",
+    };
+  }
 };

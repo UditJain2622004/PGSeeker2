@@ -1,11 +1,14 @@
 import React from "react";
 import "./PGCard.css";
 import { useNavigate } from "react-router-dom";
+import defaultPic from "./images/default.jpg";
 
 const PGCard = ({ pg }) => {
+  const coverImage = pg.images[0] || defaultPic;
   const navigate = useNavigate();
   const goTo = () => {
     navigate("/pg", { state: pg });
+    window.scrollTo(0, 0);
     // console.log(pg);
   };
   const sharingoption = pg.sharing.slice(0, 2).map((el) => {
@@ -38,7 +41,7 @@ const PGCard = ({ pg }) => {
                   onClick={goTo}
                 >
                   <div className="ripple ripple-surface">
-                    <img src={pg.images[0]} className="w-100" alt="product" />
+                    <img src={coverImage} className="w-100" alt="product" />
                     <a href="#!">
                       <div className="hover-overlay">
                         <div

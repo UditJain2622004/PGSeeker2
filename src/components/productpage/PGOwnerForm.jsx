@@ -9,26 +9,32 @@ import PgAmenitiesLine from "./pgAmenitiesLine";
 
 import "./PGOwnerForm.css";
 
-const rules = ["guests", "smoking", "loudMusic", "alcohol"];
+const rules = {
+  guests: "Guests",
+  smoking: "Smoking",
+  loudMusicAllowed: "Loud Music",
+  alcoholAllowed: "Alcohol",
+};
+// const rules = ["guests", "smoking", "loudMusicAllowed", "alcoholAllowed"];
 
-const amenities = [
-  "ac",
-  "fridge",
-  "wifi",
-  "parking",
-  "tv",
-  "nonVeg",
-  "tiffin",
-  "laundry",
-  "lift",
-  "microwave",
-  "cleaning",
-  "warden",
-  "cctv",
-  "self cooking",
-  "attach washroom",
-  "wardrobe",
-];
+const amenities = {
+  ac: "ac",
+  fridge: "fridge",
+  wifi: "wifi",
+  parking: "parking",
+  tv: "tv",
+  nonVeg: "nonVeg",
+  tiffin: "tiffin",
+  laundry: "laundry",
+  lift: "lift",
+  microwave: "microwave",
+  cleaning: "cleaning",
+  warden: "warden",
+  cctv: "cctv",
+  selfCooking: "selfCooking",
+  attachWashroom: "attachWashroom",
+  wardrobe: "wardrobe",
+};
 
 const PGOwnerForm = () => {
   const user = useSelector((state) => state.user);
@@ -54,8 +60,8 @@ const PGOwnerForm = () => {
     guests: false,
     // pets: false,
     smoking: false,
-    loudMusic: false,
-    alcohol: false,
+    loudMusicAllowed: false,
+    alcoholAllowed: false,
     securityDeposit: "",
     noticePeriod: "",
     gateClosingTime: "",
@@ -67,27 +73,30 @@ const PGOwnerForm = () => {
   });
 
   const [pgAmenities, setPGAmenities] = useState({
-    wifi: false,
     ac: false,
-    parking: false,
-    fourWheelerParking: false,
-    roomCleaning: false,
-    tv: false,
     fridge: false,
-    waterCooler: false,
-    warden: false,
-    microwave: false,
-    lift: false,
+    wifi: false,
+    parking: false,
+    tv: false,
     nonVeg: false,
-    veg: false,
-    powerBackup: false,
+    tiffin: false,
     laundry: false,
+    lift: false,
+    microwave: false,
+    cleaning: false,
+    warden: false,
+    cctv: false,
+    selfCooking: false,
+    attachWashroom: false,
+    wardrobe: false,
+    powerBackup: false,
+    library: false,
   });
 
   const handleAddSharingOption = () => {
     setSharingOptions([
       ...sharingOptions,
-      { occupancy: "", price: "", ac: false },
+      { occupancy: "", price: 0, ac: false },
     ]);
   };
 
@@ -202,6 +211,7 @@ const PGOwnerForm = () => {
     pgData.forEach((value, key) => {
       console.log("key %s: value %s", key, value);
     });
+    console.log(pg_rules);
 
     const response = await createPG(pgData);
     // console.log(response); // log the response from the server
@@ -212,12 +222,17 @@ const PGOwnerForm = () => {
       setTimeout(function () {
         successMessage.style.display = "none";
         navigate("/");
+        window.scrollTo(0, 0);
       }, 2000);
     } else {
       // Handle error scenario
+      console.log(response);
       console.log(response.error);
       console.log(pgData);
-      // errorMessage.textContent =
+      if (response.error.startsWith("Pg validation failed:")) {
+        response.error = "Please enter all required fields!!";
+      }
+      errorMessage.textContent = response.error;
       errorMessage.style.display = "block";
       setTimeout(function () {
         errorMessage.style.display = "none";
@@ -235,14 +250,16 @@ const PGOwnerForm = () => {
         <hr />
         <div className="complete-form">
           {/* Name and description **********************************************************************************************/}
-          <div class="row name parts part1">
+          <div className="row name parts part1">
             {/* <div className="form-group"> */}
-            <div class="col-6 col-md-4">
+            <div className="col-6 col-md-4">
               <label htmlFor="name">
-                <p className="input-heading">Name :</p>
+                <p className="input-heading">
+                  Name<span className="required-marker"> *</span>
+                </p>
               </label>
             </div>
-            <div class="col-12 col-md-8">
+            <div className="col-12 col-md-8">
               <input
                 type="text"
                 id="name"
@@ -257,12 +274,14 @@ const PGOwnerForm = () => {
           </div>
           <div className="row description parts part2">
             {/* <div className="form-group"> */}
-            <div class="col-6 col-md-4">
+            <div className="col-6 col-md-4">
               <label htmlFor="description">
-                <p className="input-heading">Description :</p>
+                <p className="input-heading">
+                  Description<span className="required-marker"> *</span>
+                </p>
               </label>
             </div>
-            <div class="col-12 col-md-8">
+            <div className="col-12 col-md-8">
               <textarea
                 // rows="2"
                 // cols="30"
@@ -279,12 +298,14 @@ const PGOwnerForm = () => {
           {/* PgType **********************************************************************************************/}
           <div className="row pgtype parts part3">
             {/* <div className="form-group"> */}
-            <div class="col-6 col-md-4">
+            <div className="col-6 col-md-4">
               <label htmlFor="pgType">
-                <p className="input-heading">PG Type :</p>
+                <p className="input-heading">
+                  PG Type<span className="required-marker"> *</span>
+                </p>
               </label>
             </div>
-            <div class="col-12 col-md-8">
+            <div className="col-12 col-md-8">
               <div className="radio-buttons">
                 <div>
                   <input
@@ -329,10 +350,11 @@ const PGOwnerForm = () => {
           <AddressInput
             partNum={4}
             handleChange={handleAddressDetailsChange}
-            heading={"Address"}
+            heading={`Address`}
             subHeading={"locality"}
             stateVar={addressDetails}
             key={1}
+            inputType={"text"}
           />
           <AddressInput
             partNum={5}
@@ -341,6 +363,7 @@ const PGOwnerForm = () => {
             subHeading={"city"}
             stateVar={addressDetails}
             key={2}
+            inputType={"text"}
           />
           <AddressInput
             partNum={6}
@@ -349,6 +372,7 @@ const PGOwnerForm = () => {
             subHeading={"state"}
             stateVar={addressDetails}
             key={3}
+            inputType={"text"}
           />
           <AddressInput
             partNum={7}
@@ -357,18 +381,19 @@ const PGOwnerForm = () => {
             subHeading={"pincode"}
             stateVar={addressDetails}
             key={4}
+            inputType={"number"}
           />
           {/* <div className="row sub-address parts part4">
-            <div class="col-6 col-md-4">
+            <div className="col-6 col-md-4">
               <label htmlFor="address">
                 <p className="input-heading">Address :</p>
               </label>
             </div>
 
-            <div class="col-6 col-md-2">
+            <div className="col-6 col-md-2">
               <label htmlFor="locality">Locality :</label>
             </div>
-            <div class="col-6 col-md-4">
+            <div className="col-6 col-md-4">
               <input
                 type="text"
                 id="locality"
@@ -380,16 +405,16 @@ const PGOwnerForm = () => {
 
           </div>
           <div className="row sub-address parts part5">
-            <div class="col-6 col-md-4">
+            <div className="col-6 col-md-4">
               <label htmlFor="address">
                 <p className="input-heading"></p>
               </label>
             </div>
 
-            <div class="col-6 col-md-2">
+            <div className="col-6 col-md-2">
               <label htmlFor="city">City :</label>
             </div>
-            <div class="col-6 col-md-4">
+            <div className="col-6 col-md-4">
               <input
                 type="text"
                 id="city"
@@ -401,16 +426,16 @@ const PGOwnerForm = () => {
 
           </div>
           <div className="row sub-address parts part6">
-            <div class="col-6 col-md-4">
+            <div className="col-6 col-md-4">
               <label htmlFor="address">
                 <p className="input-heading"></p>
               </label>
             </div>
 
-            <div class="col-6 col-md-2">
+            <div className="col-6 col-md-2">
               <label htmlFor="state">State :</label>
             </div>
-            <div class="col-6 col-md-4">
+            <div className="col-6 col-md-4">
               <input
                 type="text"
                 id="state"
@@ -422,16 +447,16 @@ const PGOwnerForm = () => {
 
           </div>
           <div className="row sub-address parts part7">
-            <div class="col-6 col-md-4">
+            <div className="col-6 col-md-4">
               <label htmlFor="address">
                 <p className="input-heading"></p>
               </label>
             </div>
 
-            <div class="col-6 col-md-2">
+            <div className="col-6 col-md-2">
               <label htmlFor="pincode">Pincode :</label>
             </div>
-            <div class="col-6 col-md-4">
+            <div className="col-6 col-md-4">
               <input
                 type="text"
                 id="pincode"
@@ -445,16 +470,18 @@ const PGOwnerForm = () => {
           {/* Sharing Options **********************************************************************************************/}
           <div className="row sharing parts part8">
             {/* <div className="form-group"> */}
-            <div class="col-6 col-md-4">
+            <div className="col-6 col-md-4">
               <label htmlFor="sharingoption">
-                <p className="input-heading">Sharing Options :</p>
+                <p className="input-heading">
+                  Sharing Options<span className="required-marker"> *</span>
+                </p>
               </label>
             </div>
-            <div class="col-12 col-md-8">
+            <div className="col-12 col-md-8">
               {sharingOptions.map((option, index) => (
                 <div key={index} className="sharingoption">
                   <label>
-                    Occupancy:
+                    Occupancy<span className="required-marker"> * </span>
                     <input
                       className="sharingoptionfield"
                       type="number"
@@ -469,7 +496,7 @@ const PGOwnerForm = () => {
                     />
                   </label>
                   <label>
-                    Price:
+                    Price<span className="required-marker"> * </span>
                     <input
                       className="sharingoptionfield"
                       type="number"
@@ -516,12 +543,12 @@ const PGOwnerForm = () => {
           {/* <hr />*/}
           {/* PG Rules **********************************************************************************************/}
           <div className="row rules parts part9">
-            <div class="col-6 col-md-4">
+            <div className="col-6 col-md-4">
               <label htmlFor="pgrules">
-                <p className="input-heading">PG rules :</p>
+                <p className="input-heading">PG rules</p>
               </label>
             </div>
-            <div class="col-12 col-md-8">
+            <div className="col-12 col-md-8">
               <div className="rules-row1">
                 <CheckBoxInput
                   fields={rules}
@@ -533,12 +560,12 @@ const PGOwnerForm = () => {
             </div>
           </div>
           <div className="row security-deposit parts part10">
-            <div class="col-6 col-md-4">
+            <div className="col-6 col-md-4">
               <label htmlFor="securityDeposit">
-                <p className="input-heading">Security Deposit (in INR) :</p>
+                <p className="input-heading">Security Deposit (in INR)</p>
               </label>
             </div>
-            <div class="col-12 col-md-8">
+            <div className="col-12 col-md-8">
               <input
                 type="number"
                 id="securityDeposit"
@@ -549,12 +576,12 @@ const PGOwnerForm = () => {
             </div>
           </div>
           <div className="row notice-period parts part11">
-            <div class="col-6 col-md-4">
+            <div className="col-6 col-md-4">
               <label htmlFor="noticePeriod">
-                <p className="input-heading">Notice Period (in days) :</p>
+                <p className="input-heading">Notice Period (in days)</p>
               </label>
             </div>
-            <div class="col-12 col-md-8">
+            <div className="col-12 col-md-8">
               <input
                 type="number"
                 id="noticePeriod"
@@ -565,12 +592,12 @@ const PGOwnerForm = () => {
             </div>
           </div>
           <div className="row gate-closing-time parts part12">
-            <div class="col-6 col-md-4">
+            <div className="col-6 col-md-4">
               <label htmlFor="gateClosingTime">
-                <p className="input-heading">Gate Closing Time :</p>
+                <p className="input-heading">Gate Closing Time</p>
               </label>
             </div>
-            <div class="col-12 col-md-8">
+            <div className="col-12 col-md-8">
               <input
                 type="time"
                 id="gateClosingTime"
@@ -584,7 +611,7 @@ const PGOwnerForm = () => {
           <PgAmenitiesLine
             start={0}
             end={3}
-            heading={"PG Amenities :"}
+            heading={"PG Amenities"}
             partNumber={13}
             stateVar={pgAmenities}
             handleChange={handlePgAmenitiesChange}
@@ -632,15 +659,17 @@ const PGOwnerForm = () => {
           {/* Contact Info. **********************************************************************************************/}
           <div className="row contact parts part19">
             {/* <div className="form-group"> */}
-            <div class="col-6 col-md-4">
+            <div className="col-6 col-md-4">
               <label htmlFor="contact">
-                <p className="input-heading">Contact Info :</p>
+                <p className="input-heading">
+                  Contact Info<span className="required-marker"> *</span>
+                </p>
               </label>
             </div>
-            <div class="col-6 col-md-2">
-              <label htmlFor="phone">Phone :</label>
+            <div className="col-6 col-md-2">
+              <label htmlFor="phone">Phone</label>
             </div>
-            <div class="col-6 col-md-4">
+            <div className="col-6 col-md-4">
               <input
                 type="number"
                 id="phone"
@@ -654,12 +683,12 @@ const PGOwnerForm = () => {
           {/* Images **********************************************************************************************/}
           <div className="row images parts part20">
             {/* <div className="form-group"> */}
-            <div class="col-6 col-md-4">
+            <div className="col-6 col-md-4">
               <label htmlFor="images">
-                <p className="input-heading">Images :</p>
+                <p className="input-heading">Images</p>
               </label>
             </div>
-            <div class="col-12 col-md-8">
+            <div className="col-12 col-md-8">
               <div>
                 <div className="file-input">
                   Choose a file
@@ -700,18 +729,18 @@ const PGOwnerForm = () => {
           </button>
         </div>
       </form>
-      <div class="loading-overlay">
-        <div class="loading-spinner"></div>
+      <div className="loading-overlay">
+        <div className="loading-spinner"></div>
       </div>
-      <div class="message success-message">
-        <i class="success-icon">&#10003;</i>
+      <div className="message success-message">
+        <i className="success-icon">&#10003;</i>
         <p>PG Listed Successfully!</p>
       </div>
-      <div class="message error-msg">
-        <i class="error-icon">&#10007;</i>
+      <div className="message error-msg">
+        <i className="error-icon">&#10007;</i>
         <p>Error! Please Try Again</p>
       </div>
-      {/* <div class="success-message"></div> */}
+      {/* <div className="success-message"></div> */}
     </div>
   );
 };

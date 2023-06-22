@@ -75,7 +75,7 @@ const Signup = () => {
       loadingOverlay.style.display = "block";
 
       const response = await signup(username, email, password, Confirmpassword);
-      console.log(response);
+      console.log(response.status);
       if (response.status === "success") {
         store.dispatch({
           type: "SET_USER",
@@ -84,7 +84,13 @@ const Signup = () => {
 
         loadingOverlay.style.display = "none";
         navigate("/");
+        window.scrollTo(0, 0);
       } else {
+        // if (response.status === "requestFail") {
+        //   errorMessage.textContent = response.error;
+        // } else if (!response.success) {
+        //   errorMessage.textContent = response.error;
+        // }
         errorMessage.textContent = response.error;
         errorMessage.style.display = "block";
         setTimeout(function () {

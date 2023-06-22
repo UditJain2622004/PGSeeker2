@@ -219,3 +219,8 @@ h5 {
 .cardDetails {
   cursor: pointer;
 }
+
+.ripple {
+  border: 1px solid #e0dede;
+  border-radius: 0.25rem 0.25rem 0.25rem 0.25rem;
+}

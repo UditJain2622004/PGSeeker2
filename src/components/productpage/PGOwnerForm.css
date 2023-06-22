@@ -319,3 +319,7 @@ label {
     transform: translateY(0);
   }
 }
+
+.required-marker {
+  color: red;
+}

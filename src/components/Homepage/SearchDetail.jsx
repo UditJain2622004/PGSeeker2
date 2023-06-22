@@ -12,8 +12,10 @@ function SearchDetail() {
     e.preventDefault();
     if (keyword.trim()) {
       navigate(`/`);
+      window.scrollTo(0, 0);
     } else {
       navigate("/");
+      window.scrollTo(0, 0);
     }
   };
   return (

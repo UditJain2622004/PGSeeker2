@@ -40,7 +40,7 @@ const sharing = { 1: "Single", 2: "Double", 3: "Triple", 4: "Four" };
 
 const pgTypeOptions = { male: "Boys", female: "Girls", coLiving: "Co-Living" };
 
-const Filters = ({ filters }) => {
+const Filters = ({ filters, sortOption, handleSort }) => {
   console.log(filters);
   let pgTypeInitial = {
     male: false,
@@ -49,7 +49,9 @@ const Filters = ({ filters }) => {
   };
   let cityInitial = "";
   if (filters.pgType) {
-    pgTypeInitial[filters.pgType] = true;
+    filters.pgType.forEach((type) => {
+      pgTypeInitial[type] = true;
+    });
   }
   if (filters.city) {
     cityInitial = filters.city;
@@ -163,8 +165,10 @@ const Filters = ({ filters }) => {
     const response = await allPgs(filterOptions);
     // console.log(response);
     loadingOverlay.style.display = "none";
-    navigate("/listedpg", { state: [response.data.pgs, filterOptions] });
-    window.scrollTo(0, 0);
+    if (response.status === "success") {
+      navigate("/listedpg", { state: [response.data.pgs, filterOptions] });
+      window.scrollTo(0, 0);
+    }
 
     console.log(filterOptions);
   };
@@ -181,6 +185,11 @@ const Filters = ({ filters }) => {
             <div class="vertical-line"></div>
 
             <h2>Filters</h2>
+
+            <select value={sortOption} onChange={handleSort}>
+              <option value="ascending">Price: Low to High</option>
+              <option value="descending">Price: High to Low</option>
+            </select>
 
             <form onSubmit={applyFilters}>
               <div className="select-container">

@@ -28,6 +28,7 @@ const Product = () => {
     address,
     description,
     pgType,
+    images,
     noticePeriodDays,
     securityDeposit,
     gateClosingTime,
@@ -38,6 +39,7 @@ const Product = () => {
     description,
     address,
     pgType,
+    images,
   };
   const [reviews, setReviews] = useState([]);
   // const amenities = ["wifi", "ac", "parking", "powerBackup", "tv", "fridge"];
@@ -47,7 +49,7 @@ const Product = () => {
     const fetchReviews = async () => {
       const fetchedReviews = await getReviews(pg._id);
       console.log(fetchedReviews);
-      if (fetchedReviews) {
+      if (fetchedReviews.status === "success") {
         setReviews(fetchedReviews.data.reviews);
       }
     };
