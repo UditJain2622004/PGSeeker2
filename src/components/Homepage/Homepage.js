@@ -30,10 +30,10 @@ function Homepage() {
       <div class="loading-overlay">
         <div class="loading-spinner"></div>
       </div>
-      <div class="message error-msg">
+      {/* <div class="message error-msg">
         <i class="error-icon">&#10007;</i>
         <p></p>
-      </div>
+      </div> */}
     </>
   );
 }

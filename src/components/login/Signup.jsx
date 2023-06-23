@@ -8,6 +8,7 @@ import { store } from "../../persistStore";
 // import "./Sign.css";
 
 import house2 from "../Homepage/images/bg1.jpg";
+import swal from "sweetalert";
 const Signup = () => {
   // const user = useSelector((state) => state.user);
 
@@ -67,7 +68,7 @@ const Signup = () => {
   };
 
   const handleSignup = async (event) => {
-    let errorMessage = document.querySelector(".error-msg");
+    // let errorMessage = document.querySelector(".error-msg");
     let loadingOverlay = document.querySelector(".loading-overlay");
     event.preventDefault();
 
@@ -86,16 +87,12 @@ const Signup = () => {
         navigate("/");
         window.scrollTo(0, 0);
       } else {
-        // if (response.status === "requestFail") {
-        //   errorMessage.textContent = response.error;
-        // } else if (!response.success) {
-        //   errorMessage.textContent = response.error;
-        // }
-        errorMessage.textContent = response.error;
-        errorMessage.style.display = "block";
-        setTimeout(function () {
-          errorMessage.style.display = "none";
-        }, 2000);
+        // errorMessage.textContent = response.error;
+        // errorMessage.style.display = "block";
+        // setTimeout(function () {
+        //   errorMessage.style.display = "none";
+        // }, 2000);
+        swal("Error", response.error, "error");
 
         loadingOverlay.style.display = "none";
       }
@@ -173,10 +170,10 @@ const Signup = () => {
           <div class="loading-overlay">
             <div class="loading-spinner"></div>
           </div>
-          <div class="message error-msg">
+          {/* <div class="message error-msg">
             <i class="error-icon">&#10007;</i>
             <p></p>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

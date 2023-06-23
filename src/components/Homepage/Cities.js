@@ -2,13 +2,14 @@ import React from "react";
 import "./cities.css";
 import { useNavigate } from "react-router-dom";
 import { allPgs } from "../../api";
+import swal from "sweetalert";
 
 const Cities = () => {
   let navigate = useNavigate();
 
   const makeRequest = async (filter) => {
     let loadingOverlay = document.querySelector(".loading-overlay");
-    let errorMessage = document.querySelector(".error-msg");
+    // let errorMessage = document.querySelector(".error-msg");
 
     loadingOverlay.style.display = "block";
     const response = await allPgs({ city: filter });
@@ -17,11 +18,12 @@ const Cities = () => {
       navigate("/listedpg", { state: [response.data.pgs, { city: filter }] });
       window.scrollTo(0, 0);
     } else {
-      errorMessage.textContent = response.error;
-      errorMessage.style.display = "block";
-      setTimeout(function () {
-        errorMessage.style.display = "none";
-      }, 2000);
+      swal("Error!", response.error);
+      // errorMessage.textContent = response.error;
+      // errorMessage.style.display = "block";
+      // setTimeout(function () {
+      //   errorMessage.style.display = "none";
+      // }, 2000);
     }
   };
 

@@ -4,6 +4,7 @@ import "./ReviewSection.css";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { createReview } from "../../api";
+import swal from "sweetalert";
 
 // Mock data for reviews
 // const reviewsData = [
@@ -88,7 +89,8 @@ const ReviewSection = ({ reviews, pgID }) => {
       showMsg("Review Given Successfully!!", "success");
     } else {
       if (newReview.error === "Duplicate pg,user entered") {
-        showMsg("You have already given a review for this PG!!", "error");
+        swal({ text: "You have already given a review for this PG" });
+        // showMsg("You have already given a review for this PG!!", "error");
       } else {
         showMsg(newReview.error, "error");
       }

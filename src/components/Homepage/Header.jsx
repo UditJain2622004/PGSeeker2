@@ -7,6 +7,7 @@ import LoginPage from "../login/LoginPage";
 import Navbar from "../Navbar";
 import { allPgs } from "./../../api";
 import CitySuggestList from "./citySuggestList";
+import swal from "sweetalert";
 
 function Header() {
   // const autoSuggest = (e) => {
@@ -68,11 +69,12 @@ function Header() {
       });
       window.scrollTo(0, 0);
     } else {
-      errorMessage.textContent = response.error;
-      errorMessage.style.display = "block";
-      setTimeout(function () {
-        errorMessage.style.display = "none";
-      }, 2000);
+      // errorMessage.textContent = response.error;
+      // errorMessage.style.display = "block";
+      // setTimeout(function () {
+      //   errorMessage.style.display = "none";
+      // }, 2000);
+      swal("Error!", response.error);
     }
   };
   const [navShow, setNavShow] = useState(false);

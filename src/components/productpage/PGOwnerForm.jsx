@@ -8,6 +8,7 @@ import AddressInput from "./addressInput";
 import PgAmenitiesLine from "./pgAmenitiesLine";
 
 import "./PGOwnerForm.css";
+import swal from "sweetalert";
 
 const rules = {
   guests: "Guests",
@@ -132,7 +133,10 @@ const PGOwnerForm = () => {
     }
   };
 
-  const handleImageDeselect = (index) => {
+  const handleImageDeselect = (index, event) => {
+    if (event) {
+      event.preventDefault();
+    }
     const updatedImages = [...images];
     updatedImages.splice(index, 1);
     setImages(updatedImages);
@@ -218,27 +222,42 @@ const PGOwnerForm = () => {
     if (response.status === "success") {
       form.reset();
       loadingOverlay.style.display = "none";
-      successMessage.style.display = "block";
+      swal(
+        "PG Listed Successfully!!",
+        "Be Ready To Welcome Some New Guests",
+        "success"
+      );
+      // successMessage.style.display = "block";
       setTimeout(function () {
-        successMessage.style.display = "none";
+        // successMessage.style.display = "none";
         navigate("/");
         window.scrollTo(0, 0);
       }, 2000);
+    } else if (response.status === "imageUploadFailed") {
+      loadingOverlay.style.display = "none";
+      swal(
+        "PG Listed Successfully!!",
+        "But for some reason, images could be uploaded. You can retry uploading them by going to your profile.",
+        "warning"
+      );
     } else {
       // Handle error scenario
+
       console.log(response);
       console.log(response.error);
       console.log(pgData);
       if (response.error.startsWith("Pg validation failed:")) {
-        response.error = "Please enter all required fields!!";
+        response.error = "Please Enter All Required Fields!!";
       }
-      errorMessage.textContent = response.error;
-      errorMessage.style.display = "block";
-      setTimeout(function () {
-        errorMessage.style.display = "none";
-      }, 2000);
-      console.log(form);
-      form.reset();
+
+      swal("Error!", response.error);
+      // errorMessage.textContent = response.error;
+      // errorMessage.style.display = "block";
+      // setTimeout(function () {
+      //   errorMessage.style.display = "none";
+      // }, 2000);
+      // console.log(form);
+      // form.reset();
       loadingOverlay.style.display = "none";
     }
   };
@@ -676,6 +695,25 @@ const PGOwnerForm = () => {
                 name="phone"
                 value={ContactInfo.phone}
                 onChange={handleContactInfo}
+                onWheel={(e) => {
+                  // e.preventDefault();
+                  const delta = Math.sign(e.deltaY);
+                  if (delta > 0) {
+                    console.log("Scrolling down");
+                    const phone = ContactInfo.phone;
+                    setContactInfo((phone) => ({
+                      ...phone,
+                      phone: phone.phone + 1,
+                    }));
+                  } else if (delta < 0) {
+                    console.log("Scrolling up");
+                    setContactInfo({
+                      ...ContactInfo,
+                      phone: ContactInfo.phone - 1,
+                    });
+                  }
+                  console.log(e.target.value);
+                }}
               />
             </div>
             {/* </div> */}
@@ -710,7 +748,7 @@ const PGOwnerForm = () => {
                       />
                       <button
                         className="deselect-button"
-                        onClick={() => handleImageDeselect(index)}
+                        onClick={(event) => handleImageDeselect(index, event)}
                       >
                         <span className="cross">&#10005;</span>
                       </button>
@@ -736,10 +774,10 @@ const PGOwnerForm = () => {
         <i className="success-icon">&#10003;</i>
         <p>PG Listed Successfully!</p>
       </div>
-      <div className="message error-msg">
+      {/* <div className="message error-msg">
         <i className="error-icon">&#10007;</i>
         <p>Error! Please Try Again</p>
-      </div>
+      </div> */}
       {/* <div className="success-message"></div> */}
     </div>
   );

@@ -15,7 +15,7 @@ export const allPgs = async (filters) => {
     console.log(error.message);
     return {
       status: "requestFail",
-      error: "Something went wrong!!",
+      error: "Something Went Wrong.",
     };
   }
 };
@@ -39,7 +39,7 @@ export const createPG = async (pgData) => {
     console.log(error.message);
     return {
       status: "requestFail",
-      error: "Something went wrong!!",
+      error: "Something Went Wrong.",
     };
   }
 };
@@ -61,7 +61,7 @@ export const login = async (email, password) => {
     console.log(error.message);
     return {
       status: "requestFail",
-      error: "Something went wrong!!",
+      error: "Something Went Wrong.",
     };
   }
 };
@@ -83,7 +83,7 @@ export const logout = async () => {
     console.log(error.message);
     return {
       status: "requestFail",
-      error: "Something went wrong!!",
+      error: "Something Went Wrong.",
     };
   }
 };
@@ -105,7 +105,7 @@ export const signup = async (name, email, password, passwordConfirm) => {
     console.log(error);
     return {
       status: "requestFail",
-      error: "Something went wrong!!",
+      error: "Something Went Wrong.",
     };
   }
 };
@@ -157,7 +157,7 @@ export const getPG = async (pgID) => {
     console.log(error.message);
     return {
       status: "requestFail",
-      error: "Something went wrong!!",
+      error: "Something Went Wrong.",
     };
   }
 };
@@ -180,7 +180,7 @@ export const getReviews = async (pgID) => {
     console.log(error.message);
     return {
       status: "requestFail",
-      error: "Something went wrong!!",
+      error: "Something Went Wrong.",
     };
   }
 };
@@ -204,7 +204,7 @@ export const createReview = async (review, rating, pgID, user) => {
     console.log(error.message);
     return {
       status: "requestFail",
-      error: "Something went wrong!!",
+      error: "Something Went Wrong.",
     };
   }
 };

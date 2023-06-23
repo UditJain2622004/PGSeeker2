@@ -11,6 +11,11 @@ const PGCard = ({ pg }) => {
     window.scrollTo(0, 0);
     // console.log(pg);
   };
+  const pgTypeDisplayName = {
+    male: "Male",
+    female: "Female",
+    coLiving: "Co-Living",
+  };
   const sharingoption = pg.sharing.slice(0, 2).map((el) => {
     const share = {
       1: "Single",
@@ -59,7 +64,9 @@ const PGCard = ({ pg }) => {
                   className="col-md-6 col-lg-6 col-xl-6 cardDetails"
                   onClick={goTo}
                 >
-                  <div class={`banner banner-${pg.pgType}`}>{pg.pgType}</div>
+                  <div class={`banner banner-${pg.pgType}`}>
+                    {pgTypeDisplayName[pg.pgType]}
+                  </div>
                   <h5>
                     {pg.name}
                     <span className="locality"> in {pg.address.locality}</span>

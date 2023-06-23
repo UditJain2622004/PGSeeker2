@@ -5,6 +5,7 @@ import FilterCheckbox from "./filterCheckbox";
 import { allPgs } from "../../api";
 import "./filters.css";
 import CitySuggestList from "../Homepage/citySuggestList";
+import swal from "sweetalert";
 
 const getKeysWithTrueValues = (obj) => {
   return Object.keys(obj).filter((key) => obj[key] === true);
@@ -169,6 +170,10 @@ const Filters = ({ filters, sortOption, handleSort }) => {
     if (response.status === "success") {
       navigate("/listedpg", { state: [response.data.pgs, filterOptions] });
       window.scrollTo(0, 0);
+    } else {
+      swal({
+        text: "Something Went Wrong.",
+      });
     }
 
     console.log(filterOptions);

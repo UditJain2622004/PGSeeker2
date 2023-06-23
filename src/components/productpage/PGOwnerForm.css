@@ -285,6 +285,7 @@ label {
   border: 1px solid #4caf50;
 }
 .error-msg {
+  width: 20%;
   background-color: #fdcdcb;
   color: #ef2d1b;
   border: 1px solid #ef2d1b;
@@ -322,4 +323,30 @@ label {
 
 .required-marker {
   color: red;
+}
+
+.swal-text {
+  background-color: #fefae3;
+  padding: 17px;
+  border: 1px solid #f0e1a1;
+  display: block;
+  margin: 22px;
+  text-align: center;
+  color: #61534e;
+}
+
+.swal-icon--success__line--tip {
+  left: 10px;
+  top: 44px;
+}
+.swal-icon--success__line--long {
+  right: 2px;
+  top: 37px;
+}
+
+.swal-icon--error__line--left {
+  left: 15px;
+}
+.swal-icon--error__line--right {
+  right: 12px;
 }

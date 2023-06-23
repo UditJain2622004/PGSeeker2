@@ -7,6 +7,7 @@ import house2 from "../Homepage/images/bg1.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../api";
 import { store } from "./../../persistStore";
+import swal from "sweetalert";
 
 const LoginPage = () => {
   const user = useSelector((state) => state.user);
@@ -48,7 +49,7 @@ const LoginPage = () => {
 
   const handleLogin = async (event) => {
     let loadingOverlay = document.querySelector(".loading-overlay");
-    let errorMessage = document.querySelector(".error-msg");
+    // let errorMessage = document.querySelector(".error-msg");
 
     event.preventDefault();
 
@@ -65,11 +66,12 @@ const LoginPage = () => {
         navigate("/");
         window.scrollTo(0, 0);
       } else {
-        errorMessage.textContent = response.error;
-        errorMessage.style.display = "block";
-        setTimeout(function () {
-          errorMessage.style.display = "none";
-        }, 2000);
+        swal("Error", response.error, "error");
+        // errorMessage.textContent = response.error;
+        // errorMessage.style.display = "block";
+        // setTimeout(function () {
+        //   errorMessage.style.display = "none";
+        // }, 2000);
 
         loadingOverlay.style.display = "none";
       }
@@ -123,10 +125,10 @@ const LoginPage = () => {
       <div class="loading-overlay">
         <div class="loading-spinner"></div>
       </div>
-      <div class="message error-msg">
+      {/* <div class="message error-msg">
         <i class="error-icon">&#10007;</i>
         <p></p>
-      </div>
+      </div> */}
     </div>
   );
 };

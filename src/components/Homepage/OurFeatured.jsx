@@ -6,13 +6,14 @@ import house2 from "./images/house2.jpg";
 import house3 from "./images/house3.jpg";
 import arrow from "./images/arrow.png";
 import "./header.css";
+import swal from "sweetalert";
 
 export const OurFeatured = () => {
   let navigate = useNavigate();
 
   const makeRequest = async (filter) => {
     let loadingOverlay = document.querySelector(".loading-overlay");
-    let errorMessage = document.querySelector(".error-msg");
+    // let errorMessage = document.querySelector(".error-msg");
 
     loadingOverlay.style.display = "block";
     const response = await allPgs({ pgType: filter });
@@ -24,11 +25,23 @@ export const OurFeatured = () => {
       });
       window.scrollTo(0, 0);
     } else {
-      errorMessage.textContent = response.error;
-      errorMessage.style.display = "block";
-      setTimeout(function () {
-        errorMessage.style.display = "none";
-      }, 2000);
+      swal("Error!", response.error);
+      // const node = document.createElement("div");
+      // const textnode = document.createTextNode("Water");
+      // node.appendChild(textnode);
+      // swal(
+      //   "Contact Info.",
+      //   `Contact No. - 1234567890
+      // Email - abc@gmail.com`,
+      //   "info",
+      //   { buttons: false }
+      // );
+
+      // errorMessage.textContent = response.error;
+      // errorMessage.style.display = "block";
+      // setTimeout(function () {
+      //   errorMessage.style.display = "none";
+      // }, 2000);
     }
   };
   return (
