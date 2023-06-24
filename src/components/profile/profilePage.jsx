@@ -1,179 +1,252 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import "./profilePage.css";
+import { getProfile } from "../../api";
+import swal from "sweetalert";
 
 const ProfilePage = () => {
+  const user = useSelector((state) => state.user);
+  const [name, setName] = useState(user.name);
+  const [email, setEmail] = useState(user.email);
+  const [phone, setPhone] = useState(user.phone);
+  const [about, setAbout] = useState(user.about);
+  const [addressDetails, setAddressDetails] = useState({
+    locality: user.address?.locality,
+    city: user.address?.city,
+    state: user.address?.state,
+    pincode: user.address?.pincode,
+  });
+  const [pgs, setPGs] = useState([]);
+
+  const handleDetailsChange = (e, setWhat) => {
+    setWhat(e.target.value);
+  };
+
+  const handleAddressDetailsChange = (event) => {
+    setAddressDetails({
+      ...addressDetails,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  useEffect(() => {
+    // Function to make the API request
+    const fetchProfile = async () => {
+      try {
+        const response = await getProfile(user._id);
+        if (response.status === "success") {
+          const { user, pgs } = response.data;
+          setName(user.name);
+          setEmail(user.email);
+          setPhone(user.phone);
+          setAbout(user.about);
+          if (user.address) setAddressDetails(user.address);
+
+          setPGs(pgs);
+        } else {
+          swal("Error", response.error);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchProfile(); // Call the function to make the API request
+  }, []);
+
+  const logValues = () => {
+    console.log(name, email, phone, about, addressDetails);
+  };
   return (
     <>
-      <div class="container bg-white mt-5 mb-5">
-        <div class="row">
-          <div class="col-md-3 border-right">
-            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-              <img
-                class="rounded-circle mt-5"
-                width="150px"
-                src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-              />
-              <span class="font-weight-bold">Edogaru</span>
-              <span class="text-black-50">edogaru@mail.com.my</span>
-              <span> </span>
-            </div>
-          </div>
-          <div class="col-md-5 border-right">
-            <div class="p-3 py-5">
-              <div class="d-flex justify-content-between align-items-center mb-3">
-                <h4 class="text-right">Profile Settings</h4>
-              </div>
-              <div class="row mt-2">
-                <div class="col-md-6">
-                  <label class="labels">Name</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="first name"
-                    value=""
-                  />
+      <div className="profile-container">
+        <div className="row gutters">
+          {/* <div className="sidebar"></div> */}
+          <div className="col-xl-3 col-lg-3 col-md-12 col-sm-12 sidebar">
+            <div className="profile-card h-100">
+              <div className="profile-card-body">
+                <div className="account-settings">
+                  <div className="user-profile">
+                    <div className="user-avatar avatar">
+                      <img
+                        src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                        alt="Maxwell Admin"
+                      />
+                    </div>
+                    <h5 className="user-name ff_space">{user.name}</h5>
+                    <h6 className="user-email ff_space">{user.email}</h6>
+                  </div>
+                  {user.about && (
+                    <div className="about ff_space">
+                      <h5>About</h5>
+                      <p className="about-text">
+                        I'm Yuki. Full Stack Designer I enjoy creating
+                        user-centric, delightful and human experiences.
+                      </p>
+                    </div>
+                  )}
                 </div>
-                {/* <div class="col-md-6">
-                  <label class="labels">Surname</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    value=""
-                    placeholder="surname"
-                  />
-                </div> */}
-              </div>
-              <div class="row mt-3">
-                <div class="col-md-6">
-                  <label class="labels">Mobile Number</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="enter phone number"
-                    value=""
-                  />
-                </div>
-                <div class="col-md-6">
-                  <label class="labels">Email ID</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="enter email id"
-                    value=""
-                  />
-                </div>
-                <div class="col-md-6">
-                  <label class="labels">Address Line 1</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="enter address line 1"
-                    value=""
-                  />
-                </div>
-                <div class="col-md-6">
-                  <label class="labels">Address Line 2</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="enter address line 2"
-                    value=""
-                  />
-                </div>
-                <div class="col-md-6">
-                  <label class="labels">Postcode</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="enter address line 2"
-                    value=""
-                  />
-                </div>
-                <div class="col-md-6">
-                  <label class="labels">State</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="enter address line 2"
-                    value=""
-                  />
-                </div>
-                <div class="col-md-12">
-                  <label class="labels">Area</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="enter address line 2"
-                    value=""
-                  />
-                </div>
-
-                <div class="col-md-12">
-                  <label class="labels">Education</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="education"
-                    value=""
-                  />
-                </div>
-              </div>
-              <div class="row mt-3">
-                <div class="col-md-6">
-                  <label class="labels">Country</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="country"
-                    value=""
-                  />
-                </div>
-                <div class="col-md-6">
-                  <label class="labels">State/Region</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    value=""
-                    placeholder="state"
-                  />
-                </div>
-              </div>
-              <div class="mt-5 text-center">
-                <button class="btn btn-primary profile-button" type="button">
-                  Save Profile
-                </button>
               </div>
             </div>
           </div>
-          {/* <div class="col-md-4">
-            <div class="p-3 py-5">
-              <div class="d-flex justify-content-between align-items-center experience">
-                <span>Edit Experience</span>
-                <span class="border px-3 p-1 add-experience">
-                  <i class="fa fa-plus"></i>&nbsp;Experience
-                </span>
-              </div>
-              <br />
-              <div class="col-md-12">
-                <label class="labels">Experience in Designing</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="experience"
-                  value=""
-                />
-              </div>{" "}
-              <br />
-              <div class="col-md-12">
-                <label class="labels">Additional Details</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="additional details"
-                  value=""
-                />
+          <div className="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12 main  ff_space">
+            <div className="profile-card h-100">
+              <div className="profile-card-body">
+                <div className="row gutters">
+                  <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <h6 className="mb-2 text-primary titles">
+                      Personal Details
+                    </h6>
+                  </div>
+                  <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 input-boxes">
+                    <div className="form-group">
+                      <label htmlFor="fullName">Full Name</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="fullName"
+                        placeholder="Enter full name"
+                        value={name}
+                        onChange={(e) => handleDetailsChange(e, setName)}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div className="form-group">
+                      <label htmlFor="website">About</label>
+                      <textarea
+                        name=""
+                        id="about"
+                        cols="10"
+                        rows="1"
+                        className="form-control about-input"
+                        placeholder="About You"
+                        value={about}
+                        onChange={(e) => handleDetailsChange(e, setAbout)}
+                      ></textarea>
+                      {/* <input
+                        type="text"
+                        className="form-control rest-input"
+                        id="website"
+                        placeholder="About"
+                      /> */}
+                    </div>
+                  </div>
+                  <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 input-boxes">
+                    <div className="form-group">
+                      <label htmlFor="eMail">Email</label>
+                      <input
+                        type="email"
+                        className="form-control"
+                        id="eMail"
+                        placeholder="Enter email ID"
+                        value={email}
+                        onChange={(e) => handleDetailsChange(e, setEmail)}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div className="form-group">
+                      <label htmlFor="phone">Phone</label>
+                      <input
+                        type="number"
+                        className="form-control"
+                        id="phone"
+                        placeholder="Enter phone number"
+                        value={phone}
+                        onChange={(e) => handleDetailsChange(e, setPhone)}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="row gutters">
+                  <div className="col-xl-12 col-lg-8 col-md-12 col-sm-12 col-8">
+                    <h6 className="mt-3 mb-2 text-primary titles">Address</h6>
+                  </div>
+                  <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 input-boxes">
+                    {/* <div className="col-8"> */}
+                    <div className="form-group">
+                      <label htmlFor="Locality">Locality</label>
+                      <input
+                        type="text"
+                        className="form-control rest-input"
+                        id="Locality"
+                        name="locality"
+                        placeholder="Enter Locality"
+                        value={addressDetails.locality}
+                        onChange={handleAddressDetailsChange}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div className="form-group">
+                      <label htmlFor="ciTy">City</label>
+                      <input
+                        type="text"
+                        className="form-control rest-input "
+                        id="ciTy"
+                        name="city"
+                        placeholder="Enter City"
+                        value={addressDetails.city}
+                        onChange={handleAddressDetailsChange}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 input-boxes">
+                    <div className="form-group">
+                      <label htmlFor="sTate">State</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="sTate"
+                        name="state"
+                        placeholder="Enter State"
+                        value={addressDetails.state}
+                        onChange={handleAddressDetailsChange}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div className="form-group">
+                      <label htmlFor="pincode">Pincode</label>
+                      <input
+                        type="number"
+                        className="form-control"
+                        id="pincode"
+                        name="pincode"
+                        placeholder="Pincode"
+                        value={addressDetails.pincode}
+                        onChange={handleAddressDetailsChange}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="row gutters">
+                  <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div className="text-right">
+                      <button
+                        type="button"
+                        id="submit"
+                        name="submit"
+                        className="btn btn-secondary btns"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="button"
+                        id="submit"
+                        name="submit"
+                        className="btn btn-primary btns"
+                        onClick={logValues}
+                      >
+                        Update
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div> */}
+          </div>
         </div>
       </div>
     </>

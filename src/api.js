@@ -208,3 +208,27 @@ export const createReview = async (review, rating, pgID, user) => {
     };
   }
 };
+
+export const getProfile = async (userID) => {
+  try {
+    const response = await fetch(
+      `http://localhost:5000/api/v1/user/me/${userID}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      }
+    );
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error.message);
+    return {
+      status: "requestFail",
+      error: "Something Went Wrong.",
+    };
+  }
+};

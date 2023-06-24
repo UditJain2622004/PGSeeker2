@@ -1,10 +1,16 @@
 if only 1 photo, carousel not working
 
 show actual ratings on details Page
+option to remove the price filter once applied
+update profile
+update password
+pgs in profile
 read more button for pg description on PgDetailsPage
 maybe reverse the alternating colors on PgDetailsPage
 self review on top
 what after contactUs page??
+
+apply sort and then apply price filter removes sort but not the title of sort input field
 
 inputs of price and occupancy still uncertain
 store persisting even on restart
