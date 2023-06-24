@@ -39,58 +39,53 @@
 } */
 
 .amenities-container {
-    margin: 2rem 0 2rem 0;
-    /* background-color: rgb(249, 247, 247); */
-    /* background-color: #f0e6f2c3; */
-    background-color: #e6ebf2c3
-        /* background: linear-gradient(135deg, #d1f3c8 0%, #eaf1f5 50%, #c8d9f3 100%); */
+  margin: 2rem 0 2rem 0;
 
+  background-color: #e6ebf2c3;
+  /* background: linear-gradient(135deg, #d1f3c8 0%, #eaf1f5 50%, #c8d9f3 100%); */
 }
 
 .amenity-heading {
-    font-size: 1.7rem;
-    font-weight: bold;
-    color: #0f2a8bc0;
-    text-align: center;
-
+  font-size: 1.7rem;
+  font-weight: bold;
+  color: #0f2a8bc0;
+  text-align: center;
 }
 
 hr {
-
-    align-items: center;
-    justify-content: center;
-    margin: auto;
-    margin-bottom: 3rem;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  margin-bottom: 3rem;
 }
 
 .amenities-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: auto;
-    margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: auto;
+  margin-top: 2rem;
 
-    gap: 3rem;
+  gap: 3rem;
 }
 
 .amenity {
-    display: flex;
+  display: flex;
 
-
-    width: 27%;
-    margin-left: 14px;
+  width: 27%;
+  margin-left: 14px;
 }
 
 .amenity-container {
-    width: 50px;
-    /* Set the desired width of the image container */
-    height: 60px;
-    /* Set the desired height of the image container */
-    border-radius: 50%;
+  width: 50px;
+  /* Set the desired width of the image container */
+  height: 60px;
+  /* Set the desired height of the image container */
+  border-radius: 50%;
 }
 
 .amenity-icon {
-    /* width: 4rem;
+  /* width: 4rem;
     height: 4rem;
     background-size:cover;
     border-radius: 50%;
@@ -99,33 +94,31 @@ hr {
     align-items: center;
     object-fit: cover;
     border: 0.5px solid grey; */
-    width: 4rem;
-    /* Set the image width to fill the container */
-    height: 100%;
-    /* Set the image height to fill the container */
-    object-fit: contain;
+  width: 4rem;
+  /* Set the image width to fill the container */
+  height: 100%;
+  /* Set the image height to fill the container */
+  object-fit: contain;
 }
-
 
 .amenity-label {
-    font-size: 1.3rem;
-    font-weight: bold;
-    color: #2979ff;
-    margin-left: 2rem;
-    text-transform: capitalize;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #2979ff;
+  margin-left: 2rem;
+  text-transform: capitalize;
 }
 
-
 .availability {
-    margin-left: 2rem;
-    font-size: 0.9rem;
-    font-weight: 600;
+  margin-left: 2rem;
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 
 .availability.available {
-    color: green;
+  color: green;
 }
 
 .availability.not-available {
-    color: red;
+  color: red;
 }

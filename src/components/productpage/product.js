@@ -32,6 +32,7 @@ const Product = () => {
     noticePeriodDays,
     securityDeposit,
     gateClosingTime,
+    sharing,
   } = pg;
   const subRules = { noticePeriodDays, securityDeposit, gateClosingTime };
   const headerDetails = {
@@ -40,6 +41,7 @@ const Product = () => {
     address,
     pgType,
     images,
+    sharing,
   };
   const [reviews, setReviews] = useState([]);
   // const amenities = ["wifi", "ac", "parking", "powerBackup", "tv", "fridge"];

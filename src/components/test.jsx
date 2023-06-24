@@ -36,7 +36,7 @@ const SearchableSelect = () => {
 
   return (
     <div>
-      <input type="text" list="cars" />
+      <input type="number" list="cars" />
       <datalist id="cars">
         <option>Volvo</option>
         <option>Saab</option>

@@ -18,24 +18,26 @@ const rules = {
 };
 // const rules = ["guests", "smoking", "loudMusicAllowed", "alcoholAllowed"];
 
-const amenities = {
-  ac: "ac",
-  fridge: "fridge",
-  wifi: "wifi",
-  parking: "parking",
-  tv: "tv",
-  nonVeg: "nonVeg",
-  tiffin: "tiffin",
-  laundry: "laundry",
-  lift: "lift",
-  microwave: "microwave",
-  cleaning: "cleaning",
-  warden: "warden",
-  cctv: "cctv",
-  selfCooking: "selfCooking",
-  attachWashroom: "attachWashroom",
-  wardrobe: "wardrobe",
-};
+// const amenities = {
+//   ac: "ac",
+//   fridge: "fridge",
+//   wifi: "wifi",
+//   parking: "parking",
+//   tv: "tv",
+//   nonVeg: "nonVeg",
+//   tiffin: "tiffin",
+//   laundry: "laundry",
+//   lift: "lift",
+//   microwave: "microwave",
+//   cleaning: "cleaning",
+//   warden: "warden",
+//   cctv: "cctv",
+//   selfCooking: "selfCooking",
+//   attachWashroom: "attachWashroom",
+//   wardrobe: "wardrobe",
+//   library:"library",
+//   powerBackup:"powerBackup"
+// };
 
 const PGOwnerForm = () => {
   const user = useSelector((state) => state.user);
@@ -97,7 +99,7 @@ const PGOwnerForm = () => {
   const handleAddSharingOption = () => {
     setSharingOptions([
       ...sharingOptions,
-      { occupancy: "", price: 0, ac: false },
+      { occupancy: "", price: "", ac: false },
     ]);
   };
 
@@ -108,9 +110,30 @@ const PGOwnerForm = () => {
   };
 
   const handleSharingOptionChange = (index, field, value) => {
+    console.log(sharingOptions[index][field]);
     const updatedOptions = [...sharingOptions];
     updatedOptions[index][field] = value;
     setSharingOptions(updatedOptions);
+    console.log(sharingOptions[index][field]);
+  };
+
+  const handleSharingPriceWheel = (e, index, field, value) => {
+    const delta = Math.sign(e.deltaY);
+    if (delta > 0) {
+      //Scroll Down
+      e.target.value = e.target.value * 1 + 1;
+      console.log(value);
+      console.log(sharingOptions[index][field]);
+      handleSharingOptionChange(index, field, value * 1 + 1);
+      console.log(sharingOptions[index][field]);
+    } else if (delta < 0) {
+      //Scroll Up
+      e.target.value = e.target.value * 1 - 1;
+      console.log(value);
+      console.log(sharingOptions[index][field]);
+      handleSharingOptionChange(index, field, value * 1 - 1);
+      console.log(sharingOptions[index][field]);
+    }
   };
 
   const handleImageChange = (e) => {
@@ -151,6 +174,10 @@ const PGOwnerForm = () => {
       ...addressDetails,
       [event.target.name]: event.target.value,
     });
+    if (addressDetails.pincode === "0") {
+      console.log("Hello");
+      setAddressDetails({ ...addressDetails, pincode: "" });
+    }
   };
 
   const handlePGRulesChange = (event) => {
@@ -172,19 +199,41 @@ const PGOwnerForm = () => {
   };
 
   const handleContactInfo = (event) => {
-    setContactInfo({ ...ContactInfo, [event.target.name]: event.target.value });
+    setContactInfo({
+      ...ContactInfo,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const handlePhonePincodeRulesWheel = (e) => {
+    const delta = Math.sign(e.deltaY);
+    if (delta > 0) {
+      //Scroll Down
+      e.target.value = e.target.value * 1 + 1;
+      handleAddressDetailsChange(e); // handleContactInfo works for pincode and rules also bcz they are same
+    } else if (delta < 0) {
+      //Scroll Up
+      e.target.value = e.target.value * 1 - 1;
+      handleAddressDetailsChange(e);
+    }
   };
   // const [pgData, setPGData] = useState({});
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     let loadingOverlay = document.querySelector(".loading-overlay");
-    let successMessage = document.querySelector(".success-message");
-    let errorMessage = document.querySelector(".error-msg");
+    // let successMessage = document.querySelector(".success-message");
+    // let errorMessage = document.querySelector(".error-msg");
     let form = document.querySelector(".form-container");
 
     loadingOverlay.style.display = "block";
     // successMessage.style.display = "block";
+    const pincodeRegex = /^[1-9][0-9]{5}$/;
+    if (!pincodeRegex.test(addressDetails.pincode)) {
+      swal("Error", "Invalid Pincode");
+      loadingOverlay.style.display = "none";
+      return;
+    }
 
     const { name, description, pgType } = pgDetails;
     const { noticePeriod, securityDeposit, gateClosingTime } = pgRules;
@@ -240,6 +289,8 @@ const PGOwnerForm = () => {
         "But for some reason, images could be uploaded. You can retry uploading them by going to your profile.",
         "warning"
       );
+      navigate("/");
+      window.scrollTo(0, 0);
     } else {
       // Handle error scenario
 
@@ -247,7 +298,7 @@ const PGOwnerForm = () => {
       console.log(response.error);
       console.log(pgData);
       if (response.error.startsWith("Pg validation failed:")) {
-        response.error = "Please Enter All Required Fields!!";
+        response.error = "Please Enter All Required Fields Correctly!!";
       }
 
       swal("Error!", response.error);
@@ -401,91 +452,9 @@ const PGOwnerForm = () => {
             stateVar={addressDetails}
             key={4}
             inputType={"number"}
+            handleWheelChange={handlePhonePincodeRulesWheel}
           />
-          {/* <div className="row sub-address parts part4">
-            <div className="col-6 col-md-4">
-              <label htmlFor="address">
-                <p className="input-heading">Address :</p>
-              </label>
-            </div>
 
-            <div className="col-6 col-md-2">
-              <label htmlFor="locality">Locality :</label>
-            </div>
-            <div className="col-6 col-md-4">
-              <input
-                type="text"
-                id="locality"
-                name="locality"
-                value={addressDetails.locality}
-                onChange={handleAddressDetailsChange}
-              />
-            </div>
-
-          </div>
-          <div className="row sub-address parts part5">
-            <div className="col-6 col-md-4">
-              <label htmlFor="address">
-                <p className="input-heading"></p>
-              </label>
-            </div>
-
-            <div className="col-6 col-md-2">
-              <label htmlFor="city">City :</label>
-            </div>
-            <div className="col-6 col-md-4">
-              <input
-                type="text"
-                id="city"
-                name="city"
-                value={addressDetails.city}
-                onChange={handleAddressDetailsChange}
-              />
-            </div>
-
-          </div>
-          <div className="row sub-address parts part6">
-            <div className="col-6 col-md-4">
-              <label htmlFor="address">
-                <p className="input-heading"></p>
-              </label>
-            </div>
-
-            <div className="col-6 col-md-2">
-              <label htmlFor="state">State :</label>
-            </div>
-            <div className="col-6 col-md-4">
-              <input
-                type="text"
-                id="state"
-                name="state"
-                value={addressDetails.state}
-                onChange={handleAddressDetailsChange}
-              />
-            </div>
-
-          </div>
-          <div className="row sub-address parts part7">
-            <div className="col-6 col-md-4">
-              <label htmlFor="address">
-                <p className="input-heading"></p>
-              </label>
-            </div>
-
-            <div className="col-6 col-md-2">
-              <label htmlFor="pincode">Pincode :</label>
-            </div>
-            <div className="col-6 col-md-4">
-              <input
-                type="text"
-                id="pincode"
-                name="pincode"
-                value={addressDetails.pincode}
-                onChange={handleAddressDetailsChange}
-              />
-            </div>
-
-          </div> */}
           {/* Sharing Options **********************************************************************************************/}
           <div className="row sharing parts part8">
             {/* <div className="form-group"> */}
@@ -512,6 +481,14 @@ const PGOwnerForm = () => {
                           e.target.value
                         )
                       }
+                      onWheel={(e) => {
+                        handleSharingPriceWheel(
+                          e,
+                          index,
+                          "occupancy",
+                          e.target.value
+                        );
+                      }}
                     />
                   </label>
                   <label>
@@ -519,7 +496,9 @@ const PGOwnerForm = () => {
                     <input
                       className="sharingoptionfield"
                       type="number"
-                      value={option.price}
+                      value={sharingOptions[index]["price"]}
+                      // value={option.price}
+
                       onChange={(e) =>
                         handleSharingOptionChange(
                           index,
@@ -527,6 +506,14 @@ const PGOwnerForm = () => {
                           e.target.value
                         )
                       }
+                      onWheel={(e) => {
+                        handleSharingPriceWheel(
+                          e,
+                          index,
+                          "price",
+                          e.target.value
+                        );
+                      }}
                     />
                   </label>
                   <label>
@@ -591,6 +578,7 @@ const PGOwnerForm = () => {
                 name="securityDeposit"
                 value={pgRules.securityDeposit}
                 onChange={handlePGRulesChange}
+                onWheel={handlePhonePincodeRulesWheel}
               />
             </div>
           </div>
@@ -607,6 +595,7 @@ const PGOwnerForm = () => {
                 name="noticePeriod"
                 value={pgRules.noticePeriod}
                 onChange={handlePGRulesChange}
+                onWheel={handlePhonePincodeRulesWheel}
               />
             </div>
           </div>
@@ -695,25 +684,7 @@ const PGOwnerForm = () => {
                 name="phone"
                 value={ContactInfo.phone}
                 onChange={handleContactInfo}
-                onWheel={(e) => {
-                  // e.preventDefault();
-                  const delta = Math.sign(e.deltaY);
-                  if (delta > 0) {
-                    console.log("Scrolling down");
-                    const phone = ContactInfo.phone;
-                    setContactInfo((phone) => ({
-                      ...phone,
-                      phone: phone.phone + 1,
-                    }));
-                  } else if (delta < 0) {
-                    console.log("Scrolling up");
-                    setContactInfo({
-                      ...ContactInfo,
-                      phone: ContactInfo.phone - 1,
-                    });
-                  }
-                  console.log(e.target.value);
-                }}
+                onWheel={handlePhonePincodeRulesWheel}
               />
             </div>
             {/* </div> */}

@@ -1,135 +1,133 @@
 .pg-details-container {
-    display: flex;
-    justify-content: space-evenly;
-    /* align-items: center; */
-    margin-top: 20px;
+  display: flex;
+  justify-content: space-evenly;
+  /* align-items: center; */
+  /* margin-top: 20px; */
 }
 
 .slideshow {
-    position: relative;
-    width: 600px;
-    height: 400px;
+  position: relative;
+  width: 600px;
+  height: 400px;
 }
 
 .image-container {
-    position: relative;
-    height: 50vh;
-    width: 100%;
+  position: relative;
+  height: 50vh;
+  width: 100%;
 }
 
 .pg-image {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .button-container {
-    position: absolute;
-    top: 110%;
-    left: 35%;
-    transform: translateY(-50%);
-    border: 1px solid black;
+  position: absolute;
+  top: 110%;
+  left: 35%;
+  transform: translateY(-50%);
+  border: 1px solid black;
 }
 
 .border {
-    border: 1px solid black;
+  border: 1px solid black;
 }
 
 .slideshow-button {
-    background-color: #fff;
-    color: #000;
-    border: none;
-    padding: 8px 16px;
-    cursor: pointer;
+  background-color: #fff;
+  color: #000;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
 }
 
 .pg-description {
-    /* margin-left: 40px; */
-    width: 70%;
+  /* margin-left: 40px; */
+  width: 70%;
 }
 
 .address {
-    font-weight: 400;
+  font-weight: 400;
 
-    font-size: 18px;
-    margin-bottom: 10px;
+  font-size: 18px;
+  margin-bottom: 10px;
 }
 
 .grey {
-    color: grey;
+  color: grey;
 }
 
 .price {
-    margin-top: 15px;
-
+  margin-top: 15px;
 }
 
 .pg_type {
-    margin: 5px;
-    font-size: 18px;
-
+  margin: 5px;
+  font-size: 18px;
 }
 
 .fs-18 {
-    font-size: 18px;
+  font-size: 18px;
 }
 
 .price-value {
-    margin-left: 15px;
+  margin-left: 15px;
 }
 
 .pg-name {
-    font-size: 50px;
-    font-weight: bold;
-    margin-bottom: 5px;
-    margin-top: 20px;
-    color: #0f2a8bc0;
+  font-size: 50px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  margin-top: 20px;
+  color: #0f2a8bc0;
 }
 
 .pg-info p {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 .booking-buttons {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .booking-button {
-    background-color: #2549d3;
-    color: #fff;
-    border: none;
-    padding: 8px 16px;
-    margin-right: 10px;
-    cursor: pointer;
+  background-color: #2549d3;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  margin-right: 10px;
+  cursor: pointer;
 }
 
 .amenities-section {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .amenities-section h3 {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
 .amenities-section ul {
-    list-style-type: none;
-    padding: 0;
+  list-style-type: none;
+  padding: 0;
 }
 
 .amenities-section li {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 .pg-description-text {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .pg-description-text h3 {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
 /* .reviews-section {
@@ -161,3 +159,31 @@ textarea{
     margin-bottom: 5px;
     font-size: 1rem;
 } */
+
+.carousel-container {
+  text-align: "center";
+  padding: "0 20px";
+  width: 600px;
+  height: 500px;
+}
+
+.sharing-heading {
+  font-size: 1.7rem;
+  font-weight: bold;
+  color: #0f2a8bc0;
+  text-align: center;
+}
+
+.image-details-section {
+  padding: 0 100px 0 100px;
+  background-color: #e6ebf2c3;
+  margin-top: 0px;
+}
+.sharing-container {
+  padding: 0 100px 0 100px;
+  /* background-color: #e6ebf2c3; */
+}
+
+.pgPagehr {
+  margin: 0px 0px 0px 0px;
+}

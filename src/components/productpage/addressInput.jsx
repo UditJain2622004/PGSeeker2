@@ -12,6 +12,7 @@ const AddressInput = ({
   subHeading,
   keyIndex,
   inputType,
+  handleWheelChange,
 }) => {
   return (
     <>
@@ -37,6 +38,7 @@ const AddressInput = ({
               name={subHeading}
               value={stateVar[subHeading]}
               onChange={handleChange}
+              onWheel={handleWheelChange}
             />
           </div>
 

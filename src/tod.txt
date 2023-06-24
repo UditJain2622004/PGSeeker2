@@ -1,12 +1,19 @@
-sharing options
-size of images carousel changing due to no. of images
-size of images carousel changing due to size of images
 if only 1 photo, carousel not working
 
+show actual ratings on details Page
+read more button for pg description on PgDetailsPage
+maybe reverse the alternating colors on PgDetailsPage
 self review on top
-inputs of price and phone no. changing
-
-
-bad validation in add pg form(for empty fields)
 what after contactUs page??
+
+inputs of price and occupancy still uncertain
 store persisting even on restart
+what to do for sharing -> 6,7,8...(in PGCard and PgDetailsPage)
+bad validation in add pg form(for empty fields)
+specific error msg on pgOwnerForm page
+put loading as initial state of state variable of things like reviews, profile data
+
+**
+always focus out before Scrolling
+log out before stopping the server
+pick images that looks good in carousel

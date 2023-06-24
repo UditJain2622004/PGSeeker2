@@ -1,296 +1,194 @@
-import React from "react";
-// import "./profilePage2.css";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import "./profilePage2.css";
 
 const ProfilePage2 = () => {
+  const user = useSelector((state) => state.user);
+  const [name, setName] = useState(user.name);
+  const [email, setEmail] = useState(user.email);
+  const [phone, setPhone] = useState(user.phone);
+  const [about, setAbout] = useState(user.about);
+
+  const handleDetailsChange = (e, setWhat) => {
+    setWhat(e.target.value);
+  };
+
+  const logValues = () => {
+    console.log(name, email, phone, about);
+  };
   return (
     <>
-      <link
-        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
-        rel="stylesheet"
-      />
-      <div class="container">
-        <div class="row flex-lg-nowrap">
-          <div class="col-12 col-lg-auto mb-3 sidebar">
-            <div class="card p-3">
-              <div class="sidebar-link">
-                <ul class="sidebar">
-                  <li class="">
-                    <a class="sidebar-link px-2" href="#">
-                      <i class="fa fa-fw fa-bar-chart mr-1"></i>
-                      <span className="sidebar-item">Overview</span>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a
-                      class="sidebar-link px-2"
-                      href="https://www.bootdey.com/snippets/view/bs4-crud-users"
-                      target="__blank"
-                    >
-                      <i class="fa fa-fw fa-th mr-1"></i>
-                      <span>CRUD</span>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a
-                      class="sidebar-link px-2"
-                      href="https://www.bootdey.com/snippets/view/bs4-edit-profile-page"
-                      target="__blank"
-                    >
-                      <i class="fa fa-fw fa-cog mr-1"></i>
-                      <span>Settings</span>
-                    </a>
-                  </li>
-                </ul>
+      <div className="profile-container">
+        <div className="row gutters">
+          {/* <div className="sidebar"></div> */}
+          <div className="col-xl-3 col-lg-3 col-md-12 col-sm-12 sidebar">
+            <div className="profile-card h-100">
+              <div className="profile-card-body">
+                <div className="account-settings">
+                  <div className="user-profile">
+                    <div className="user-avatar avatar">
+                      <img
+                        src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                        alt="Maxwell Admin"
+                      />
+                    </div>
+                    <h5 className="user-name ff_space">{user.name}</h5>
+                    <h6 className="user-email ff_space">{user.email}</h6>
+                  </div>
+                  {user.about && (
+                    <div className="about ff_space">
+                      <h5>About</h5>
+                      <p className="about-text">
+                        I'm Yuki. Full Stack Designer I enjoy creating
+                        user-centric, delightful and human experiences.
+                      </p>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
-
-          <div class="col">
-            <div class="row">
-              <div class="col mb-3">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="e-profile">
-                      <div class="row">
-                        {/* <div class="col-12 col-sm-auto mb-3">
-                          <div class="mx-auto" style="width: 140px;">
-                            <div
-                              class="d-flex justify-content-center align-items-center rounded"
-                              style="height: 140px; background-color: rgb(233, 236, 239);"
-                            >
-                              <span style="color: rgb(166, 168, 170); font: bold 8pt Arial;">
-                                140x140
-                              </span>
-                            </div>
-                          </div>
-                        </div> */}
-                        <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
-                          <div class="text-center text-sm-left mb-2 mb-sm-0">
-                            <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">
-                              John Smith
-                            </h4>
-                            <p class="mb-0">@johnny.s</p>
-                            <div class="text-muted">
-                              <small>Last seen 2 hours ago</small>
-                            </div>
-                            <div class="mt-2">
-                              <button class="btn btn-primary" type="button">
-                                <i class="fa fa-fw fa-camera"></i>
-                                <span>Change Photo</span>
-                              </button>
-                            </div>
-                          </div>
-                          <div class="text-center text-sm-right">
-                            <span class="badge badge-secondary">
-                              administrator
-                            </span>
-                            <div class="text-muted">
-                              <small>Joined 09 Dec 2017</small>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                          <a href="" class="active nav-link">
-                            Settings
-                          </a>
-                        </li>
-                      </ul>
-                      <div class="tab-content pt-3">
-                        <div class="tab-pane active det">
-                          <form class="form" novalidate="">
-                            <div class="row">
-                              <div class="col">
-                                <div class="row">
-                                  <div class="col">
-                                    <div class="form-group">
-                                      <label>Full Name</label>
-                                      <input
-                                        class="form-control"
-                                        type="text"
-                                        name="name"
-                                        placeholder="John Smith"
-                                        value="John Smith"
-                                      />
-                                    </div>
-                                  </div>
-                                  <div class="col">
-                                    <div class="form-group">
-                                      <label>Username</label>
-                                      <input
-                                        class="form-control"
-                                        type="text"
-                                        name="username"
-                                        placeholder="johnny.s"
-                                        value="johnny.s"
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="row">
-                                  <div class="col">
-                                    <div class="form-group">
-                                      <label>Email</label>
-                                      <input
-                                        class="form-control"
-                                        type="text"
-                                        placeholder="user@example.com"
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="row">
-                                  <div class="col mb-3">
-                                    <div class="form-group">
-                                      <label>About</label>
-                                      <textarea
-                                        class="form-control"
-                                        rows="5"
-                                        placeholder="My Bio"
-                                      ></textarea>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="col-12 col-sm-6 mb-3">
-                                <div class="mb-2">
-                                  <b>Change Password</b>
-                                </div>
-                                <div class="row">
-                                  <div class="col">
-                                    <div class="form-group">
-                                      <label>Current Password</label>
-                                      <input
-                                        class="form-control"
-                                        type="password"
-                                        placeholder="••••••"
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="row">
-                                  <div class="col">
-                                    <div class="form-group">
-                                      <label>New Password</label>
-                                      <input
-                                        class="form-control"
-                                        type="password"
-                                        placeholder="••••••"
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="row">
-                                  <div class="col">
-                                    <div class="form-group">
-                                      <label>
-                                        Confirm{" "}
-                                        <span class="d-none d-xl-inline">
-                                          Password
-                                        </span>
-                                      </label>
-                                      <input
-                                        class="form-control"
-                                        type="password"
-                                        placeholder="••••••"
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-12 col-sm-5 offset-sm-1 mb-3">
-                                <div class="mb-2">
-                                  <b>Keeping in Touch</b>
-                                </div>
-                                <div class="row">
-                                  <div class="col">
-                                    <label>Email Notifications</label>
-                                    <div class="custom-controls-stacked px-2">
-                                      <div class="custom-control custom-checkbox">
-                                        <input
-                                          type="checkbox"
-                                          class="custom-control-input"
-                                          id="notifications-blog"
-                                          checked=""
-                                        />
-                                        <label
-                                          class="custom-control-label"
-                                          for="notifications-blog"
-                                        >
-                                          Blog posts
-                                        </label>
-                                      </div>
-                                      <div class="custom-control custom-checkbox">
-                                        <input
-                                          type="checkbox"
-                                          class="custom-control-input"
-                                          id="notifications-news"
-                                          checked=""
-                                        />
-                                        <label
-                                          class="custom-control-label"
-                                          for="notifications-news"
-                                        >
-                                          Newsletter
-                                        </label>
-                                      </div>
-                                      <div class="custom-control custom-checkbox">
-                                        <input
-                                          type="checkbox"
-                                          class="custom-control-input"
-                                          id="notifications-offers"
-                                          checked=""
-                                        />
-                                        <label
-                                          class="custom-control-label"
-                                          for="notifications-offers"
-                                        >
-                                          Personal Offers
-                                        </label>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="col d-flex justify-content-end">
-                                <button class="btn btn-primary" type="submit">
-                                  Save Changes
-                                </button>
-                              </div>
-                            </div>
-                          </form>
-                        </div>
-                      </div>
+          <div className="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12 main  ff_space">
+            <div className="profile-card h-100">
+              <div className="profile-card-body">
+                <div className="row gutters">
+                  <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <h6 className="mb-2 text-primary titles">
+                      Personal Details
+                    </h6>
+                  </div>
+                  <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 input-boxes">
+                    <div className="form-group">
+                      <label for="fullName">Full Name</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="fullName"
+                        placeholder="Enter full name"
+                        value={name}
+                        onChange={(e) => handleDetailsChange(e, setName)}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div className="form-group">
+                      <label for="website">About</label>
+                      <textarea
+                        name=""
+                        id="about"
+                        cols="10"
+                        rows="1"
+                        className="form-control about-input"
+                        placeholder="About You"
+                        value={about}
+                        onChange={(e) => handleDetailsChange(e, setAbout)}
+                      ></textarea>
+                      {/* <input
+                        type="text"
+                        className="form-control rest-input"
+                        id="website"
+                        placeholder="About"
+                      /> */}
+                    </div>
+                  </div>
+                  <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 input-boxes">
+                    <div className="form-group">
+                      <label for="eMail">Email</label>
+                      <input
+                        type="email"
+                        className="form-control"
+                        id="eMail"
+                        placeholder="Enter email ID"
+                        value={email}
+                        onChange={(e) => handleDetailsChange(e, setEmail)}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div className="form-group">
+                      <label for="phone">Phone</label>
+                      <input
+                        type="number"
+                        className="form-control"
+                        id="phone"
+                        placeholder="Enter phone number"
+                        value={phone}
+                        onChange={(e) => handleDetailsChange(e, setPhone)}
+                      />
                     </div>
                   </div>
                 </div>
-              </div>
-
-              <div class="col-12 col-md-3 mb-3">
-                <div class="card mb-3">
-                  <div class="card-body">
-                    <div class="px-xl-3">
-                      <button class="btn btn-block btn-secondary">
-                        <i class="fa fa-sign-out"></i>
-                        <span>Logout</span>
+                <div className="row gutters">
+                  <div className="col-xl-12 col-lg-8 col-md-12 col-sm-12 col-8">
+                    <h6 className="mt-3 mb-2 text-primary titles">Address</h6>
+                  </div>
+                  <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 input-boxes">
+                    {/* <div className="col-8"> */}
+                    <div className="form-group">
+                      <label for="Street">Street</label>
+                      <input
+                        type="text"
+                        className="form-control rest-input"
+                        id="Street"
+                        placeholder="Enter Street"
+                      />
+                    </div>
+                  </div>
+                  <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div className="form-group">
+                      <label for="ciTy">City</label>
+                      <input
+                        type="text"
+                        className="form-control rest-input "
+                        id="ciTy"
+                        placeholder="Enter City"
+                      />
+                    </div>
+                  </div>
+                  <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 input-boxes">
+                    <div className="form-group">
+                      <label for="sTate">State</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="sTate"
+                        placeholder="Enter State"
+                      />
+                    </div>
+                  </div>
+                  <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div className="form-group">
+                      <label for="zIp">Zip Code</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="zIp"
+                        placeholder="Zip Code"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="row gutters">
+                  <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div className="text-right">
+                      <button
+                        type="button"
+                        id="submit"
+                        name="submit"
+                        className="btn btn-secondary btns"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="button"
+                        id="submit"
+                        name="submit"
+                        className="btn btn-primary btns"
+                        // onClick={logValues}
+                      >
+                        Update
                       </button>
                     </div>
-                  </div>
-                </div>
-                <div class="card">
-                  <div class="card-body">
-                    <h6 class="card-title font-weight-bold">Support</h6>
-                    <p class="card-text">
-                      Get fast, free help from our friendly assistants.
-                    </p>
-                    <button type="button" class="btn btn-primary">
-                      Contact Us
-                    </button>
                   </div>
                 </div>
               </div>

@@ -78,12 +78,12 @@
 
 import React from "react";
 import "./Amenities.css"; // Import your CSS file for styling
-import pic from "./PG/pic3.png";
+// import pic from "./PG/pic3.png";
 // Amenities
 import wifi from "./images/A-img/wifi.png";
 import ac from "./images/A-img/ac.png";
 import parking from "./images/A-img/parking.png";
-import wheeler from "./images/A-img/4-wheeler.png";
+// import wheeler from "./images/A-img/4-wheeler.png";
 import room from "./images/A-img/clean.png";
 import tv from "./images/A-img/television.png";
 import fridge from "./images/A-img/fridge.png";
