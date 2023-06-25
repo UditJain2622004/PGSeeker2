@@ -232,3 +232,28 @@ export const getProfile = async (userID) => {
     };
   }
 };
+
+export const updateProfile = async (updates, userID) => {
+  try {
+    const response = await fetch(
+      `http://localhost:5000/api/v1/user/UpdateMe/${userID}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updates),
+        credentials: "include",
+      }
+    );
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error.message);
+    return {
+      status: "requestFail",
+      error: "Something Went Wrong.",
+    };
+  }
+};

@@ -187,3 +187,30 @@ textarea{
 .pgPagehr {
   margin: 0px 0px 0px 0px;
 }
+
+.fas {
+  font-family: "Font Awesome 5 Free";
+}
+
+.filled-star {
+  color: gold; /* or any color you prefer for filled stars */
+}
+
+.empty-star {
+  color: lightgray; /* or any color you prefer for empty stars */
+}
+
+/* Styles for the partially filled star */
+.partially-filled-star {
+  position: relative;
+  display: inline-block;
+}
+
+/* Styles for the clipped portion of the partially filled star */
+.star-clip-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  width: 100%;
+}

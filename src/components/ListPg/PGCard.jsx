@@ -2,6 +2,7 @@ import React from "react";
 import "./PGCard.css";
 import { useNavigate } from "react-router-dom";
 import defaultPic from "./images/default.jpg";
+import StarRating from "../productpage/StarRating";
 
 const PGCard = ({ pg }) => {
   const coverImage = pg.images[0] || defaultPic;
@@ -77,24 +78,18 @@ const PGCard = ({ pg }) => {
                       : pg.description}
                   </p>
                   {/* <hr /> */}
+                  <StarRating rating={pg.ratingsAverage} />
 
-                  <div className="d-flex flex-row">
-                    <div className="text-danger mb-1 me-2">
+                  {/* <div className="d-flex flex-row">
+                    <div className="mb-1 me-2">
                       <i className="fa fa-star"></i>
                       <i className="fa fa-star"></i>
                       <i className="fa fa-star"></i>
                       <i className="fa fa-star"></i>
                     </div>
 
-                    {/* <span>
-                      <img
-                        src="./images/../../../../public/male.png"
-                        alt="icon"
-                        srcset=""
-                      />
-                      {pg.gender}
-                    </span> */}
-                  </div>
+                    
+                  </div> */}
                   <div className="li"></div>
 
                   <div class="sharing">

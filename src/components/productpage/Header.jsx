@@ -3,7 +3,7 @@ import "./PGDetailsPage.css";
 import { Carousel } from "react-carousel-minimal";
 import stars_5 from "./images/stars_5.png";
 import SharingOptions from "./sharingOptions";
-
+import StarRating from "./StarRating";
 import defaultPic from "./images/default.jpg";
 
 // const share = [
@@ -84,8 +84,8 @@ function Header({ headerDetails }) {
                 </p>
               </div>
               <div className="d-flex mt-2 align-items-center">
-                <h5 className="fs_sm">Ratings:</h5>
-                <img className="ms-3" src={stars_5} alt="stars_5" />
+                <h5 className="fs_sm">Ratings : </h5>
+                <StarRating rating={headerDetails.ratingsAverage} />
               </div>
             </div>
           </div>

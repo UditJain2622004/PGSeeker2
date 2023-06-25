@@ -110,12 +110,17 @@ const Filters = ({ filters, sortOption, handleSort }) => {
 
   const handlePriceChange = (event) => {
     const selectedValue = event.target.value;
-    setPriceInputTitle(selectedValue);
-    const arr = selectedValue.split(" ");
-    if (arr[0] === "Upto") {
-      setPrice([0, arr[1] * 1]);
-    } else if (arr[0] === "Above") {
-      setPrice([arr[1] * 1, 100000]);
+    if (selectedValue === "No Filter") {
+      setPriceInputTitle("Price Range");
+      setPrice([]);
+    } else {
+      setPriceInputTitle(selectedValue);
+      const arr = selectedValue.split(" ");
+      if (arr[0] === "Upto") {
+        setPrice([0, arr[1] * 1]);
+      } else if (arr[0] === "Above") {
+        setPrice([arr[1] * 1, 100000]);
+      }
     }
   };
 
@@ -221,6 +226,7 @@ const Filters = ({ filters, sortOption, handleSort }) => {
                     <option value="Upto 5000">Upto 5000</option>
                     <option value="Upto 10000">Upto 10000</option>
                     <option value="Above 10000">Above 10000</option>
+                    <option value="No Filter">No Filter</option>
                   </select>
                 </label>
               </div>

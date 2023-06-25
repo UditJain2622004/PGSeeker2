@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import "./profilePage.css";
-import { getProfile } from "../../api";
+import { getProfile, updateProfile } from "../../api";
 import swal from "sweetalert";
 
 const ProfilePage = () => {
-  const user = useSelector((state) => state.user);
-  const [name, setName] = useState(user.name);
-  const [email, setEmail] = useState(user.email);
-  const [phone, setPhone] = useState(user.phone);
-  const [about, setAbout] = useState(user.about);
+  let user = useSelector((state) => state.user);
+  const [name, setName] = useState("...");
+  const [email, setEmail] = useState("...");
+  const [phone, setPhone] = useState("...");
+  const [about, setAbout] = useState("...");
   const [addressDetails, setAddressDetails] = useState({
     locality: user.address?.locality,
     city: user.address?.city,
@@ -17,6 +18,11 @@ const ProfilePage = () => {
     pincode: user.address?.pincode,
   });
   const [pgs, setPGs] = useState([]);
+  const [activeButton, setActiveButton] = useState(null);
+
+  const handleButtonClick = (buttonId) => {
+    setActiveButton(buttonId);
+  };
 
   const handleDetailsChange = (e, setWhat) => {
     setWhat(e.target.value);
@@ -54,6 +60,26 @@ const ProfilePage = () => {
     fetchProfile(); // Call the function to make the API request
   }, []);
 
+  const updateMe = async () => {
+    console.log(about);
+    const updates = {
+      name: name,
+      email: email,
+      phone: phone,
+      about: about,
+      address: addressDetails,
+    };
+    console.log(updates);
+    const updatedUser = await updateProfile(updates, user._id);
+    console.log(updatedUser);
+    setName(updatedUser.data.user.name);
+    setEmail(updatedUser.data.user.email);
+    setPhone(updatedUser.data.user.phone);
+    setAbout(updatedUser.data.user.about);
+    if (updatedUser.address) setAddressDetails(updatedUser.address);
+    user = updatedUser;
+  };
+
   const logValues = () => {
     console.log(name, email, phone, about, addressDetails);
   };
@@ -73,18 +99,57 @@ const ProfilePage = () => {
                         alt="Maxwell Admin"
                       />
                     </div>
-                    <h5 className="user-name ff_space">{user.name}</h5>
-                    <h6 className="user-email ff_space">{user.email}</h6>
+                    <h5 className="user-name ff_space">{name}</h5>
+                    <h6 className="user-email ff_space">{email}</h6>
                   </div>
                   {user.about && (
                     <div className="about ff_space">
                       <h5>About</h5>
-                      <p className="about-text">
-                        I'm Yuki. Full Stack Designer I enjoy creating
-                        user-centric, delightful and human experiences.
-                      </p>
+                      <p className="about-text">{about}</p>
                     </div>
                   )}
+
+                  <ul class="nav flex-column nav-tabs">
+                    <h6 className="sidebar-heading">Personal</h6>
+                    <li class="nav-item ">
+                      <Link
+                        class={`nav-link ${
+                          activeButton === "personal" ? "active-link" : ""
+                        }`}
+                        to="#"
+                        onClick={() => handleButtonClick("personal")}
+                      >
+                        Active
+                      </Link>
+                    </li>
+                    <li class="nav-item">
+                      <Link
+                        class={`nav-link ${
+                          activeButton === "password" ? "active-link" : ""
+                        }`}
+                        to="#"
+                        onClick={() => handleButtonClick("password")}
+                      >
+                        Update Password
+                      </Link>
+                    </li>
+                    <h6 className="sidebar-heading">PGS You own</h6>
+                    {pgs.map((pg, i) => {
+                      return (
+                        <li class="nav-item">
+                          <Link
+                            class={`nav-link ${
+                              activeButton === `pg${i + 1}` ? "active-link" : ""
+                            }`}
+                            to="#"
+                            onClick={() => handleButtonClick(`pg${i + 1}`)}
+                          >
+                            {pg.name}
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
                 </div>
               </div>
             </div>
@@ -115,7 +180,7 @@ const ProfilePage = () => {
                     <div className="form-group">
                       <label htmlFor="website">About</label>
                       <textarea
-                        name=""
+                        name="about"
                         id="about"
                         cols="10"
                         rows="1"
@@ -237,7 +302,7 @@ const ProfilePage = () => {
                         id="submit"
                         name="submit"
                         className="btn btn-primary btns"
-                        onClick={logValues}
+                        onClick={updateMe}
                       >
                         Update
                       </button>

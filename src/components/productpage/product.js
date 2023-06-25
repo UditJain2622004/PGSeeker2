@@ -33,6 +33,7 @@ const Product = () => {
     securityDeposit,
     gateClosingTime,
     sharing,
+    ratingsAverage,
   } = pg;
   const subRules = { noticePeriodDays, securityDeposit, gateClosingTime };
   const headerDetails = {
@@ -42,6 +43,7 @@ const Product = () => {
     pgType,
     images,
     sharing,
+    ratingsAverage,
   };
   const [reviews, setReviews] = useState([]);
   // const amenities = ["wifi", "ac", "parking", "powerBackup", "tv", "fridge"];
