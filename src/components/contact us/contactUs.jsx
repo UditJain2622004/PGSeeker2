@@ -1,12 +1,20 @@
 import React from "react";
 import "./contactUs.css";
+import swal from "sweetalert";
 
 const ContactUs = () => {
+  const sendMsg = (e) => {
+    e.preventDefault();
+    swal({
+      text: `Thanks For Contacting Us.
+     We Will Reach Out To You ASAP!`,
+    });
+  };
   return (
     <div className="whole-page">
       <div className="contact-us-page">
         <h1 className="contact-heading">Contact Us</h1>
-        <form className="contact-us-form">
+        <form className="contact-us-form" onSubmit={sendMsg}>
           <div className="a-form-group ">
             {/* <label className="lables" htmlFor="name">
             Name:

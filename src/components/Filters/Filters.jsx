@@ -42,7 +42,7 @@ const sharing = { 1: "Single", 2: "Double", 3: "Triple", 4: "Four" };
 
 const pgTypeOptions = { male: "Boys", female: "Girls", coLiving: "Co-Living" };
 
-const Filters = ({ filters, sortOption, handleSort }) => {
+const Filters = ({ filters, sortOption, setSortOption, handleSort }) => {
   console.log(filters);
   let pgTypeInitial = {
     male: false,
@@ -174,6 +174,7 @@ const Filters = ({ filters, sortOption, handleSort }) => {
     loadingOverlay.style.display = "none";
     if (response.status === "success") {
       navigate("/listedpg", { state: [response.data.pgs, filterOptions] });
+      setSortOption("ascending");
       window.scrollTo(0, 0);
     } else {
       swal({

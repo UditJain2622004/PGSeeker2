@@ -1,6 +1,6 @@
 .profile-container {
   /* margin: 20px; */
-  padding: 40px;
+  padding: 30px 40px 10px 40px;
   color: #2e323c;
   background: #f5f6fa;
   position: relative;
@@ -53,6 +53,8 @@
 }
 
 .profile-card {
+  padding: 0px 20px;
+  height: 100%;
   box-shadow: 0 0 5px 2px #e4e2e2;
   background: #ffffff;
   -webkit-border-radius: 5px;
@@ -60,9 +62,10 @@
   border-radius: 5px;
   border: 0;
   margin-bottom: 1rem;
+  background-color: #f5f5f6c3;
 }
 .sidebar {
-  /* padding: 20px; */
+  margin: 20px;
 }
 
 .input-boxes {
@@ -105,4 +108,22 @@
   color: #0f2a8bc0;
   font-weight: 500;
   font-size: 20px;
+}
+
+.personal {
+  margin: 20px 0;
+  padding: 0;
+}
+
+.profile-page {
+  height: 88%;
+}
+
+.update-password {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  padding: 0 40px;
+  height: 70%;
+  width: 70%;
 }

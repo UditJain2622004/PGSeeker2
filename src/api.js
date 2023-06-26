@@ -257,3 +257,33 @@ export const updateProfile = async (updates, userID) => {
     };
   }
 };
+
+export const updatePassword = async (
+  currentPassword,
+  newPassword,
+  passwordConfirm,
+  userID
+) => {
+  try {
+    const response = await fetch(
+      `http://localhost:5000/api/v1/user/updatePassword/${userID}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ currentPassword, newPassword, passwordConfirm }),
+        credentials: "include",
+      }
+    );
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error.message);
+    return {
+      status: "requestFail",
+      error: "Something Went Wrong.",
+    };
+  }
+};

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./PGDetailsPage.css";
 import { Carousel } from "react-carousel-minimal";
 import stars_5 from "./images/stars_5.png";
@@ -15,6 +15,19 @@ import defaultPic from "./images/default.jpg";
 // ];
 
 function Header({ headerDetails }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const handleToggle = () => {
+    setIsExpanded(!isExpanded);
+  };
+
+  const readMoreOrNot = (text, maxLength) => {
+    if (text.length <= maxLength || isExpanded) {
+      return text;
+    }
+
+    return text.slice(0, maxLength);
+  };
   console.log(headerDetails.images);
   const pgTypeDisplayName = {
     male: "Male",
@@ -67,7 +80,11 @@ function Header({ headerDetails }) {
               <h2 className="pg-name ff_space">{headerDetails.name}</h2>
               <div className=" ff_space grey  mt-3 align-items-center">
                 <h5>About The property</h5>
-                {headerDetails.description}
+                {readMoreOrNot(headerDetails.description, 154)}
+                <button className="read-more-btn" onClick={handleToggle}>
+                  {headerDetails.description.length > 154 &&
+                    (isExpanded ? "Read Less" : "...Read More")}
+                </button>
               </div>
               <div className=" ff_space grey  mt-3 align-items-center">
                 <h5>Address</h5>

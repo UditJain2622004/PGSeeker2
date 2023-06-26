@@ -1,15 +1,16 @@
 if only 1 photo, carousel not working
 
-loader on update Profile
-update password
-pgs in profile
-read more button for pg description on PgDetailsPage
-maybe reverse the alternating colors on PgDetailsPage
-self review on top
+city images
+height of profile cards changing due to change in no. of pgs
+pgDetailHeader
+
+
+
 what after contactUs page??
-
-apply sort and then apply price filter removes sort but not the title of sort input field
-
+sort filter is removed on applying new filter(bcz it is set on frontend, so refreshes after every new request) should it or not
+self review on top
+change loader
+pgs in profile
 api functions all same, make one helper function
 inputs of price and occupancy still uncertain
 store persisting even on restart
@@ -19,6 +20,10 @@ specific error msg on pgOwnerForm page
 put loading as initial state of state variable of things like reviews, profile data
 
 **
+Take already tested data for demo
+
+**
 always focus out before Scrolling
 log out before stopping the server
 pick images that looks good in carousel
+at least 2 photos

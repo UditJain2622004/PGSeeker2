@@ -128,7 +128,7 @@ const PGCard = ({ pg }) => {
                             {/* <span className="text-primary"> • </span> */}
                             <span className="amenities">
                               {" "}
-                              • {el.charAt(0).toUpperCase() + el.slice(1)}
+                              • {el.toUpperCase()}
                             </span>
                           </>
                         );

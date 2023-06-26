@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { useSelector } from "react-redux";
-
+import Loader from "../Homepage/Loader";
 import "./LoginPage.css";
 import house2 from "../Homepage/images/bg1.jpg";
 import { Link, useNavigate } from "react-router-dom";
@@ -16,6 +16,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -55,6 +56,7 @@ const LoginPage = () => {
 
     if (validateForm()) {
       loadingOverlay.style.display = "block";
+      // setIsLoading(true)
       const response = await login(email, password);
       console.log(response);
       if (response.status === "success") {
@@ -63,6 +65,7 @@ const LoginPage = () => {
           payload: response.data.user,
         });
         loadingOverlay.style.display = "none";
+        // setIsLoading(false)
         navigate("/");
         window.scrollTo(0, 0);
       } else {
@@ -74,6 +77,7 @@ const LoginPage = () => {
         // }, 2000);
 
         loadingOverlay.style.display = "none";
+        // setIsLoading(false)
       }
     }
   };
@@ -122,6 +126,7 @@ const LoginPage = () => {
       <div className=" img-section">
         <img className="image-sign" src={house2} alt="bg"></img>
       </div>
+      {isLoading && <Loader />}
       <div class="loading-overlay">
         <div class="loading-spinner"></div>
       </div>

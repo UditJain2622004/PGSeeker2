@@ -32,6 +32,7 @@ const PGListingPage = ({ pgs, filters }) => {
           <Filters
             filters={filters}
             sortOption={sortOption}
+            setSortOption={setSortOption}
             handleSort={handleSort}
           />
         </div>

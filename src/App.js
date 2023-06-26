@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 // import { Provider } from "react-redux";
 // import store from "./store";
 
+import Loader from "./components/Homepage/Loader";
 import Navbar from "./components/Navbar";
 import LoginPage from "./components/login/LoginPage";
 import LogOut from "./components/login/logout";
@@ -15,9 +16,8 @@ import PGOwnerForm from "./components/productpage/PGOwnerForm";
 import About from "./components/About Us/aboutus";
 import ContactUs from "./components/contact us/contactUs";
 import Services from "./components/Services/services";
-import ProfilePage from "./components/profile/ProfilePage";
 import ProtectedRoute from "./ProtectedRoute";
-import Test from "./components/test";
+import Profile from "./components/profile/Profile";
 
 function App() {
   return (
@@ -42,8 +42,11 @@ function App() {
           <Route path="/About" element={<About />} />
           <Route path="/Services" element={<Services />} />
           <Route path="/contactUs" element={<ContactUs />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/test" element={<Test />} />
+          <Route
+            path="/profile"
+            element={<ProtectedRoute component={Profile} />}
+          />
+          <Route path="/test" element={<Loader />} />
         </Routes>
       </Router>
     </>
