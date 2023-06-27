@@ -1,9 +1,9 @@
-if only 1 photo, carousel not working
-
-city images
-height of profile cards changing due to change in no. of pgs
 pgDetailHeader
 
+
+
+if only 1 photo, carousel not working
+height of profile cards changing due to change in no. of pgs
 
 
 what after contactUs page??
@@ -27,3 +27,4 @@ always focus out before Scrolling
 log out before stopping the server
 pick images that looks good in carousel
 at least 2 photos
+not more than 3 pgs of 1 user

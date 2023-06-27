@@ -33,13 +33,10 @@ const Cities = () => {
         Popular Cities
       </h2>
       <div id="cities">
-        <div
-          class="box city-box city1"
-          onClick={() => makeRequest("bangalore")}
-        >
+        <div class="box city-box city1" onClick={() => makeRequest("lukhnow")}>
           <h2 class="h2 center">DELHI</h2>
         </div>
-        <div class="box city-box city2" onClick={() => makeRequest("chennai")}>
+        <div class="box city-box city2" onClick={() => makeRequest("kolkata")}>
           <h2 class="h2 center">MUMBAI</h2>
         </div>
         <div class="box city-box city3" onClick={() => makeRequest("delhi")}>

@@ -104,7 +104,7 @@ const Profile = () => {
       <div className="container">
         <div className="row profile-page">
           <div className="col-xl-3 col-lg-3 col-md-12 col-sm-12 sidebar">
-            <div className="profile-card h-100">
+            <div className="profile-card">
               <div className="profile-card-body">
                 <div className="account-settings">
                   <div className="user-profile">
