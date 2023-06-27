@@ -228,12 +228,12 @@ const PGOwnerForm = () => {
 
     loadingOverlay.style.display = "block";
     // successMessage.style.display = "block";
-    const pincodeRegex = /^[1-9][0-9]{5}$/;
-    if (!pincodeRegex.test(addressDetails.pincode)) {
-      swal("Error", "Invalid Pincode");
-      loadingOverlay.style.display = "none";
-      return;
-    }
+    // const pincodeRegex = /^[1-9][0-9]{5}$/;
+    // if (!pincodeRegex.test(addressDetails.pincode)) {
+    //   swal("Error", "Invalid Pincode");
+    //   loadingOverlay.style.display = "none";
+    //   return;
+    // }
 
     const { name, description, pgType } = pgDetails;
     const { noticePeriod, securityDeposit, gateClosingTime } = pgRules;

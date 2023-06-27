@@ -1,10 +1,13 @@
 import React from "react";
 import "./PGCard.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import defaultPic from "./images/default.jpg";
 import StarRating from "../productpage/StarRating";
+import { useSelector } from "react-redux";
+import swal from "sweetalert";
 
 const PGCard = ({ pg }) => {
+  const user = useSelector((state) => state.user);
   const coverImage = pg.images[0] || defaultPic;
   const navigate = useNavigate();
   const goTo = () => {
@@ -34,6 +37,26 @@ const PGCard = ({ pg }) => {
   );
   const mainAmenities =
     amenities.length > 5 ? amenities.slice(0, 5) : amenities;
+
+  const showContactInfo = () => {
+    if (!user) {
+      swal({ text: "Please Login To See Contact Info" });
+    } else {
+      let msg = document.createElement("div");
+
+      let line1 = document.createElement("p");
+      line1.classList.add("swal-text");
+      line1.textContent = `Contact  - 1232456980`;
+
+      let line2 = document.createElement("p");
+      line2.classList.add("swal-text");
+      line2.textContent = `Email ID - abc@gmail.com`;
+
+      msg.appendChild(line1);
+      msg.appendChild(line2);
+      swal({ title: "PG Contact Info", content: msg, buttons: false });
+    }
+  };
   return (
     <section className="pg-card" style={{ backgroundColor: "#ffffff" }}>
       {/* <section className="pg-card" style={{ backgroundColor: "#eee" }}> */}
@@ -172,6 +195,7 @@ const PGCard = ({ pg }) => {
                     <button
                       className="btn btn-outline-primary py-2 mt-2 blue_bg_1 button"
                       type="button"
+                      onClick={showContactInfo}
                     >
                       Contact Owner
                     </button>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import menu from "./Homepage/images/menu.svg";
-import profileImage from "./Homepage/images/profile.jpg";
+import profileImage from "./Homepage/images/profile3.jpg";
 import "./navbar.css";
 
 const Navbar = () => {
