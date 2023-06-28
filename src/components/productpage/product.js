@@ -4,12 +4,11 @@ import React from "react";
 import Amenities from "./Amenities";
 import Rules from "./rules";
 import ReviewSection from "./reviews";
-import UseStateDesc from "./UseStateDesc";
 
 import Header from "./Header";
 import Footer from "../Homepage/Footer";
 import { useLocation } from "react-router-dom";
-import { getReviews, getPG } from "../../api";
+import { getReviews } from "../../api";
 import { useState, useEffect } from "react";
 
 const getKeysWithTrueValues = (obj) => {
@@ -19,7 +18,6 @@ const getKeysWithTrueValues = (obj) => {
 const Product = () => {
   const location = useLocation();
   const pg = location.state;
-  // console.log(pg);
 
   const rules = getKeysWithTrueValues(pg.pgRules[0]);
   const amenities = getKeysWithTrueValues(pg.pgAmenities[0]);
@@ -52,7 +50,6 @@ const Product = () => {
   useEffect(() => {
     const fetchReviews = async () => {
       const fetchedReviews = await getReviews(pg._id);
-      console.log(fetchedReviews);
       if (fetchedReviews.status === "success") {
         setReviews(fetchedReviews.data.reviews);
       }

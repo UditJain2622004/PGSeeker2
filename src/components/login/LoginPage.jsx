@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-import { useSelector } from "react-redux";
-import Loader from "../Homepage/Loader";
+// import { useSelector } from "react-redux";
+// import Loader from "../Homepage/Loader";
 import "./LoginPage.css";
 import house2 from "../Homepage/images/bg1.jpg";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,13 +10,13 @@ import { store } from "./../../persistStore";
 import swal from "sweetalert";
 
 const LoginPage = () => {
-  const user = useSelector((state) => state.user);
-  console.log(user);
+  // const user = useSelector((state) => state.user);
+  // console.log(user);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -58,7 +58,6 @@ const LoginPage = () => {
       loadingOverlay.style.display = "block";
       // setIsLoading(true)
       const response = await login(email, password);
-      console.log(response);
       if (response.status === "success") {
         store.dispatch({
           type: "SET_USER",
@@ -126,7 +125,7 @@ const LoginPage = () => {
       <div className=" img-section">
         <img className="image-sign" src={house2} alt="bg"></img>
       </div>
-      {isLoading && <Loader />}
+      {/* {isLoading && <Loader />} */}
       <div class="loading-overlay">
         <div class="loading-spinner"></div>
       </div>

@@ -38,56 +38,6 @@ function SearchDetail() {
               </div>
             </form>
           </div>
-
-          {/* <div className="ps-sm-5 ps-lg-0 col-sm-6 col-lg-2  text-center">
-              <Dropdown>
-                <Dropdown.Toggle
-                  className="ff_space fw_700 fs_sm blue_clr"
-                  variant="success"
-                  id="dropdown-basic"
-                >
-                  Property Type
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu>
-                  <Dropdown.Item href="#">Duplex </Dropdown.Item>
-                  <Dropdown.Item href="#">Flat</Dropdown.Item>
-                  <Dropdown.Item href="#">Farmhouse</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-              <p className="ff_space fw_400 fs_sm blk_clr opacity-50 ps-3">
-                Duplex
-              </p>
-            </div> */}
-          {/* <div className="col-sm-6 col-lg-2  text-center">
-              <Dropdown>
-                <Dropdown.Toggle
-                  className="ff_space fw_700 fs_sm blue_clr"
-                  variant="success"
-                  id="dropdown-basic"
-                >
-                  Max Price
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu>
-                  <Dropdown.Item href="#">$10,000 </Dropdown.Item>
-                  <Dropdown.Item href="#">$25,000 </Dropdown.Item>
-                  <Dropdown.Item href="#">$50,000 </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-              <p className="ff_space fw_400 fs_sm blk_clr opacity-50 ps-3">
-                $10,000
-              </p>
-            </div> */}
-          {/* <div className="ps-sm-5 ps-lg-0 col-sm-6 col-lg-3  text-center">
-            <a
-              href="#"
-              className="d-inline-block butn1 ff_space fw_700 fs_sm text-nowrap"
-            >
-              <img className="pe-3 pb-1" src={search} alt="search" />
-              Search
-            </a>
-          </div> */}
         </div>
       </div>
     </section>

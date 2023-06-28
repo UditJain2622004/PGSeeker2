@@ -1,6 +1,5 @@
 export const allPgs = async (filters) => {
   try {
-    console.log(filters);
     const response = await fetch("http://localhost:5000/api/v1/pg/search", {
       method: "POST",
       headers: {
@@ -23,7 +22,7 @@ export const allPgs = async (filters) => {
 // api.js
 export const createPG = async (pgData) => {
   try {
-    console.log(pgData);
+    // console.log(pgData);
     const response = await fetch("http://localhost:5000/api/v1/pg", {
       method: "POST",
       // headers: {
@@ -98,7 +97,6 @@ export const signup = async (name, email, password, passwordConfirm) => {
       body: JSON.stringify({ name, email, password, passwordConfirm }),
       credentials: "include",
     });
-    console.log(response);
     const data = await response.json();
     return data;
   } catch (error) {

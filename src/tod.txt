@@ -18,7 +18,8 @@ what to do for sharing -> 6,7,8...(in PGCard and PgDetailsPage)
 bad validation in add pg form(for empty fields)
 specific error msg on pgOwnerForm page
 put loading as initial state of state variable of things like reviews, profile data
-
+review on own pg should not be possible
+sort by ratings
 **
 Take already tested data for demo
 

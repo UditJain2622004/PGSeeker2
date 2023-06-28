@@ -18,13 +18,7 @@ const PGListingPage = ({ pgs, filters }) => {
     } else if (sortOption === "ascending") {
       setPgData([...pgData].sort((a, b) => b.minPrice - a.minPrice));
     }
-    // Check if the selected option is different from the current sort option
-    // if (selectedOption !== sortOption) {
-    //   setSortOption(selectedOption);
-    //   setPgData([...pgData].reverse());
-    // }
   };
-  // console.log(filters);
   return (
     <>
       <div className="d-flex">

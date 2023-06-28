@@ -7,7 +7,7 @@ import img3 from "./../Homepage/images/services6.jpg";
 const Services = () => {
   return (
     <div className="services-container">
-      <h1 className="blue_clr">Services</h1>
+      <h1 className="blue_clr services_title">Services</h1>
       <div className="services-content ">
         <div className="services-description container ">
           <div className="row m-5">

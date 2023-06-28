@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Sidebar from "./test/sidebar";
 import Personal from "./test/personal";
 import UpdatePassword from "./test/updatePassword";
 import { useSelector } from "react-redux";
@@ -39,7 +38,6 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    // Function to make the API request
     const fetchProfile = async () => {
       const Loader = document.querySelector(".loading-overlay");
       try {
@@ -64,7 +62,7 @@ const Profile = () => {
       }
     };
 
-    fetchProfile(); // Call the function to make the API request
+    fetchProfile();
   }, []);
 
   const updateMe = async () => {
@@ -76,11 +74,10 @@ const Profile = () => {
       about: about,
       address: addressDetails,
     };
-    console.log(updates);
     Loader.style.display = "block";
     const updatedUser = await updateProfile(updates, user._id);
     if (updatedUser.status === "success") {
-      console.log(updatedUser);
+      // console.log(updatedUser);
       setName(updatedUser.data.user.name);
       setEmail(updatedUser.data.user.email);
       setPhone(updatedUser.data.user.phone);
@@ -148,7 +145,7 @@ const Profile = () => {
                         Update Password
                       </Link>
                     </li>
-                    {pgs.length > 0 && (
+                    {/* {pgs.length > 0 && (
                       <h6 className="sidebar-heading">PGs You own</h6>
                     )}
 
@@ -166,7 +163,7 @@ const Profile = () => {
                           </Link>
                         </li>
                       );
-                    })}
+                    })} */}
                   </ul>
                 </div>
               </div>

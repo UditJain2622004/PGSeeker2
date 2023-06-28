@@ -11,12 +11,9 @@
 }
 
 .city-box {
-  /* box-shadow: 0px 6px 10px rgba(74, 74, 235, 0.5); */
-  /* box-shadow: 2px 2px 4px #b9c1f0; */
   cursor: pointer;
 }
 .city-box:hover {
-  /* box-shadow: 0px 6px 10px rgba(74, 74, 235, 0.5); */
   box-shadow: 0px 0px 2px 4px #b9c1f0;
 }
 
@@ -53,11 +50,11 @@
 }
 
 .city1 {
-  background: url("./images/lukhnow.jpg") no-repeat center center/cover;
+  background: url("./images/sirsa.jpg") no-repeat center center/cover;
 }
 
 .city2 {
-  background: url("./images/kolkata.jpg") no-repeat center center/cover;
+  background: url("./images/hisar.jpg") no-repeat center center/cover;
 }
 
 .city3 {
@@ -65,7 +62,7 @@
 }
 
 .city4 {
-  background: url("./images/hyderabad.jpg") no-repeat center center/cover;
+  background: url("./images/kolkata.jpg") no-repeat center center/cover;
 }
 
 .city5 {

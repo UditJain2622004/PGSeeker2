@@ -1,7 +1,6 @@
 import React from "react";
 
 const FilterCheckbox = ({ name, displayName, handleChange, stateVar }) => {
-  // console.log(stateVar);
   return (
     <div>
       <label>

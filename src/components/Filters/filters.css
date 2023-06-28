@@ -1,6 +1,5 @@
 .filters {
   display: flex;
-  /* background: linear-gradient(135deg, #c2ebf0 0%, #eceff1 50%, #c2ebf0 100%); */
 }
 .filters-body {
   flex: 1;
@@ -11,8 +10,6 @@
   width: 1px;
   background-color: #888888;
   opacity: 0.5;
-
-  /* Additional styles for the vertical line */
 }
 
 label {
@@ -39,7 +36,6 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
-/* Styling for dropdown lists */
 .select-container {
   position: relative;
   display: inline-block;

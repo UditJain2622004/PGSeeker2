@@ -16,9 +16,6 @@ const ContactUs = () => {
         <h1 className="contact-heading">Contact Us</h1>
         <form className="contact-us-form" onSubmit={sendMsg}>
           <div className="a-form-group ">
-            {/* <label className="lables" htmlFor="name">
-            Name:
-          </label> */}
             <input
               className="contact-us-inputs"
               type="text"
@@ -28,9 +25,6 @@ const ContactUs = () => {
             />
           </div>
           <div className="a-form-group">
-            {/* <label className="lables" htmlFor="email">
-            Email:
-          </label> */}
             <input
               size={30}
               className="contact-us-inputs"

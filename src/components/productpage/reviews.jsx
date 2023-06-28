@@ -36,13 +36,10 @@ import swal from "sweetalert";
 
 const ReviewSection = ({ reviews, pgID }) => {
   const user = useSelector((state) => state.user);
-  console.log(reviews);
   const [reviewsData, setReviewsData] = useState([]);
   useEffect(() => {
     setReviewsData(reviews);
   }, [reviews]);
-
-  console.log(reviewsData);
 
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
@@ -76,7 +73,6 @@ const ReviewSection = ({ reviews, pgID }) => {
     const newReview = await createReview(reviewText, rating, pgID, user._id);
     loadingOverlay.style.display = "none";
 
-    console.log(newReview);
     if (newReview.status === "success") {
       // reviews = [
       //   { ...newReview.data.review, user: { name: user.name } },

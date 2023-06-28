@@ -1,6 +1,6 @@
 import React from "react";
 import "./PGCard.css";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import defaultPic from "./images/default.jpg";
 import StarRating from "../productpage/StarRating";
 import { useSelector } from "react-redux";
@@ -13,7 +13,6 @@ const PGCard = ({ pg }) => {
   const goTo = () => {
     navigate("/pg", { state: pg });
     window.scrollTo(0, 0);
-    // console.log(pg);
   };
   const pgTypeDisplayName = {
     male: "Male",
@@ -59,7 +58,6 @@ const PGCard = ({ pg }) => {
   };
   return (
     <section className="pg-card" style={{ backgroundColor: "#ffffff" }}>
-      {/* <section className="pg-card" style={{ backgroundColor: "#eee" }}> */}
       <div className="container px-0">
         <div className="full-card col-md-12 col-xl-10">
           <div className="card shadow-0 border ">
@@ -76,7 +74,6 @@ const PGCard = ({ pg }) => {
                         <div
                           className="mask"
                           style={{
-                            // backgroundColor: "rgba(0, 253, 253, 0.15)",
                             backgroundColor: "rgba(253, 253, 253, 0.15)",
                           }}
                         ></div>
@@ -103,16 +100,6 @@ const PGCard = ({ pg }) => {
                   {/* <hr /> */}
                   <StarRating rating={pg.ratingsAverage} />
 
-                  {/* <div className="d-flex flex-row">
-                    <div className="mb-1 me-2">
-                      <i className="fa fa-star"></i>
-                      <i className="fa fa-star"></i>
-                      <i className="fa fa-star"></i>
-                      <i className="fa fa-star"></i>
-                    </div>
-
-                    
-                  </div> */}
                   <div className="li"></div>
 
                   <div class="sharing">
@@ -148,7 +135,6 @@ const PGCard = ({ pg }) => {
                       {mainAmenities.map((el) => {
                         return (
                           <>
-                            {/* <span className="text-primary"> • </span> */}
                             <span className="amenities">
                               {" "}
                               • {el.toUpperCase()}
@@ -160,19 +146,6 @@ const PGCard = ({ pg }) => {
 
                     <div className="li"></div>
 
-                    {/* <span>{pg.amenities}</span>
-                    <span className="text-primary"> • </span>
-                    <span>Light weight</span>
-                    <span className="text-primary"> • </span>
-                    <span>Best finish</span>
-                    <br />
-                  </div>
-                  <div className="mb-2 text-muted small">
-                    <span>Unique design</span>
-                    <span className="text-primary"> • </span>
-                    <span>For men</span>
-                    <span className="text-primary"> • </span>
-                    <span>Casual</span> */}
                     <br />
                   </div>
                   <p className="text-truncate mb-4 mb-md-0">{pg.location}</p>

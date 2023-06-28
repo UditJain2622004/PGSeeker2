@@ -110,11 +110,11 @@ const PGOwnerForm = () => {
   };
 
   const handleSharingOptionChange = (index, field, value) => {
-    console.log(sharingOptions[index][field]);
+    // console.log(sharingOptions[index][field]);
     const updatedOptions = [...sharingOptions];
     updatedOptions[index][field] = value;
     setSharingOptions(updatedOptions);
-    console.log(sharingOptions[index][field]);
+    // console.log(sharingOptions[index][field]);
   };
 
   const handleSharingPriceWheel = (e, index, field, value) => {
@@ -122,17 +122,17 @@ const PGOwnerForm = () => {
     if (delta > 0) {
       //Scroll Down
       e.target.value = e.target.value * 1 + 1;
-      console.log(value);
-      console.log(sharingOptions[index][field]);
+      // console.log(value);
+      // console.log(sharingOptions[index][field]);
       handleSharingOptionChange(index, field, value * 1 + 1);
-      console.log(sharingOptions[index][field]);
+      // console.log(sharingOptions[index][field]);
     } else if (delta < 0) {
       //Scroll Up
       e.target.value = e.target.value * 1 - 1;
-      console.log(value);
-      console.log(sharingOptions[index][field]);
+      // console.log(value);
+      // console.log(sharingOptions[index][field]);
       handleSharingOptionChange(index, field, value * 1 - 1);
-      console.log(sharingOptions[index][field]);
+      // console.log(sharingOptions[index][field]);
     }
   };
 
@@ -175,7 +175,6 @@ const PGOwnerForm = () => {
       [event.target.name]: event.target.value,
     });
     if (addressDetails.pincode === "0") {
-      console.log("Hello");
       setAddressDetails({ ...addressDetails, pincode: "" });
     }
   };
@@ -261,13 +260,11 @@ const PGOwnerForm = () => {
     pgData.append("securityDeposit", securityDeposit);
     pgData.append("gateClosingTime", gateClosingTime);
 
-    pgData.forEach((value, key) => {
-      console.log("key %s: value %s", key, value);
-    });
-    console.log(pg_rules);
+    // pgData.forEach((value, key) => {
+    //   console.log("key %s: value %s", key, value);
+    // });
 
     const response = await createPG(pgData);
-    // console.log(response); // log the response from the server
     if (response.status === "success") {
       form.reset();
       loadingOverlay.style.display = "none";
@@ -294,9 +291,7 @@ const PGOwnerForm = () => {
     } else {
       // Handle error scenario
 
-      console.log(response);
       console.log(response.error);
-      console.log(pgData);
       if (response.error.startsWith("Pg validation failed:")) {
         response.error = "Please Enter All Required Fields Correctly!!";
       }
@@ -307,7 +302,6 @@ const PGOwnerForm = () => {
       // setTimeout(function () {
       //   errorMessage.style.display = "none";
       // }, 2000);
-      // console.log(form);
       // form.reset();
       loadingOverlay.style.display = "none";
     }

@@ -1,36 +1,26 @@
 .contact-us-page {
-  /* max-width: 500px;
-  margin: 0 auto;
-  padding: 20px; */
   width: 50%;
-  /* height: 80%; */
   border: none;
   border-radius: 30px;
   background-color: #ffffff;
   padding: 50px;
   margin: 0px auto;
-  /* background-color: #f6ffff; */
   box-shadow: 0 2px 4px #d6dfe9;
 }
 
 .whole-page {
   max-width: 800px;
-  /* margin: 0 10px; */
   height: 88vh;
   margin: 0 auto;
   padding: 40px;
   background-color: #f5f5f5;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  /* opacity: 0.5; */
 }
 
 .contact-heading {
-  /* text-align: center; */
   margin-bottom: 20px;
   color: #2f2f2fdc;
-  /* text-decoration: dashed; */
-  /* background-color: #aeb4f9; */
 }
 
 .contact-us-form {
@@ -47,25 +37,20 @@
 }
 
 .contact-us-inputs {
-  /* opacity: 10%; */
   height: 50px !important;
   width: 85% !important;
   padding: 20px !important;
   border-radius: 50px !important;
   border: none !important;
   background-color: #f6f8fa;
-  /* background-color: #f6f8fa; */
-  /* background-color: #f3f3f3dd; */
-  /* border: 1px solid #ccc; */
+
   width: auto;
   box-shadow: none !important;
 }
 .contact-us-inputs:hover {
-  /* border: none !important; */
   box-shadow: 2px 2px 4px #d6dfe9 !important;
 }
 .contact-us-inputs-textarea:hover {
-  /* border: none !important; */
   box-shadow: 2px 2px 4px #d6dfe9 !important;
 }
 .contact-us-inputs:focus {
@@ -75,23 +60,18 @@
   outline: none;
 }
 .contact-us-inputs::placeholder {
-  /* border: none !important; */
   color: #878c91;
   opacity: 60%;
 }
 .contact-us-inputs-textarea::placeholder {
   color: #878c91;
   opacity: 60%;
-  /* color: #888888; */
-  /* border: none !important; */
-  /* box-shadow: 2px 2px 4px #888888 !important; */
 }
 .contact-us-inputs-textarea {
   padding: 20px !important;
   box-shadow: none !important;
   background-color: #f6f8fa;
 
-  /* background-color: #f3f3f3dd; */
   padding: 10px;
   border-radius: 20px !important;
   border: none;
@@ -100,10 +80,8 @@
 
 .contact-us-button {
   padding: 10px 20px;
-  background-color: #2277f7 !important; /* Brown color */
+  background-color: #2277f7 !important;
 
-  /* background-color: #7e8de1 !important; */
-  /* background-color: #8294fc !important; */
   color: #fff;
   border: none;
   border-radius: 50px !important;

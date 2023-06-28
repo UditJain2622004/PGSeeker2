@@ -197,7 +197,7 @@ textarea{
 }
 
 .empty-star {
-  color: lightgray; /* or any color you prefer for empty stars */
+  color: black; /* or any color you prefer for empty stars */
 }
 
 /* Styles for the partially filled star */

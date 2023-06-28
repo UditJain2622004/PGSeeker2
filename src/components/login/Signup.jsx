@@ -1,17 +1,12 @@
 import "./style.css";
 import React, { useState } from "react";
-// import { useSelector } from "react-redux";
 import { signup } from "../../api";
 import { useNavigate } from "react-router-dom";
-// import { Link } from "react-router-dom";
 import { store } from "../../persistStore";
-// import "./Sign.css";
 
 import house2 from "../Homepage/images/bg1.jpg";
 import swal from "sweetalert";
 const Signup = () => {
-  // const user = useSelector((state) => state.user);
-
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -68,7 +63,6 @@ const Signup = () => {
   };
 
   const handleSignup = async (event) => {
-    // let errorMessage = document.querySelector(".error-msg");
     let loadingOverlay = document.querySelector(".loading-overlay");
     event.preventDefault();
 
@@ -76,7 +70,6 @@ const Signup = () => {
       loadingOverlay.style.display = "block";
 
       const response = await signup(username, email, password, Confirmpassword);
-      console.log(response.status);
       if (response.status === "success") {
         store.dispatch({
           type: "SET_USER",
@@ -87,11 +80,6 @@ const Signup = () => {
         navigate("/");
         window.scrollTo(0, 0);
       } else {
-        // errorMessage.textContent = response.error;
-        // errorMessage.style.display = "block";
-        // setTimeout(function () {
-        //   errorMessage.style.display = "none";
-        // }, 2000);
         swal("Error", response.error, "error");
 
         loadingOverlay.style.display = "none";
@@ -170,10 +158,6 @@ const Signup = () => {
           <div class="loading-overlay">
             <div class="loading-spinner"></div>
           </div>
-          {/* <div class="message error-msg">
-            <i class="error-icon">&#10007;</i>
-            <p></p>
-          </div> */}
         </div>
       </div>
     </div>

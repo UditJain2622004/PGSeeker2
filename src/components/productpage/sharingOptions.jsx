@@ -18,7 +18,6 @@ const sharingDisplayName = {
 
 const SharingOptions = ({ options }) => {
   options = sliceIntoChunks(options, 3);
-  //   console.log(options);
   return (
     <>
       {options.map((row, i) => {

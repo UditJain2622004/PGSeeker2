@@ -4,13 +4,7 @@ const FilterRadio = ({ name, value, displayName, handleChange }) => {
   return (
     <div>
       <label>
-        <input
-          type="radio"
-          name={name}
-          value={value}
-          //   checked={selectedOption3 === "multi"}
-          onChange={handleChange}
-        />
+        <input type="radio" name={name} value={value} onChange={handleChange} />
         {displayName}
       </label>
     </div>

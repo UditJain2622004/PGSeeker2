@@ -2,7 +2,6 @@
 
 .services-container {
   max-width: 800px;
-  /* margin: 0 10px; */
   margin: 0 auto;
   padding: 40px;
   background-color: #f5f5f5;
@@ -12,7 +11,6 @@
 
 .blue_clr {
   color: #2549d3;
-  /* font-size: 32px; */
   font-weight: bold;
   text-align: center;
   margin-bottom: 20px;
@@ -57,7 +55,9 @@
 }
 
 .services-heading {
-  /* text-decoration: line-through; */
   color: #2549d3;
   margin: 0;
+}
+.services_title {
+  font-weight: 600 !important;
 }

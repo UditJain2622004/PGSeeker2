@@ -2,7 +2,6 @@
 
 .about-container {
   max-width: 800px;
-  /* margin: 0 10px; */
   margin: 0 auto;
   padding: 40px;
   background-color: #f5f5f5;
@@ -11,8 +10,7 @@
 }
 
 .blue_clr {
-  /* color: #2979ff; */
-  font-size: 32px;
+  font-size: 48px;
   font-weight: bold;
   text-align: center;
   margin-bottom: 20px;
@@ -55,7 +53,6 @@
   font-size: 1rem;
   color: #888888;
 }
-
-/* .aboutuspic {
-  border-radius: 0 35% 0 35%;
-} */
+.about_us_title {
+  font-weight: 600 !important;
+}

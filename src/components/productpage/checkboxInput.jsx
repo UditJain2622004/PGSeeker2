@@ -1,11 +1,6 @@
 import React from "react";
 
-function capitalize(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
 const checkboxInput = ({ fields, type, handleChange, allowed }) => {
-  // console.log(Object.keys(fields));
   return (
     <>
       {Object.keys(fields).map((el, index) => {

@@ -1,54 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import hero_img from "./images/hero2.jpg";
 import { useNavigate } from "react-router-dom";
 import "./header.css";
-import LoginPage from "../login/LoginPage";
-import Navbar from "../Navbar";
 import { allPgs } from "./../../api";
 import CitySuggestList from "./citySuggestList";
 import swal from "sweetalert";
 
 function Header() {
-  // const autoSuggest = (e) => {
-  //   let sortedNames = cityNames.sort();
-
-  //   let input = document.getElementById("input");
-  //   let autoSuggestContainer = document.querySelector(".autoSuggestContainer");
-  //   removeElements();
-  //   for (let i of sortedNames) {
-
-  //     if (
-  //       i.toLowerCase().startsWith(input.value.toLowerCase()) &&
-  //       input.value != ""
-  //     ) {
-  //       let listItem = document.createElement("li");
-  //       listItem.classList.add("list-items");
-  //       listItem.style.cursor = "pointer";
-  //       listItem.addEventListener("click", function () {
-  //         displayNames(i);
-  //       });
-  //       let word = "<b>" + i.substr(0, input.value.length) + "</b>";
-  //       word += i.substr(input.value.length);
-  //       listItem.innerHTML = word;
-  //       autoSuggestContainer.style.display = "block";
-  //       document.querySelector(".list").appendChild(listItem);
-  //     }
-  //   }
-  //   function displayNames(value) {
-  //     console.log("Hi");
-  //     setKeyword(value.toLowerCase());
-  //     input.value = value;
-  //     removeElements();
-  //   }
-  //   function removeElements() {
-  //     autoSuggestContainer.style.display = "none";
-  //     let items = document.querySelectorAll(".list-items");
-  //     items.forEach((item) => {
-  //       item.remove();
-  //     });
-  //   }
-  // };
   let navigate = useNavigate();
 
   const [keyword, setKeyword] = useState("");
@@ -56,7 +14,7 @@ function Header() {
   const searchSubmitHandler = async (e) => {
     e.preventDefault();
     let loadingOverlay = document.querySelector(".loading-overlay");
-    let errorMessage = document.querySelector(".error-msg");
+    // let errorMessage = document.querySelector(".error-msg");
 
     loadingOverlay.style.display = "block";
 
@@ -107,7 +65,6 @@ function Header() {
                   className="main-search"
                   type="text"
                   placeholder="Enter city ..."
-                  // onKeyUp={autoSuggest}
                   onChange={(e) => setKeyword(e.target.value)}
                   list="cityNames"
                 />
@@ -122,9 +79,7 @@ function Header() {
               </form>
             </div>
           </div>
-          {/* <div className="autoSuggestContainer">
-            <ul class="list"></ul>
-          </div> */}
+
           <div className="col-lg-6">
             <img className="w-100 border-hero" src={hero_img} alt="hero_img" />
           </div>

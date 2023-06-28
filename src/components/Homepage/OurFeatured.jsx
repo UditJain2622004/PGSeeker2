@@ -18,7 +18,6 @@ export const OurFeatured = () => {
     loadingOverlay.style.display = "block";
     const response = await allPgs({ pgType: filter });
     loadingOverlay.style.display = "none";
-    console.log({ pgType: [filter] });
     if (response.status === "success") {
       navigate("/listedpg", {
         state: [response.data.pgs, { pgType: [filter] }],
@@ -26,22 +25,6 @@ export const OurFeatured = () => {
       window.scrollTo(0, 0);
     } else {
       swal("Error!", response.error);
-      // const node = document.createElement("div");
-      // const textnode = document.createTextNode("Water");
-      // node.appendChild(textnode);
-      // swal(
-      //   "Contact Info.",
-      //   `Contact No. - 1234567890
-      // Email - abc@gmail.com`,
-      //   "info",
-      //   { buttons: false }
-      // );
-
-      // errorMessage.textContent = response.error;
-      // errorMessage.style.display = "block";
-      // setTimeout(function () {
-      //   errorMessage.style.display = "none";
-      // }, 2000);
     }
   };
   return (
@@ -80,7 +63,7 @@ export const OurFeatured = () => {
                   >
                     Explore <img src={arrow} alt="" className="w_20" />
                   </h5>
-                  <p className="m-0 ff_space fw_700 fs_xsm blue_clr">
+                  <p className="m-0 ff_space fw_700 fs_xsm blue_clr2">
                     Rs. 5000-7000
                   </p>
                 </div>
@@ -104,7 +87,7 @@ export const OurFeatured = () => {
                   >
                     Explore <img src={arrow} alt="" className="w_20" />
                   </h5>
-                  <p className="m-0 ff_space fw_700 fs_xsm blue_clr">
+                  <p className="m-0 ff_space fw_700 fs_xsm blue_clr2">
                     Rs. 5000-7000
                   </p>
                 </div>
@@ -128,7 +111,7 @@ export const OurFeatured = () => {
                   >
                     Explore <img src={arrow} alt="" className="w_20" />
                   </h5>
-                  <p className="m-0 ff_space fw_700 fs_xsm blue_clr">
+                  <p className="m-0 ff_space fw_700 fs_xsm blue_clr2">
                     Rs. 5000-7000
                   </p>
                 </div>

@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "./sidebar";
 import Personal from "./personal";
-import UpdatePassword from "./updatePassword";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { getProfile, updateProfile } from "../../../api";
 import swal from "sweetalert";
 
@@ -63,7 +61,6 @@ const Main = () => {
   }, []);
 
   const updateMe = async () => {
-    console.log(about);
     const updates = {
       name: name,
       email: email,
@@ -71,9 +68,8 @@ const Main = () => {
       about: about,
       address: addressDetails,
     };
-    console.log(updates);
     const updatedUser = await updateProfile(updates, user._id);
-    console.log(updatedUser);
+    // console.log(updatedUser);
     setName(updatedUser.data.user.name);
     setEmail(updatedUser.data.user.email);
     setPhone(updatedUser.data.user.phone);
@@ -82,9 +78,9 @@ const Main = () => {
     user = updatedUser;
   };
 
-  const logValues = () => {
-    console.log(name, email, phone, about, addressDetails);
-  };
+  // const logValues = () => {
+  //   console.log(name, email, phone, about, addressDetails);
+  // };
   return (
     <>
       <div className="container">

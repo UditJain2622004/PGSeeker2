@@ -7,10 +7,9 @@ import "./navbar.css";
 
 const Navbar = () => {
   const user = useSelector((state) => state.user);
-  console.log(user);
 
   const buttons = user
-    ? ["PGowner", "Add PG", "logout", "LogOut"]
+    ? ["PGowner", "Add PG", "logout", "Logout"]
     : ["login", "Login", "signup", "Sign Up"];
   const [navShow, setNavShow] = useState(false);
   if (navShow) {

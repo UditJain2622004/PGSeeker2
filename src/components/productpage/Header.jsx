@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./PGDetailsPage.css";
 import { Carousel } from "react-carousel-minimal";
-import stars_5 from "./images/stars_5.png";
 import SharingOptions from "./sharingOptions";
 import StarRating from "./StarRating";
 import defaultPic from "./images/default.jpg";
@@ -28,7 +27,6 @@ function Header({ headerDetails }) {
 
     return text.slice(0, maxLength);
   };
-  console.log(headerDetails.images);
   const pgTypeDisplayName = {
     male: "Male",
     female: "Female",
@@ -39,12 +37,10 @@ function Header({ headerDetails }) {
   if (data.length === 0) {
     data.push({ image: defaultPic });
   }
-  console.log(data);
   const slideNumberStyle = {
     fontSize: "20px",
     fontWeight: "bold",
   };
-  // console.log(data.length !== 1);
   return (
     <>
       <div className="image-details-section">

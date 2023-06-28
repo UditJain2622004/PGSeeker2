@@ -75,6 +75,9 @@
 .blue_clr {
   color: #0f298b;
 }
+.blue_clr2 {
+  color: #2549d3;
+}
 
 .blue_hover_clr:hover {
   color: #0f298b !important;

@@ -94,4 +94,5 @@ export const cityNames = [
   "Mumbai",
   "Hyderabad",
   "Chandigarh",
+  "Kolkata",
 ];

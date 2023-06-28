@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FilterCheckbox from "./filterCheckbox";
-// import FilterRadio from "./filterRadio";
 import { allPgs } from "../../api";
 import "./filters.css";
 import CitySuggestList from "../Homepage/citySuggestList";
@@ -43,7 +42,7 @@ const sharing = { 1: "Single", 2: "Double", 3: "Triple", 4: "Four" };
 const pgTypeOptions = { male: "Boys", female: "Girls", coLiving: "Co-Living" };
 
 const Filters = ({ filters, sortOption, setSortOption, handleSort }) => {
-  console.log(filters);
+  // console.log(filters);
   let pgTypeInitial = {
     male: false,
     female: false,
@@ -58,7 +57,6 @@ const Filters = ({ filters, sortOption, setSortOption, handleSort }) => {
   if (filters.city) {
     cityInitial = filters.city;
   }
-  console.log(pgTypeInitial);
   const navigate = useNavigate();
   const [amenitiesValues, setamenitiesValues] = useState({
     wifi: false,
@@ -88,11 +86,7 @@ const Filters = ({ filters, sortOption, setSortOption, handleSort }) => {
   });
   const [PgType, setPgType] = useState(pgTypeInitial);
   const [city, setCity] = useState(cityInitial);
-  // const [PgType, setPgType] = useState({
-  //   male: false,
-  //   female: false,
-  //   coLiving: false,
-  // });
+
   const [sharingOption, setSharingOption] = useState({
     1: false,
     2: false,
@@ -101,8 +95,6 @@ const Filters = ({ filters, sortOption, setSortOption, handleSort }) => {
   });
   const [price, setPrice] = useState();
   const [priceInputTitle, setPriceInputTitle] = useState("Price Range");
-  // const [submittedPrice, setSubmittedPrice] = useState("");
-  // const [pgType, setPgType] = useState("");
 
   const handleCityChange = (event) => {
     setCity(event.target.value);
@@ -157,8 +149,6 @@ const Filters = ({ filters, sortOption, setSortOption, handleSort }) => {
     event.preventDefault();
     let loadingOverlay = document.querySelector(".loading-overlay");
 
-    // setSubmittedPrice(price);
-
     loadingOverlay.style.display = "block";
 
     const filterOptions = {
@@ -170,7 +160,6 @@ const Filters = ({ filters, sortOption, setSortOption, handleSort }) => {
       rules: getKeysWithTrueValues(rulesValues),
     };
     const response = await allPgs(filterOptions);
-    // console.log(response);
     loadingOverlay.style.display = "none";
     if (response.status === "success") {
       navigate("/listedpg", { state: [response.data.pgs, filterOptions] });
@@ -181,13 +170,7 @@ const Filters = ({ filters, sortOption, setSortOption, handleSort }) => {
         text: "Something Went Wrong.",
       });
     }
-
-    console.log(filterOptions);
   };
-  // useEffect(() => {
-  //   // Log the submitted option
-  //   console.log("Price:", submittedPrice);
-  // }, [submittedPrice]);
 
   return (
     <section className="filters">
