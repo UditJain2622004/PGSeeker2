@@ -5,7 +5,20 @@ import defaultPic from "./images/default.jpg";
 import StarRating from "../productpage/StarRating";
 import { useSelector } from "react-redux";
 import swal from "sweetalert";
+function capitalizeEachWord(sentence) {
+  // Split the sentence into an array of words
+  const words = sentence.split(" ");
 
+  // Capitalize the first letter and lowercase the rest for each word
+  const capitalizedWords = words.map((word) => {
+    const firstLetter = word.charAt(0).toUpperCase();
+    const restLetters = word.slice(1).toLowerCase();
+    return firstLetter + restLetters;
+  });
+  const capitalizedSentence = capitalizedWords.join(" ");
+
+  return capitalizedSentence;
+}
 const PGCard = ({ pg }) => {
   const user = useSelector((state) => state.user);
   const coverImage = pg.images[0] || defaultPic;
@@ -90,7 +103,10 @@ const PGCard = ({ pg }) => {
                   </div>
                   <h5>
                     {pg.name}
-                    <span className="locality"> in {pg.address.locality}</span>
+                    <span className="locality">
+                      in {pg.address.locality},{" "}
+                      {capitalizeEachWord(pg.address.city)}
+                    </span>
                   </h5>
                   <p className="description">
                     {pg.description.length > 110

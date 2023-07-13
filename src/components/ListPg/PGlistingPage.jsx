@@ -5,7 +5,7 @@ import Filters from "../Filters/Filters";
 import { Link } from "react-router-dom";
 
 const PGListingPage = ({ pgs, filters }) => {
-  const [pgData, setPgData] = useState([]);
+  const [pgData, setPgData] = useState(pgs);
   const [sortOption, setSortOption] = useState("ascending");
   useEffect(() => {
     setPgData(pgs);
